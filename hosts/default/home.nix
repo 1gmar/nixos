@@ -82,4 +82,5 @@
   git.enable = true;
   direnv.enable = true;
   bash.enable = true;
+  ssh.enable = true;
 }

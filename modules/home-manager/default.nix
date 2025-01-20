@@ -9,5 +9,6 @@
     ./i3.nix
     ./git.nix
     ./direnv.nix
+    ./ssh.nix
   ];
 }
