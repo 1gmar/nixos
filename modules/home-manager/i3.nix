@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  wallpaperPath,
   ...
 }: let
   mod = "Mod4";
@@ -17,8 +18,8 @@ in {
         modifier = mod;
         bars = [];
         gaps = {
-          inner = 10;
-          outer = 5;
+          inner = 5;
+          outer = 2;
         };
         keybindings = {
           "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
@@ -38,6 +39,13 @@ in {
           "${mod}+s" = "layout tabbed";
           "${mod}+e" = "layout toggle split";
         };
+        startup = [
+          {
+            command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaperPath}";
+            always = true;
+            notification = false;
+          }
+        ];
         window = {
           border = 0;
           hideEdgeBorders = "both";

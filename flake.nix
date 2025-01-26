@@ -36,6 +36,16 @@
           ./modules/nixos
         ];
       };
+      desktop = nixpkgs.lib.nixosSystem {
+        system = system;
+        specialArgs = {inherit inputs system wallpaperPath;};
+        modules = [
+          ./hosts/desktop/configuration.nix
+          inputs.disko.nixosModules.default
+          ./hosts/desktop/disk-config.nix
+          ./modules/nixos
+        ];
+      };
     };
     nixosModules.neovim = import ./modules/exposed/nixvim.nix;
     homeManagerModules.default = ./modules/home-manager;

@@ -1,10 +1,14 @@
-{...}: {
+{
+  lib,
+  stylixEnable,
+  ...
+}: {
   options = {};
-  config = {
+  config = lib.mkIf stylixEnable {
     stylix.targets = {
       i3.enable = true;
       kitty.enable = true;
-      vim.enable = true;
+      vim.enable = false;
     };
   };
 }
