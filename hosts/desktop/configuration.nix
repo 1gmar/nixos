@@ -9,6 +9,7 @@
 }: let
   userName = "igmar";
   stylixEnable = false;
+  hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix {inherit pkgs;};
 in {
   imports = [
     # Include the results of the hardware scan.
@@ -33,6 +34,9 @@ in {
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
+      "corefonts"
+      "vistafonts"
+      "vista-fonts"
       "nvidia-x11"
       "nvidia-settings"
       "nvidia-persistenced"
@@ -40,6 +44,19 @@ in {
 
   # Set your time zone.
   time.timeZone = "Europe/Chisinau";
+
+  fonts = {
+    fontDir.enable = true;
+    enableGhostscriptFonts = true;
+    packages = with pkgs; [
+      corefonts
+      vistafonts
+      jetbrains-mono
+      noto-fonts
+      ubuntu_font_family
+      hiragino-typeface
+    ];
+  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -133,6 +150,7 @@ in {
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.libinput.mouse.naturalScrolling = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

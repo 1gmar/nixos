@@ -13,7 +13,9 @@
       font = {
         package = lib.mkForce (pkgs.nerd-fonts.meslo-lg);
         name = lib.mkForce "MesloLGSNerdFontMono";
+        size = 16;
       };
+      themeFile = "Solarized_Light";
     };
   };
 }
