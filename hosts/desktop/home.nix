@@ -76,12 +76,13 @@
   programs.home-manager.enable = true;
 
   programs.firefox.enable = true;
-  vim.enable = true;
-  nixvim.enable = true;
-  kitty.enable = true;
-  i3wm.enable = true;
-  git.enable = true;
-  direnv.enable = true;
   bash.enable = true;
+  direnv.enable = true;
+  git.enable = true;
+  i3wm.enable = true;
+  kitty.enable = true;
+  nixvim.enable = true;
+  rofi.enable = true;
   ssh.enable = true;
+  vim.enable = true;
 }

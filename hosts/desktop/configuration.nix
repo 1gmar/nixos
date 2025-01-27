@@ -18,53 +18,15 @@ in {
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 5;
+    };
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "corefonts"
-      "vistafonts"
-      "vista-fonts"
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
-    ];
-
-  # Set your time zone.
-  time.timeZone = "Europe/Chisinau";
-
-  fonts = {
-    fontDir.enable = true;
-    enableGhostscriptFonts = true;
-    packages = with pkgs; [
-      corefonts
-      vistafonts
-      jetbrains-mono
-      noto-fonts
-      ubuntu_font_family
-      hiragino-typeface
-    ];
-  };
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    font = "ter-u18b";
-    # keyMap = "us";
-    useXkbConfig = true; # use xkb.options in tty.
-    packages = [pkgs.terminus_font];
     colors = [
       "fdf6e3"
       "dc322f"
@@ -83,54 +45,9 @@ in {
       "586e75"
       "002b36"
     ];
-  };
-
-  # Enable the X11 windowing system.
-  services = {
-    xserver = {
-      enable = true;
-      xkb.layout = "us";
-      videoDrivers = ["nvidia"];
-      windowManager.i3.enable = true;
-    };
-    displayManager = {
-      defaultSession = "none+i3";
-      sddm.enable = true;
-    };
-  };
-
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
-  # Enable sound.
-  # hardware.pulseaudio.enable = true;
-  # OR
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  main-user = {
-    enable = true;
-    userName = "${userName}";
-    description = "Igor Marta";
-  };
-  stylix-mode = {
-    enable = stylixEnable;
-    wallpaper = wallpaperPath;
-  };
-
-  home-manager = {
-    extraSpecialArgs = {inherit inputs system stylixEnable wallpaperPath;};
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    sharedModules = [
-      inputs.self.outputs.homeManagerModules.default
-    ];
-    users.${userName} = import ./home.nix;
+    font = "ter-u18b";
+    packages = [pkgs.terminus_font];
+    useXkbConfig = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -138,19 +55,118 @@ in {
     feh
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  fonts = {
+    fontconfig.defaultFonts = {
+      monospace = [
+        "DejaVu Sans Mono"
+        "Noto Sans Mono CJK JP"
+      ];
+      sansSerif = [
+        "DejaVu Sans"
+        "Noto Sans CJK JP"
+      ];
+      serif = [
+        "DejaVu Serif"
+        "Noto Serif CJK JP"
+      ];
+    };
+    fontDir.enable = true;
+    enableGhostscriptFonts = true;
+    packages = with pkgs; [
+      arphic-ukai
+      arphic-uming
+      corefonts
+      dejavu_fonts
+      fira
+      freefont_ttf
+      hiragino-typeface
+      ipafont
+      jetbrains-mono
+      lato
+      liberation_ttf
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      open-sans
+      roboto-slab
+      ubuntu_font_family
+      vistafonts
+    ];
+  };
 
-  # List services that you want to enable:
+  home-manager = {
+    extraSpecialArgs = {inherit inputs system stylixEnable wallpaperPath;};
+    sharedModules = [
+      inputs.self.outputs.homeManagerModules.default
+    ];
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.${userName} = import ./home.nix;
+  };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.libinput.mouse.naturalScrolling = true;
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  main-user = {
+    enable = true;
+    description = "Igor Marta";
+    userName = "${userName}";
+  };
+
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+  };
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    settings.experimental-features = ["nix-command" "flakes"];
+  };
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "corefonts"
+      "vistafonts"
+      "vista-fonts"
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
+    ];
+
+  # Enable the X11 windowing system.
+  services = {
+    displayManager = {
+      defaultSession = "none+i3";
+      sddm.enable = true;
+    };
+    libinput.mouse = {
+      accelProfile = "flat";
+      naturalScrolling = true;
+    };
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+    openssh.enable = true;
+    xserver = {
+      enable = true;
+      videoDrivers = ["nvidia"];
+      windowManager.i3.enable = true;
+      xkb.layout = "us";
+    };
+  };
+
+  stylix-mode = {
+    enable = stylixEnable;
+    wallpaper = wallpaperPath;
+  };
+
+  # Set your time zone.
+  time.timeZone = "Europe/Chisinau";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

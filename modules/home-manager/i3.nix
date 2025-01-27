@@ -10,7 +10,7 @@ in {
   options = {
     i3wm.enable = lib.mkEnableOption "enable i3wm module";
   };
-  config = lib.mkIf config.kitty.enable {
+  config = lib.mkIf config.i3wm.enable {
     xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -23,8 +23,8 @@ in {
         };
         keybindings = {
           "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
-          "${mod}+d" = "exec --no-startup-id ${pkgs.dmenu}/bin/dmenu";
-          "${mod}+Shift+q" = "kill";
+          "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
+          "${mod}+Shift+c" = "kill";
           "${mod}+j" = "focus down";
           "${mod}+k" = "focus up";
           "${mod}+h" = "focus left";

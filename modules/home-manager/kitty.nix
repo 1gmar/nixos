@@ -11,9 +11,9 @@
     programs.kitty = {
       enable = true;
       font = {
-        package = lib.mkForce (pkgs.nerd-fonts.meslo-lg);
-        name = lib.mkForce "MesloLGSNerdFontMono";
-        size = 16;
+        package = lib.mkForce (pkgs.meslo-lgs-nf);
+        name = lib.mkForce "MesloLGS NF";
+        size = 14;
       };
       themeFile = "Solarized_Light";
     };
