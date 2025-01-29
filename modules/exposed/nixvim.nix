@@ -5,6 +5,17 @@
 }: {
   options = {};
   config = {
+    autoCmd = [
+      {
+        command = "normal zR";
+        event = [
+          "BufReadPost"
+          "BufWinEnter"
+          "FileReadPost"
+        ];
+        pattern = ["*"];
+      }
+    ];
     globals = {
       mapleader = " ";
       maplocalleader = " ";
@@ -64,18 +75,17 @@
     ];
     opts = {
       background = "light";
+      expandtab = true;
       number = true;
       relativenumber = true;
-      expandtab = true;
-      tabstop = 2;
-      softtabstop = 2;
       shiftwidth = 2;
       smartindent = true;
+      softtabstop = 2;
+      tabstop = 2;
     };
     extraConfigLuaPost = ''
     '';
     extraConfigVim = ''
-      let g:filetype_pl="prolog"
     '';
     extraPlugins = with pkgs.vimPlugins; [nvim-solarized-lua];
     plugins = {
@@ -224,6 +234,7 @@
       };
       treesitter = {
         enable = true;
+        folding = true;
         grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
           nix
         ];
@@ -234,8 +245,8 @@
             enable = true;
             keymaps = {
               init_selection = "<CR>";
-              node_incremental = "<C-k>";
               node_decremental = "<C-j>";
+              node_incremental = "<C-k>";
               scope_incremental = "<C-h>";
             };
           };

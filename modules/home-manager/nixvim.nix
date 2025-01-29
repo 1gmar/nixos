@@ -12,7 +12,17 @@
       nixvim = (import ../exposed/nixvim.nix) {inherit config lib pkgs;};
     in
       with nixvim.config; {
-        inherit colorscheme globals keymaps opts extraConfigLuaPost extraConfigVim extraPlugins plugins;
+        inherit
+          autoCmd
+          colorscheme
+          extraConfigLuaPost
+          extraConfigVim
+          extraPlugins
+          globals
+          keymaps
+          opts
+          plugins
+          ;
         enable = true;
       };
   };
