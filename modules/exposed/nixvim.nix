@@ -143,6 +143,8 @@
       };
       cmp-buffer.enable = true;
       cmp-nvim-lsp.enable = true;
+      cmp_luasnip.enable = true;
+      cmp-path.enable = true;
       luasnip = {
         enable = true;
         fromVscode = [
@@ -152,8 +154,13 @@
           }
         ];
       };
-      cmp_luasnip.enable = true;
       friendly-snippets.enable = true;
+      lint = {
+        enable = true;
+        lintersByFt = {
+          nix = ["statix"];
+        };
+      };
       lspkind = {
         enable = true;
         cmp = {
@@ -194,14 +201,6 @@
       lualine = {
         enable = true;
         settings.options.theme = "solarized_light";
-      };
-      none-ls = {
-        enable = true;
-        sources = {
-          code_actions = {
-            statix.enable = true;
-          };
-        };
       };
       neo-tree = {
         enable = true;

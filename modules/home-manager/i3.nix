@@ -13,12 +13,15 @@ in {
   config = lib.mkIf config.i3wm.enable {
     xsession.windowManager.i3 = {
       enable = true;
-      package = pkgs.i3-gaps;
       config = {
-        modifier = mod;
         bars = [];
+        fonts = {
+          names = ["DejaVu Sans Mono"];
+          size = 9.0;
+          style = "Bold";
+        };
         gaps = {
-          inner = 5;
+          inner = 2;
           outer = 2;
         };
         keybindings = {
@@ -39,10 +42,11 @@ in {
           "${mod}+s" = "layout tabbed";
           "${mod}+e" = "layout toggle split";
         };
+        modifier = mod;
         startup = [
           {
-            command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaperPath}";
             always = true;
+            command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaperPath}";
             notification = false;
           }
         ];

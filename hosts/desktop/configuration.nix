@@ -53,6 +53,7 @@ in {
   environment.systemPackages = with pkgs; [
     alejandra
     feh
+    statix
   ];
 
   fonts = {
