@@ -15,8 +15,46 @@ in {
       enable = true;
       config = {
         bars = [];
-        fonts = {
-          names = ["DejaVu Sans Mono"];
+        colors = {
+          background = "#fdf6e3";
+          focused = {
+            background = "#fdf6e3";
+            border = "#268bd2";
+            text = "#657b83";
+            indicator = "#859900";
+            childBorder = "#268db2";
+          };
+          focusedInactive = {
+            background = "#eee8d5";
+            border = "#839496";
+            text = "#93a1a1";
+            indicator = "#859900";
+            childBorder = "#839496";
+          };
+          placeholder = {
+            background = "#eee8d5";
+            border = "#839496";
+            text = "#93a1a1";
+            indicator = "#859900";
+            childBorder = "#839496";
+          };
+          unfocused = {
+            background = "#eee8d5";
+            border = "#839496";
+            text = "#93a1a1";
+            indicator = "#859900";
+            childBorder = "#839496";
+          };
+          urgent = {
+            background = "#eee8d5";
+            border = "#dc322f";
+            text = "#dc322f";
+            indicator = "#859900";
+            childBorder = "#dc322f";
+          };
+        };
+        fonts = lib.mkForce {
+          names = ["Noto Sans Mono"];
           size = 9.0;
           style = "Bold";
         };
@@ -41,12 +79,21 @@ in {
           "${mod}+m" = "fullscreen toggle";
           "${mod}+s" = "layout tabbed";
           "${mod}+e" = "layout toggle split";
+          "${mod}+f" = "floating toggle";
+          "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
+          "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
+          "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         };
         modifier = mod;
         startup = [
           {
             always = true;
             command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaperPath}";
+            notification = false;
+          }
+          {
+            always = true;
+            command = "systemctl --user restart polybar.service";
             notification = false;
           }
         ];

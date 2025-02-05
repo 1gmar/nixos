@@ -53,44 +53,44 @@ in {
   environment.systemPackages = with pkgs; [
     alejandra
     feh
+    pavucontrol
     statix
   ];
 
   fonts = {
     fontconfig.defaultFonts = {
+      emoji = [
+        "Noto Color Emoji"
+      ];
       monospace = [
-        "DejaVu Sans Mono"
+        "Noto Sans Mono"
         "Noto Sans Mono CJK JP"
       ];
       sansSerif = [
-        "DejaVu Sans"
+        "Noto Sans"
         "Noto Sans CJK JP"
       ];
       serif = [
-        "DejaVu Serif"
+        "Noto Serif"
         "Noto Serif CJK JP"
       ];
     };
     fontDir.enable = true;
     enableGhostscriptFonts = true;
     packages = with pkgs; [
-      arphic-ukai
-      arphic-uming
       corefonts
       dejavu_fonts
-      fira
       freefont_ttf
       hiragino-typeface
       ipafont
       jetbrains-mono
-      lato
       liberation_ttf
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      open-sans
-      roboto-slab
-      ubuntu_font_family
+      noto-fonts-color-emoji
+      unifont
+      unifont_upper
       vistafonts
     ];
   };

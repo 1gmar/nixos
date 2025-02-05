@@ -82,6 +82,7 @@
   i3wm.enable = true;
   kitty.enable = true;
   nixvim.enable = true;
+  polybar.enable = true;
   rofi.enable = true;
   ssh.enable = true;
   vim.enable = true;

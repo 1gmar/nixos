@@ -5,17 +5,7 @@
 }: {
   options = {};
   config = {
-    autoCmd = [
-      {
-        command = "normal zR";
-        event = [
-          "BufReadPost"
-          "BufWinEnter"
-          "FileReadPost"
-        ];
-        pattern = ["*"];
-      }
-    ];
+    autoCmd = [];
     globals = {
       mapleader = " ";
       maplocalleader = " ";
@@ -76,6 +66,7 @@
     opts = {
       background = "light";
       expandtab = true;
+      foldlevel = 99;
       number = true;
       relativenumber = true;
       shiftwidth = 2;

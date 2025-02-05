@@ -7,7 +7,7 @@
   config = lib.mkIf stylixEnable {
     stylix.targets = {
       i3.enable = true;
-      kitty.enable = true;
+      kitty.enable = false;
       vim.enable = false;
     };
   };

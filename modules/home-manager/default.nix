@@ -8,6 +8,7 @@
     ./i3.nix
     ./kitty.nix
     ./nixvim.nix
+    ./polybar.nix
     ./rofi.nix
     ./ssh.nix
     ./vim.nix
