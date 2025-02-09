@@ -54,7 +54,7 @@ in {
           };
         };
         fonts = lib.mkForce {
-          names = ["Noto Sans Mono"];
+          names = ["Noto Sans"];
           size = 9.0;
           style = "Bold";
         };
@@ -80,8 +80,8 @@ in {
           "${mod}+s" = "layout tabbed";
           "${mod}+e" = "layout toggle split";
           "${mod}+f" = "floating toggle";
-          "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+";
-          "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-";
+          "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         };
         modifier = mod;

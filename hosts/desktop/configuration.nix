@@ -80,6 +80,7 @@ in {
     packages = with pkgs; [
       corefonts
       dejavu_fonts
+      font-awesome
       freefont_ttf
       hiragino-typeface
       ipafont
