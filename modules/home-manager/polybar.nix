@@ -27,7 +27,8 @@
             "MesloLGS NF:size=12:style=Bold;3"
             "Noto Color Emoji:scale=8;2"
             "MesloLGS NF:size=8:style=Bold;3"
-            "FontAwesome6Free:style=Solid:size=12;3"
+            "Material Design Icons:size=12;3"
+            "Material Design Icons:size=18;3"
           ];
           height = "2.0%";
           module.margin = "1";
@@ -38,10 +39,24 @@
         };
         "module/cpu" = {
           type = "internal/cpu";
-          format.text = "<label> <ramp-coreload>";
-          format.warn = "﬘ %{F#dc322f}%percentage%%%{F-}";
+          format = {
+            prefix = {
+              font = "5";
+              padding = "0";
+              text = "󰍛";
+            };
+            text = "<label> <ramp-coreload>";
+            warn = {
+              prefix = {
+                font = "5";
+                padding = "0";
+                text = "󰍛";
+              };
+              text = "%{F#dc322f}%percentage%%%{F-}";
+            };
+          };
           interval = "0.5";
-          label.text = "﬘ %percentage%%";
+          label.text = "%percentage%%";
           ramp.coreload = {
             background = "#eee8d5";
             font = "3";
@@ -61,12 +76,28 @@
         };
         "module/disk" = {
           type = "internal/fs";
-          format.mounted = "<label-mounted> <ramp-capacity>";
-          format.warn = "<label-warn> <ramp-capacity>";
+          format = {
+            mounted = {
+              prefix = {
+                font = "5";
+                padding = "0";
+                text = "󰋊";
+              };
+              text = "<label-mounted> <ramp-capacity>";
+            };
+            warn = {
+              prefix = {
+                font = "5";
+                padding = "0";
+                text = "󰋊";
+              };
+              text = "<label-warn> <ramp-capacity>";
+            };
+          };
           interval = "10";
           label = {
-            mounted = "%{T4}🖴 %{T-}%percentage_used%%";
-            warn = "%{T4}🖴 %{T-}%{F#dc322f}%percentage_used%%%{F-}";
+            mounted = "%percentage_used%%";
+            warn = "%{F#dc322f}%percentage_used%%%{F-}";
           };
           ramp.capacity = {
             background = "#eee8d5";
@@ -77,11 +108,25 @@
         };
         "module/memory" = {
           type = "internal/memory";
-          format.text = "<label> <ramp-used>";
-          format.warn = "<label-warn> <ramp-used>";
+          format = {
+            prefix = {
+              font = "5";
+              padding = "0";
+              text = "󰤽";
+            };
+            text = "<label> <ramp-used>";
+            warn = {
+              prefix = {
+                font = "5";
+                padding = "0";
+                text = "󰤽";
+              };
+              text = "<label-warn> <ramp-used>";
+            };
+          };
           interval = "1.0";
-          label.text = " %percentage_used%%";
-          label.warn = " %{F#dc322f}%percentage_used%%%{F-}";
+          label.text = "%percentage_used%%";
+          label.warn = "%{F#dc322f}%percentage_used%%%{F-}";
           ramp.used = {
             background = "#eee8d5";
             foreground = "#268bd2";
@@ -92,10 +137,15 @@
         "module/volume" = {
           type = "internal/pulseaudio";
           format.volume = "<ramp-volume> <label-volume>";
-          label.muted.foreground = "#dc322f";
-          label.muted.text = "婢 %percentage%%";
+          label.muted = {
+            foreground = "#dc322f";
+            text = "%{T5}󰖁%{T-}%percentage%%";
+          };
           label.volume = "%percentage%%";
-          ramp.volume = ["奄" "奔" "墳"];
+          ramp = {
+            font = "5";
+            volume = ["󰕿" "󰖀" "󰕾"];
+          };
         };
       };
     };

@@ -55,7 +55,7 @@ in {
         };
         fonts = lib.mkForce {
           names = ["Noto Sans"];
-          size = 9.0;
+          size = 8.0;
           style = "Bold";
         };
         gaps = {
