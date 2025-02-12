@@ -3,6 +3,7 @@
     inputs.nixvim.homeManagerModules.nixvim
     ./bash.nix
     ./direnv.nix
+    ./gammastep.nix
     ./git.nix
     ./home-stylix.nix
     ./i3.nix

@@ -78,6 +78,7 @@
   programs.firefox.enable = true;
   bash.enable = true;
   direnv.enable = true;
+  gammastep.enable = true;
   git.enable = true;
   i3wm.enable = true;
   kitty.enable = true;

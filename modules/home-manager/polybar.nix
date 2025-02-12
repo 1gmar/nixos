@@ -29,7 +29,7 @@
             "MesloLGS NF:size=12:style=Bold;3"
             "MesloLGS NF:size=8:style=Bold;3"
             "Material Design Icons:size=18;3"
-            "FontAwesome6Free:style=Solid:size=16;3"
+            "FontAwesome6Free:style=Solid:size=18;3"
           ];
           height = "2.0%";
           module.margin = "1";
@@ -65,8 +65,8 @@
             };
           };
           interval = "0.5";
-          label.text = "%percentage%%";
-          label.warn = "%percentage%%";
+          label.text = "%percentage:2%%";
+          label.warn = "%percentage:2%%";
           ramp.coreload = {
             background = "\${colors.backgroundHigh}";
             font = "2";
@@ -106,10 +106,10 @@
           };
           interval = "10";
           label = {
-            mounted = "%percentage_used%%";
+            mounted = "%percentage_used:2%%";
             warn = {
               foreground = "\${colors.red}";
-              text = "%percentage_used%%";
+              text = "%percentage_used:2%%";
             };
           };
           ramp.capacity = {
@@ -124,14 +124,14 @@
           format = {
             prefix = {
               font = "4";
-              padding = "0";
+              padding.right = "5px";
               text = "";
             };
             text = "<label> <ramp-used>";
             warn = {
               prefix = {
                 font = "4";
-                padding-right = "1";
+                padding.right = "5px";
                 text = "";
               };
               text = "<label-warn> <ramp-used>";
@@ -139,10 +139,10 @@
           };
           interval = "1.0";
           label = {
-            text = "%percentage_used%%";
+            text = "%percentage_used:2%%";
             warn = {
               foreground = "\${colors.red}";
-              text = "%percentage_used%%";
+              text = "%percentage_used:2%%";
             };
           };
           ramp.used = {
@@ -159,7 +159,7 @@
           interface = "enp5s0";
           interval = "0.5";
           label = {
-            connected = "%{T3}󰅀%{T-}%downspeed% %{T3}󰅃%{T-}%upspeed%";
+            connected = "%{T3}󰅀%{T-}%downspeed:8% %{T3}󰅃%{T-}%upspeed:8%";
             disconnected = {
               font = "3";
               text = "󰲛";
@@ -176,9 +176,9 @@
           format.volume = "<ramp-volume> <label-volume>";
           label.muted = {
             foreground = "\${colors.red}";
-            text = "%{T3}󰖁%{T-}%percentage%%";
+            text = "%{T3}󰖁%{T-}%percentage:2%%";
           };
-          label.volume = "%percentage%%";
+          label.volume = "%percentage:2%%";
           ramp = {
             font = "3";
             volume = ["󰕿" "󰖀" "󰕾"];
