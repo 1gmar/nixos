@@ -18,49 +18,59 @@
       script = "polybar &";
       settings = {
         "bar/i3-bar" = {
-          background = "#fdf6e3";
-          foreground = "#657b83";
-          border.left.size = "5";
-          border.right.size = "5";
-          border.top.size = "3";
+          background = "\${colors.background}";
+          foreground = "\${colors.text}";
+          border = {
+            left.size = "5";
+            right.size = "5";
+            top.size = "3";
+          };
           font = [
             "MesloLGS NF:size=12:style=Bold;3"
-            "Noto Color Emoji:scale=8;2"
             "MesloLGS NF:size=8:style=Bold;3"
-            "Material Design Icons:size=12;3"
             "Material Design Icons:size=18;3"
+            "FontAwesome6Free:style=Solid:size=16;3"
           ];
           height = "2.0%";
           module.margin = "1";
-          modules.center = "cpu memory disk";
-          modules.right = "volume date";
+          modules.center = "cpu memory disk network";
+          modules.right = "tray volume date";
           padding = "1";
           radius = "2";
+        };
+        "colors" = {
+          background = "#fdf6e3";
+          backgroundHigh = "#eee8d5";
+          blue = "#268bd2";
+          red = "#dc322f";
+          text = "#657b83";
         };
         "module/cpu" = {
           type = "internal/cpu";
           format = {
             prefix = {
-              font = "5";
+              font = "3";
               padding = "0";
               text = "󰍛";
             };
             text = "<label> <ramp-coreload>";
             warn = {
               prefix = {
-                font = "5";
+                font = "3";
                 padding = "0";
                 text = "󰍛";
               };
-              text = "%{F#dc322f}%percentage%%%{F-}";
+              foreground = "\${colors.red}";
+              text = "<label-warn> <ramp-coreload>";
             };
           };
           interval = "0.5";
           label.text = "%percentage%%";
+          label.warn = "%percentage%%";
           ramp.coreload = {
-            background = "#eee8d5";
-            font = "3";
-            foreground = "#268bd2";
+            background = "\${colors.backgroundHigh}";
+            font = "2";
+            foreground = "\${colors.blue}";
             spacing = "0";
             text = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
           };
@@ -79,7 +89,7 @@
           format = {
             mounted = {
               prefix = {
-                font = "5";
+                font = "3";
                 padding = "0";
                 text = "󰋊";
               };
@@ -87,7 +97,7 @@
             };
             warn = {
               prefix = {
-                font = "5";
+                font = "3";
                 padding = "0";
                 text = "󰋊";
               };
@@ -97,11 +107,14 @@
           interval = "10";
           label = {
             mounted = "%percentage_used%%";
-            warn = "%{F#dc322f}%percentage_used%%%{F-}";
+            warn = {
+              foreground = "\${colors.red}";
+              text = "%percentage_used%%";
+            };
           };
           ramp.capacity = {
-            background = "#eee8d5";
-            foreground = "#268bd2";
+            background = "\${colors.backgroundHigh}";
+            foreground = "\${colors.blue}";
             text = ["█" "▇" "▆" "▅" "▄" "▃" "▂" "▁"];
           };
           warn.percentage = "90";
@@ -110,40 +123,64 @@
           type = "internal/memory";
           format = {
             prefix = {
-              font = "5";
+              font = "4";
               padding = "0";
-              text = "󰤽";
+              text = "";
             };
             text = "<label> <ramp-used>";
             warn = {
               prefix = {
-                font = "5";
-                padding = "0";
-                text = "󰤽";
+                font = "4";
+                padding-right = "1";
+                text = "";
               };
               text = "<label-warn> <ramp-used>";
             };
           };
           interval = "1.0";
-          label.text = "%percentage_used%%";
-          label.warn = "%{F#dc322f}%percentage_used%%%{F-}";
+          label = {
+            text = "%percentage_used%%";
+            warn = {
+              foreground = "\${colors.red}";
+              text = "%percentage_used%%";
+            };
+          };
           ramp.used = {
-            background = "#eee8d5";
-            foreground = "#268bd2";
+            background = "\${colors.backgroundHigh}";
+            foreground = "\${colors.blue}";
             text = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
           };
           warn.percentage = "90";
+        };
+        "module/network" = {
+          type = "internal/network";
+          format.connected = "<label-connected>";
+          format.disconnected = "<label-disconnected>";
+          interface = "enp5s0";
+          interval = "0.5";
+          label = {
+            connected = "%{T3}󰅀%{T-}%downspeed% %{T3}󰅃%{T-}%upspeed%";
+            disconnected = {
+              font = "3";
+              text = "󰲛";
+            };
+          };
+        };
+        "module/tray" = {
+          type = "internal/tray";
+          format.margin = "1";
+          tray.spacing = "1";
         };
         "module/volume" = {
           type = "internal/pulseaudio";
           format.volume = "<ramp-volume> <label-volume>";
           label.muted = {
-            foreground = "#dc322f";
-            text = "%{T5}󰖁%{T-}%percentage%%";
+            foreground = "\${colors.red}";
+            text = "%{T3}󰖁%{T-}%percentage%%";
           };
           label.volume = "%percentage%%";
           ramp = {
-            font = "5";
+            font = "3";
             volume = ["󰕿" "󰖀" "󰕾"];
           };
         };

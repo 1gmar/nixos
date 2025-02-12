@@ -55,6 +55,7 @@ in {
     feh
     pavucontrol
     statix
+    telegram-desktop
   ];
 
   fonts = {
