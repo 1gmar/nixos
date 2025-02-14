@@ -9,7 +9,7 @@
 }: let
   userName = "igmar";
   stylixEnable = false;
-  hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix {inherit pkgs;};
+  hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix {};
 in {
   imports = [
     # Include the results of the hardware scan.
@@ -47,7 +47,7 @@ in {
     ];
     font = "ter-u18b";
     packages = [pkgs.terminus_font];
-    useXkbConfig = true;
+    keyMap = "us";
   };
 
   environment.systemPackages = with pkgs; [
@@ -109,7 +109,23 @@ in {
   };
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_TIME = "ja_JP.UTF-8";
+    };
+    inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        fcitx5-mozc
+      ];
+    };
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "ja_JP.UTF-8/UTF-8"
+    ];
+  };
 
   main-user = {
     enable = true;
@@ -158,9 +174,9 @@ in {
     openssh.enable = true;
     xserver = {
       enable = true;
+      exportConfiguration = true;
       videoDrivers = ["nvidia"];
       windowManager.i3.enable = true;
-      xkb.layout = "us";
     };
   };
 
