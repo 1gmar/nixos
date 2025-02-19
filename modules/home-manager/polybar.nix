@@ -30,11 +30,15 @@
             "MesloLGS NF:size=8:style=Bold;3"
             "Material Design Icons:size=18;3"
             "FontAwesome6Free:style=Solid:size=18;3"
+            "Noto Color Emoji:style=Regular:size=12:scale=10;3"
           ];
           height = "2.0%";
-          module.margin = "1";
-          modules.center = "cpu memory disk network";
-          modules.right = "tray volume date";
+          module.margin = "5px";
+          modules = {
+            center = "cpu memory disk network";
+            left = "gpu gpu-temp cpu-temp";
+            right = "tray volume input-method date";
+          };
           padding = "1";
           radius = "2";
         };
@@ -42,6 +46,7 @@
           background = "#fdf6e3";
           backgroundHigh = "#eee8d5";
           blue = "#268bd2";
+          green = "#859900";
           red = "#dc322f";
           text = "#657b83";
         };
@@ -119,6 +124,43 @@
           };
           warn.percentage = "90";
         };
+        "module/gpu" = {
+          type = "custom/script";
+          exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits";
+          format = {
+            prefix = {
+              font = "3";
+              padding.right = "5px";
+              text = "󰢮";
+            };
+            text = "<label>";
+          };
+          interval = "0.5";
+          label = "%output:2%%";
+        };
+        "module/gpu-temp" = {
+          type = "custom/script";
+          exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits";
+          format = {
+            prefix = {
+              font = "3";
+              padding = "0";
+              text = "󰔏";
+            };
+            text = "<label>";
+          };
+          interval = "0.5";
+          label = "%output:2%°C";
+        };
+        "module/input-method" = {
+          type = "internal/xkeyboard";
+          format = "<label-layout>";
+          label.layout = "%icon%";
+          layout.icon = {
+            default = "US";
+            text = ["us;EN" "ro;RO" "ru;RU"];
+          };
+        };
         "module/memory" = {
           type = "internal/memory";
           format = {
@@ -159,17 +201,30 @@
           interface = "enp5s0";
           interval = "0.5";
           label = {
-            connected = "%{T3}󰅀%{T-}%downspeed:8% %{T3}󰅃%{T-}%upspeed:8%";
+            connected = "%{F#dc322f}%{T3}󰜮%{F- T-}%downspeed:8% %{F#859900}%{T3}󰜷%{F- T-}%upspeed:8%";
             disconnected = {
               font = "3";
               text = "󰲛";
             };
           };
         };
+        "module/cpu-temp" = {
+          type = "internal/temperature";
+          format.prefix = {
+            text = "󰔏";
+            font = "3";
+          };
+          hwmon.path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input";
+          thermal.zone = "0";
+          zone.type = "x86_pkg_temp";
+        };
         "module/tray" = {
           type = "internal/tray";
           format.margin = "1";
-          tray.spacing = "1";
+          tray = {
+            size = "70%";
+            spacing = "2";
+          };
         };
         "module/volume" = {
           type = "internal/pulseaudio";

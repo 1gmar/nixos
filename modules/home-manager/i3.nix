@@ -60,7 +60,7 @@ in {
         };
         gaps = {
           inner = 2;
-          outer = 2;
+          outer = 1;
         };
         keybindings = {
           "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
@@ -94,6 +94,16 @@ in {
           {
             always = true;
             command = "systemctl --user restart polybar.service";
+            notification = false;
+          }
+          {
+            always = false;
+            command = "${pkgs.ibus}/bin/ibus start";
+            notification = false;
+          }
+          {
+            always = false;
+            command = "${pkgs.telegram-desktop}/bin/telegram-desktop";
             notification = false;
           }
         ];

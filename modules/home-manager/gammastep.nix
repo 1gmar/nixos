@@ -19,7 +19,7 @@
         randr.screen = 0;
       };
       temperature = {
-        day = 6000;
+        day = 6500;
         night = 2500;
       };
       tray = true;
