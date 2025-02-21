@@ -21,26 +21,25 @@
           background = "\${colors.background}";
           foreground = "\${colors.text}";
           border = {
-            left.size = "5";
-            right.size = "5";
-            top.size = "3";
+            left.size = "0";
+            right.size = "0";
+            top.size = "0";
           };
           font = [
-            "MesloLGS NF:size=12:style=Bold;3"
-            "MesloLGS NF:size=8:style=Bold;3"
-            "Material Design Icons:size=18;3"
-            "FontAwesome6Free:style=Solid:size=18;3"
-            "Noto Color Emoji:style=Regular:size=12:scale=10;3"
+            "JetBrainsMono:size=12:style=Bold;3"
+            "JetBrainsMono:size=8:style=Bold;3"
+            "Material Design Icons:size=18;4"
+            "Noto Sans CJK JP:size=12:style=Bold;3"
           ];
           height = "2.0%";
           module.margin = "5px";
           modules = {
             center = "cpu memory disk network";
-            left = "gpu gpu-temp cpu-temp";
+            left = "gpu gpu-fan gpu-temp cpu-fan cpu-temp";
             right = "tray volume input-method date";
           };
           padding = "1";
-          radius = "2";
+          radius = "1";
         };
         "colors" = {
           background = "#fdf6e3";
@@ -81,12 +80,35 @@
           };
           warn.percentage = "90";
         };
+        "module/cpu-fan" = {
+          type = "custom/script";
+          exec = "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 | ${pkgs.gawk}/bin/awk '{print $2}'";
+          format = {
+            prefix = {
+              font = "3";
+              text = "󰈐";
+            };
+            text = "<label>";
+          };
+          interval = "0.5";
+          label = "%output:4%";
+        };
+        "module/cpu-temp" = {
+          type = "internal/temperature";
+          format.prefix = {
+            font = "3";
+            text = "󰔏";
+          };
+          hwmon.path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input";
+          thermal.zone = "0";
+          zone.type = "x86_pkg_temp";
+        };
         "module/date" = {
           type = "internal/date";
-          date = "%Y-%m-%d";
+          date = "%Y年%m月%e日";
           format = "<label>";
           interval = "1.0";
-          label = "%date% %time%";
+          label = "%{T3}󰸗%{T-}%date% %{T3}󰅐%{T-}%time%";
           time = "%H:%M:%S";
         };
         "module/disk" = {
@@ -138,6 +160,19 @@
           interval = "0.5";
           label = "%output:2%%";
         };
+        "module/gpu-fan" = {
+          type = "custom/script";
+          exec = "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan1 | ${pkgs.gawk}/bin/awk '{print $2}'";
+          format = {
+            prefix = {
+              font = "3";
+              text = "󰈐";
+            };
+            text = "<label>";
+          };
+          interval = "0.5";
+          label = "%output:4%";
+        };
         "module/gpu-temp" = {
           type = "custom/script";
           exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits";
@@ -154,27 +189,33 @@
         };
         "module/input-method" = {
           type = "internal/xkeyboard";
-          format = "<label-layout>";
+          format = {
+            prefix = {
+              font = "3";
+              text = "󰖟";
+            };
+            text = "<label-layout>";
+          };
           label.layout = "%icon%";
           layout.icon = {
-            default = "US";
-            text = ["us;EN" "ro;RO" "ru;RU"];
+            default = "en";
+            text = ["us;en" "ro;ro" "ru;ru"];
           };
         };
         "module/memory" = {
           type = "internal/memory";
           format = {
             prefix = {
-              font = "4";
+              font = "3";
               padding.right = "5px";
-              text = "";
+              text = "󰘚";
             };
             text = "<label> <ramp-used>";
             warn = {
               prefix = {
-                font = "4";
+                font = "3";
                 padding.right = "5px";
-                text = "";
+                text = "󰘚";
               };
               text = "<label-warn> <ramp-used>";
             };
@@ -201,22 +242,12 @@
           interface = "enp5s0";
           interval = "0.5";
           label = {
-            connected = "%{F#dc322f}%{T3}󰜮%{F- T-}%downspeed:8% %{F#859900}%{T3}󰜷%{F- T-}%upspeed:8%";
+            connected = "%{F#268bd2}%{T3}󰜮%{F- T-}%downspeed:8% %{F#859900}%{T3}󰜷%{F- T-}%upspeed:8%";
             disconnected = {
               font = "3";
               text = "󰲛";
             };
           };
-        };
-        "module/cpu-temp" = {
-          type = "internal/temperature";
-          format.prefix = {
-            text = "󰔏";
-            font = "3";
-          };
-          hwmon.path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input";
-          thermal.zone = "0";
-          zone.type = "x86_pkg_temp";
         };
         "module/tray" = {
           type = "internal/tray";
@@ -231,12 +262,12 @@
           format.volume = "<ramp-volume> <label-volume>";
           label.muted = {
             foreground = "\${colors.red}";
-            text = "%{T3}󰖁%{T-}%percentage:2%%";
+            text = "%{T3}󰖁%{T-} %percentage:2%%";
           };
           label.volume = "%percentage:2%%";
-          ramp = {
+          ramp.volume = {
             font = "3";
-            volume = ["󰕿" "󰖀" "󰕾"];
+            text = ["󰕿" "󰖀" "󰕾"];
           };
         };
       };

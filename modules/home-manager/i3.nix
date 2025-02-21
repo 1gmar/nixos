@@ -60,7 +60,7 @@ in {
         };
         gaps = {
           inner = 2;
-          outer = 1;
+          outer = 0;
         };
         keybindings = {
           "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
