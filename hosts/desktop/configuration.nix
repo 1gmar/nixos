@@ -59,6 +59,7 @@ in {
       pavucontrol
       statix
       telegram-desktop
+      wthrr
     ];
     variables = {
       GLFW_IM_MODULE = "ibus";
@@ -92,6 +93,7 @@ in {
       jetbrains-mono
       liberation_ttf
       material-design-icons
+      meslo-lgs-nf
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif

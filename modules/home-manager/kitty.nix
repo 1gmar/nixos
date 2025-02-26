@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  pkgs,
   ...
 }: {
   options = {
@@ -11,7 +10,6 @@
     programs.kitty = {
       enable = true;
       font = {
-        package = lib.mkForce (pkgs.meslo-lgs-nf);
         name = lib.mkForce "MesloLGS NF";
         size = lib.mkForce 14;
       };

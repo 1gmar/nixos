@@ -27,16 +27,16 @@
           };
           font = [
             "JetBrainsMono:size=12:style=Bold;3"
-            "JetBrainsMono:size=8:style=Bold;3"
             "Material Design Icons:size=18;4"
             "Noto Sans CJK JP:size=12:style=Bold;3"
+            "MesloLGS NF:size=18:style=Bold;3"
           ];
           height = "2.0%";
           module.margin = "5px";
           modules = {
-            center = "cpu memory disk network";
-            left = "gpu gpu-fan gpu-temp cpu-fan cpu-temp";
-            right = "tray volume input-method date";
+            center = "cpu cpu-fan cpu-temp network";
+            left = "gpu gpu-fan gpu-temp memory disk";
+            right = "tray weather volume input-method date";
           };
           padding = "1";
           radius = "1";
@@ -53,15 +53,13 @@
           type = "internal/cpu";
           format = {
             prefix = {
-              font = "3";
-              padding = "0";
+              font = "2";
               text = "󰍛";
             };
             text = "<label> <ramp-coreload>";
             warn = {
               prefix = {
-                font = "3";
-                padding = "0";
+                font = "2";
                 text = "󰍛";
               };
               foreground = "\${colors.red}";
@@ -72,8 +70,8 @@
           label.text = "%percentage:2%%";
           label.warn = "%percentage:2%%";
           ramp.coreload = {
+            "7".foreground = "\${colors.red}";
             background = "\${colors.backgroundHigh}";
-            font = "2";
             foreground = "\${colors.blue}";
             spacing = "0";
             text = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
@@ -85,7 +83,7 @@
           exec = "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 | ${pkgs.gawk}/bin/awk '{print $2}'";
           format = {
             prefix = {
-              font = "3";
+              font = "2";
               text = "󰈐";
             };
             text = "<label>";
@@ -96,7 +94,7 @@
         "module/cpu-temp" = {
           type = "internal/temperature";
           format.prefix = {
-            font = "3";
+            font = "2";
             text = "󰔏";
           };
           hwmon.path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input";
@@ -108,7 +106,7 @@
           date = "%Y年%m月%e日";
           format = "<label>";
           interval = "1.0";
-          label = "%{T3}󰸗%{T-}%date% %{T3}󰅐%{T-}%time%";
+          label = "%{T2}󰸗%{T-}%date% %{T2}󰅐%{T-}%time%";
           time = "%H:%M:%S";
         };
         "module/disk" = {
@@ -116,33 +114,26 @@
           format = {
             mounted = {
               prefix = {
-                font = "3";
-                padding = "0";
+                font = "2";
                 text = "󰋊";
               };
-              text = "<label-mounted> <ramp-capacity>";
+              text = "<label-mounted>";
             };
             warn = {
               prefix = {
-                font = "3";
-                padding = "0";
+                font = "2";
                 text = "󰋊";
               };
-              text = "<label-warn> <ramp-capacity>";
+              text = "<label-warn>";
             };
           };
-          interval = "10";
+          interval = "10.0";
           label = {
             mounted = "%percentage_used:2%%";
             warn = {
               foreground = "\${colors.red}";
               text = "%percentage_used:2%%";
             };
-          };
-          ramp.capacity = {
-            background = "\${colors.backgroundHigh}";
-            foreground = "\${colors.blue}";
-            text = ["█" "▇" "▆" "▅" "▄" "▃" "▂" "▁"];
           };
           warn.percentage = "90";
         };
@@ -151,7 +142,7 @@
           exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits";
           format = {
             prefix = {
-              font = "3";
+              font = "2";
               padding.right = "5px";
               text = "󰢮";
             };
@@ -165,7 +156,7 @@
           exec = "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan1 | ${pkgs.gawk}/bin/awk '{print $2}'";
           format = {
             prefix = {
-              font = "3";
+              font = "2";
               text = "󰈐";
             };
             text = "<label>";
@@ -178,8 +169,7 @@
           exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits";
           format = {
             prefix = {
-              font = "3";
-              padding = "0";
+              font = "2";
               text = "󰔏";
             };
             text = "<label>";
@@ -191,7 +181,7 @@
           type = "internal/xkeyboard";
           format = {
             prefix = {
-              font = "3";
+              font = "2";
               text = "󰖟";
             };
             text = "<label-layout>";
@@ -206,18 +196,18 @@
           type = "internal/memory";
           format = {
             prefix = {
-              font = "3";
+              font = "2";
               padding.right = "5px";
               text = "󰘚";
             };
-            text = "<label> <ramp-used>";
+            text = "<label>";
             warn = {
               prefix = {
-                font = "3";
+                font = "2";
                 padding.right = "5px";
                 text = "󰘚";
               };
-              text = "<label-warn> <ramp-used>";
+              text = "<label-warn>";
             };
           };
           interval = "1.0";
@@ -228,23 +218,24 @@
               text = "%percentage_used:2%%";
             };
           };
-          ramp.used = {
-            background = "\${colors.backgroundHigh}";
-            foreground = "\${colors.blue}";
-            text = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
-          };
           warn.percentage = "90";
         };
         "module/network" = {
           type = "internal/network";
-          format.connected = "<label-connected>";
+          format.connected = {
+            prefix = {
+              font = "2";
+              text = "󰛳";
+            };
+            text = "<label-connected>";
+          };
           format.disconnected = "<label-disconnected>";
           interface = "enp5s0";
           interval = "0.5";
           label = {
-            connected = "%{F#268bd2}%{T3}󰜮%{F- T-}%downspeed:8% %{F#859900}%{T3}󰜷%{F- T-}%upspeed:8%";
+            connected = "%{F#268bd2}%{T2}󰜮%{F- T-}%downspeed:8% %{F#859900}%{T2}󰜷%{F- T-}%upspeed:8%";
             disconnected = {
-              font = "3";
+              font = "2";
               text = "󰲛";
             };
           };
@@ -262,13 +253,20 @@
           format.volume = "<ramp-volume> <label-volume>";
           label.muted = {
             foreground = "\${colors.red}";
-            text = "%{T3}󰖁%{T-} %percentage:2%%";
+            text = "%{T2}󰖁%{T-} %percentage:2%%";
           };
           label.volume = "%percentage:2%%";
           ramp.volume = {
-            font = "3";
+            font = "2";
             text = ["󰕿" "󰖀" "󰕾"];
           };
+        };
+        "module/weather" = {
+          type = "custom/script";
+          exec = "${pkgs.wthrr}/bin/wthrr | ${pkgs.gawk}/bin/awk 'NR==4 {print $2, $5}'";
+          format = "<label>";
+          interval = "10.0";
+          label = "%output:8%";
         };
       };
     };

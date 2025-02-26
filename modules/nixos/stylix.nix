@@ -20,15 +20,12 @@ in {
       base16Scheme = "${pkgs.base16-schemes}/share/themes/solarized-light.yaml";
       fonts = {
         monospace = {
-          package = lib.mkDefault (pkgs.nerd-fonts.jetbrains-mono);
-          name = lib.mkDefault "JetBrainsMono Nerd Font Mono";
+          name = lib.mkDefault "JetBrainsMono";
         };
         sansSerif = {
-          package = pkgs.dejavu_fonts;
           name = "DejaVu Sans";
         };
         serif = {
-          package = pkgs.dejavu_fonts;
           name = "DejaVu Serif";
         };
       };
