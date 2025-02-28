@@ -8,7 +8,6 @@
   ...
 }: let
   userName = "igmar";
-  stylixEnable = false;
   hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix {};
 in {
   imports = [
@@ -72,23 +71,25 @@ in {
         "Noto Color Emoji"
       ];
       monospace = [
-        "Noto Sans Mono"
+        "Fira Mono"
         "Noto Sans Mono CJK JP"
       ];
       sansSerif = [
-        "Noto Sans"
+        "Fira Sans"
         "Noto Sans CJK JP"
       ];
       serif = [
-        "Noto Serif"
+        "Fira Sans"
         "Noto Serif CJK JP"
       ];
     };
     fontDir.enable = true;
     enableGhostscriptFonts = true;
     packages = with pkgs; [
+      cantarell-fonts
       corefonts
       dejavu_fonts
+      fira
       hiragino-typeface
       jetbrains-mono
       liberation_ttf
@@ -105,7 +106,7 @@ in {
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs system stylixEnable wallpaperPath;};
+    extraSpecialArgs = {inherit inputs system wallpaperPath;};
     sharedModules = [
       inputs.self.outputs.homeManagerModules.default
     ];
@@ -193,11 +194,6 @@ in {
         options = "grp:win_space_toggle,grp:ctrl_alt_toggle_bidir";
       };
     };
-  };
-
-  stylix-mode = {
-    enable = stylixEnable;
-    wallpaper = wallpaperPath;
   };
 
   # Set your time zone.

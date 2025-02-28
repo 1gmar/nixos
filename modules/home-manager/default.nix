@@ -5,7 +5,6 @@
     ./direnv.nix
     ./gammastep.nix
     ./git.nix
-    ./home-stylix.nix
     ./i3.nix
     ./kitty.nix
     ./nixvim.nix

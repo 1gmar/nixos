@@ -92,10 +92,6 @@ in {
     userName = "${userName}";
     description = "Igor Marta";
   };
-  stylix-mode = {
-    enable = true;
-    wallpaper = wallpaperPath;
-  };
 
   home-manager = {
     extraSpecialArgs = {inherit inputs system;};

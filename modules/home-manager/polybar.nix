@@ -263,7 +263,7 @@
         };
         "module/weather" = {
           type = "custom/script";
-          exec = "${pkgs.wthrr}/bin/wthrr | ${pkgs.gawk}/bin/awk 'NR==4 {print $2, $5}'";
+          exec = "${pkgs.wthrr}/bin/wthrr | ${pkgs.gawk}/bin/awk 'NR==4 {split($0, L, \",\"); split(L[2], S, \" \"); print $2, S[1]}'";
           format = "<label>";
           interval = "10.0";
           label = "%output:8%";

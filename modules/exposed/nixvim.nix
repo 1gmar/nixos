@@ -207,6 +207,7 @@
       telescope = {
         enable = true;
         extensions = {
+          live-grep-args.enable = true;
           ui-select.enable = true;
         };
         keymaps = {
