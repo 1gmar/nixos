@@ -36,7 +36,7 @@
           modules = {
             center = "cpu cpu-fan cpu-temp network";
             left = "gpu gpu-fan gpu-temp memory disk";
-            right = "tray weather volume input-method date";
+            right = "tray weather volume input-method date time";
           };
           padding = "1";
           radius = "1";
@@ -102,12 +102,30 @@
           zone.type = "x86_pkg_temp";
         };
         "module/date" = {
-          type = "internal/date";
-          date = "%Y年%m月%e日";
-          format = "<label>";
+          type = "custom/script";
+          exec = "${pkgs.coreutils-full}/bin/date +%Y年%-m月%-e日";
+          format = {
+            prefix = {
+              font = "2";
+              text = "󰸗";
+            };
+            text = "<label>";
+          };
           interval = "1.0";
-          label = "%{T2}󰸗%{T-}%date% %{T2}󰅐%{T-}%time%";
-          time = "%H:%M:%S";
+          label = "%output%";
+        };
+        "module/time" = {
+          type = "custom/script";
+          exec = "${pkgs.coreutils-full}/bin/date +%H:%M:%S";
+          format = {
+            prefix = {
+              font = "2";
+              text = "󰅐";
+            };
+            text = "<label>";
+          };
+          interval = "1.0";
+          label = "%output%";
         };
         "module/disk" = {
           type = "internal/fs";
@@ -233,7 +251,7 @@
           interface = "enp5s0";
           interval = "0.5";
           label = {
-            connected = "%{F#268bd2}%{T2}󰜮%{F- T-}%downspeed:8% %{F#859900}%{T2}󰜷%{F- T-}%upspeed:8%";
+            connected = "%{F#268bd2}%{T2}󰜮%{F- T-}%downspeed:9% %{F#859900}%{T2}󰜷%{F- T-}%upspeed:9%";
             disconnected = {
               font = "2";
               text = "󰲛";

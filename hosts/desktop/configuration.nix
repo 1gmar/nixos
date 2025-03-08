@@ -53,6 +53,7 @@ in {
     systemPackages = with pkgs; [
       alejandra
       dmidecode
+      docker-compose
       feh
       lm_sensors
       pavucontrol
@@ -198,6 +199,8 @@ in {
 
   # Set your time zone.
   time.timeZone = "Europe/Chisinau";
+
+  virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
