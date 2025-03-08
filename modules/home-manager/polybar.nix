@@ -111,7 +111,7 @@
             };
             text = "<label>";
           };
-          interval = "1.0";
+          interval = "1";
           label = "%output%";
         };
         "module/time" = {
@@ -124,7 +124,7 @@
             };
             text = "<label>";
           };
-          interval = "1.0";
+          interval = "1";
           label = "%output%";
         };
         "module/disk" = {
@@ -145,7 +145,7 @@
               text = "<label-warn>";
             };
           };
-          interval = "10.0";
+          interval = "10";
           label = {
             mounted = "%percentage_used:2%%";
             warn = {
@@ -228,7 +228,7 @@
               text = "<label-warn>";
             };
           };
-          interval = "1.0";
+          interval = "1";
           label = {
             text = "%percentage_used:2%%";
             warn = {
@@ -251,7 +251,7 @@
           interface = "enp5s0";
           interval = "0.5";
           label = {
-            connected = "%{F#268bd2}%{T2}󰜮%{F- T-}%downspeed:9% %{F#859900}%{T2}󰜷%{F- T-}%upspeed:9%";
+            connected = "%{F#268bd2}%{T2}󰜮%{F- T-}%downspeed:10% %{F#859900}%{T2}󰜷%{F- T-}%upspeed:10%";
             disconnected = {
               font = "2";
               text = "󰲛";
@@ -283,7 +283,10 @@
           type = "custom/script";
           exec = "${pkgs.wthrr}/bin/wthrr | ${pkgs.gawk}/bin/awk 'NR==4 {split($0, L, \",\"); split(L[2], S, \" \"); print $2, S[1]}'";
           format = "<label>";
-          interval = "10.0";
+          interval = {
+            fail = "5";
+            text = "300";
+          };
           label = "%output:8%";
         };
       };

@@ -55,6 +55,8 @@ in {
       dmidecode
       docker-compose
       feh
+      jellyfin-media-player
+      keepassxc
       lm_sensors
       pavucontrol
       statix
