@@ -108,6 +108,7 @@
   git.enable = true;
   i3wm.enable = true;
   kitty.enable = true;
+  librewolf.enable = true;
   nixvim.enable = true;
   polybar.enable = true;
   rofi.enable = true;

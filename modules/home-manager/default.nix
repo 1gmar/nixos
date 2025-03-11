@@ -7,6 +7,7 @@
     ./git.nix
     ./i3.nix
     ./kitty.nix
+    ./librewolf.nix
     ./nixvim.nix
     ./polybar.nix
     ./rofi.nix

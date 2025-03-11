@@ -80,9 +80,12 @@ in {
           "${mod}+s" = "layout tabbed";
           "${mod}+e" = "layout toggle split";
           "${mod}+f" = "floating toggle";
-          "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
           "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any play-pause";
+          "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any next";
+          "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any previous";
         };
         modifier = mod;
         startup = [
@@ -99,6 +102,11 @@ in {
           {
             always = false;
             command = "${pkgs.ibus}/bin/ibus start";
+            notification = false;
+          }
+          {
+            always = false;
+            command = "${pkgs.keepassxc}/bin/keepassxc";
             notification = false;
           }
           {

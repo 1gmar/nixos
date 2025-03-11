@@ -251,7 +251,7 @@
           interface = "enp5s0";
           interval = "0.5";
           label = {
-            connected = "%{F#268bd2}%{T2}󰜮%{F- T-}%downspeed:10% %{F#859900}%{T2}󰜷%{F- T-}%upspeed:10%";
+            connected = "%downspeed:10%%{F#268bd2}%{T2}󰜮%{F- T-} %upspeed:10%%{F#859900}%{T2}󰜷%{F- T-}";
             disconnected = {
               font = "2";
               text = "󰲛";
@@ -281,13 +281,23 @@
         };
         "module/weather" = {
           type = "custom/script";
-          exec = "${pkgs.wthrr}/bin/wthrr | ${pkgs.gawk}/bin/awk 'NR==4 {split($0, L, \",\"); split(L[2], S, \" \"); print $2, S[1]}'";
-          format = "<label>";
+          exec = "(set -o pipefail && ${pkgs.wthrr}/bin/wthrr | ${pkgs.gawk}/bin/awk 'NR==4 {split($0, L, \",\"); split(L[2], S, \" \"); print $2, S[1]}')";
+          format = {
+            fail = "<label-fail>";
+            text = "<label>";
+          };
           interval = {
             fail = "5";
             text = "300";
           };
-          label = "%output:8%";
+          label = {
+            fail = {
+              font = "2";
+              foreground = "\${colors.red}";
+              text = "󱯻 󰲛";
+            };
+            text = "%output:8%";
+          };
         };
       };
     };

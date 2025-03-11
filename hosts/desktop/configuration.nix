@@ -59,6 +59,7 @@ in {
       keepassxc
       lm_sensors
       pavucontrol
+      playerctl
       statix
       telegram-desktop
       wthrr
