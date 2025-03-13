@@ -101,7 +101,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.firefox.enable = true;
+  programs.firefox.enable = false;
   bash.enable = true;
   direnv.enable = true;
   gammastep.enable = true;

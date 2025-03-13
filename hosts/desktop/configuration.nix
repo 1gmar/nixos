@@ -62,6 +62,7 @@ in {
       playerctl
       statix
       telegram-desktop
+      vdpauinfo
       wthrr
     ];
     variables = {
