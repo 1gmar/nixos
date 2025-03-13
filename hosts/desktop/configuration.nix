@@ -64,6 +64,7 @@ in {
       telegram-desktop
       vdpauinfo
       wthrr
+      xss-lock
     ];
     variables = {
       GLFW_IM_MODULE = "ibus";

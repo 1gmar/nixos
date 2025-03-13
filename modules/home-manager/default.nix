@@ -11,6 +11,7 @@
     ./nixvim.nix
     ./polybar.nix
     ./rofi.nix
+    ./screen-locker.nix
     ./ssh.nix
     ./vim.nix
   ];

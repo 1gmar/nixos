@@ -80,6 +80,7 @@ in {
           "${mod}+s" = "layout tabbed";
           "${mod}+e" = "layout toggle split";
           "${mod}+f" = "floating toggle";
+          "${mod}+Escape" = "exec ${pkgs.systemd}/bin/loginctl lock-session && ${pkgs.coreutils-full}/bin/sleep 5 && /run/current-system/sw/bin/xset dpms force off";
           "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
@@ -106,7 +107,7 @@ in {
           }
           {
             always = false;
-            command = "${pkgs.keepassxc}/bin/keepassxc";
+            command = "${pkgs.keepassxc}/bin/keepassxc --localconfig ${config.home.homeDirectory}/.config/keepassxc/keepassxc_local.ini";
             notification = false;
           }
           {

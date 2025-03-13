@@ -112,6 +112,7 @@
   nixvim.enable = true;
   polybar.enable = true;
   rofi.enable = true;
+  screen-locker.enable = true;
   ssh.enable = true;
   vim.enable = true;
 }
