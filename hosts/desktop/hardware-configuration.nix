@@ -44,6 +44,7 @@
       modesetting.enable = true;
       open = false;
       powerManagement.enable = true;
+      videoAcceleration = true;
     };
     nvidia-container-toolkit = {
       enable = true;

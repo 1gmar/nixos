@@ -27,22 +27,22 @@ in {
 
   console = {
     colors = [
-      "fdf6e3"
+      "002b36"
       "dc322f"
       "859900"
       "b58900"
-      "93a1a1"
+      "268bd2"
       "d33682"
       "2aa198"
-      "073642"
       "eee8d5"
-      "cb4b16"
-      "268bd2"
-      "839496"
-      "657b83"
-      "6c71c4"
-      "586e75"
       "002b36"
+      "cb4b16"
+      "586e75"
+      "657b83"
+      "839496"
+      "6c71c4"
+      "93a1a1"
+      "fdf6e3"
     ];
     font = "ter-u18b";
     packages = [pkgs.terminus_font];
@@ -54,6 +54,7 @@ in {
       alejandra
       dmidecode
       docker-compose
+      fastfetch
       feh
       jellyfin-media-player
       keepassxc
@@ -68,6 +69,7 @@ in {
     ];
     variables = {
       GLFW_IM_MODULE = "ibus";
+      LIBVA_DRIVER_NAME = "nvidia";
     };
   };
 
@@ -190,6 +192,14 @@ in {
     };
     openssh.enable = true;
     xserver = {
+      config = lib.mkAfter ''
+        Section "ServerFlags"
+            Option "BlankTime"   "0"
+            Option "OffTime"     "0"
+            Option "StandbyTime" "0"
+            Option "SuspendTime" "0"
+        EndSection
+      '';
       enable = true;
       exportConfiguration = true;
       videoDrivers = ["nvidia"];

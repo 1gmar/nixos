@@ -54,7 +54,7 @@ in {
           };
         };
         fonts = lib.mkForce {
-          names = ["Noto Sans"];
+          names = ["Fira Sans"];
           size = 8.0;
           style = "Bold";
         };
@@ -66,6 +66,7 @@ in {
           "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
           "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
           "${mod}+Shift+c" = "kill";
+          "--release button2" = "kill";
           "${mod}+j" = "focus down";
           "${mod}+k" = "focus up";
           "${mod}+h" = "focus left";
@@ -80,7 +81,7 @@ in {
           "${mod}+s" = "layout tabbed";
           "${mod}+e" = "layout toggle split";
           "${mod}+f" = "floating toggle";
-          "${mod}+Escape" = "exec ${pkgs.systemd}/bin/loginctl lock-session && ${pkgs.coreutils-full}/bin/sleep 5 && /run/current-system/sw/bin/xset dpms force off";
+          "${mod}+Escape" = "exec ${pkgs.systemd}/bin/loginctl lock-session && ${pkgs.coreutils-full}/bin/sleep 5 && ${pkgs.xorg.xset}/bin/xset dpms force off";
           "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";

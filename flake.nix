@@ -19,7 +19,7 @@
 
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
-    wallpaperPath = ./fujisan.png;
+    wallpaperPath = ./anime-sky.png;
   in {
     nixosConfigurations = {
       default = nixpkgs.lib.nixosSystem {
