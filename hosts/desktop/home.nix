@@ -114,5 +114,6 @@
   rofi.enable = true;
   screen-locker.enable = true;
   ssh.enable = true;
+  thunderbird.enable = true;
   vim.enable = true;
 }
