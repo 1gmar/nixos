@@ -100,7 +100,7 @@ in {
           type = "custom/script";
           exec = "${pkgs.coreutils-full}/bin/date +%Y年%-m月%-e日";
           format = {
-            foreground = colors.orange;
+            foreground = colors.yellow;
             text = "<label>";
           };
           interval = "1";
@@ -110,7 +110,7 @@ in {
           type = "custom/script";
           exec = "${pkgs.coreutils-full}/bin/date +%-H時%M分%S秒";
           format = {
-            foreground = colors.orange;
+            foreground = colors.green;
             text = "<label>";
           };
           interval = "1";

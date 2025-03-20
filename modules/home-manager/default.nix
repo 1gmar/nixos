@@ -3,6 +3,7 @@
     inputs.nixvim.homeManagerModules.nixvim
     ./activity-watch.nix
     ./bash.nix
+    ./dconf.nix
     ./direnv.nix
     ./gammastep.nix
     ./git.nix

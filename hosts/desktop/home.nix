@@ -104,6 +104,7 @@
   programs.firefox.enable = false;
   activity-watch.enable = true;
   bash.enable = true;
+  dconf-settings.enable = true;
   direnv.enable = true;
   gammastep.enable = true;
   git.enable = true;

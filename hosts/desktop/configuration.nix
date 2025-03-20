@@ -51,7 +51,9 @@ in {
 
   environment = {
     systemPackages = with pkgs; [
+      adwaita-icon-theme
       alejandra
+      denaro
       dmidecode
       docker-compose
       fastfetch
@@ -204,11 +206,7 @@ in {
       exportConfiguration = true;
       videoDrivers = ["nvidia"];
       windowManager.i3.enable = true;
-      xkb = {
-        layout = "us,ro,ru";
-        variant = ",std,phonetic_YAZHERTY";
-        options = "grp:win_space_toggle,grp:ctrl_alt_toggle_bidir";
-      };
+      xkb.layout = "us";
     };
   };
 
