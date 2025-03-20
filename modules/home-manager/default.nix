@@ -1,6 +1,7 @@
 {inputs, ...}: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
+    ./activity-watch.nix
     ./bash.nix
     ./direnv.nix
     ./gammastep.nix

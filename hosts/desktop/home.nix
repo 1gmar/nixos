@@ -102,6 +102,7 @@
   programs.home-manager.enable = true;
 
   programs.firefox.enable = false;
+  activity-watch.enable = true;
   bash.enable = true;
   direnv.enable = true;
   gammastep.enable = true;
