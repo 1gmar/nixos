@@ -9,6 +9,7 @@
     backgroundHigh = "#eee8d5";
     blue = "#268bd2";
     cyan = "#2aa198";
+    foregroundEmph = "#586e75";
     green = "#859900";
     magenta = "#d33682";
     orange = "#cb4b16";
@@ -49,7 +50,7 @@ in {
           module.margin = "0";
           modules = {
             center = "cpu cpu-fan cpu-temp network gpu gpu-fan gpu-temp";
-            left = "";
+            left = "workspaces";
             right = "tray weather memory disk volume input-method date time";
           };
           padding = "1";
@@ -282,6 +283,33 @@ in {
               text = "󱯻 ";
             };
             text = "%output:8%";
+          };
+        };
+        "module/workspaces" = {
+          type = "internal/xworkspaces";
+          icon = {
+            default = "󰘔";
+            text = ["browser;󰾔" "email;󰇰" "messenger;󱋊" "terminal;󰆍"];
+          };
+          label = {
+            active = {
+              background = colors.backgroundHigh;
+              foreground = colors.foregroundEmph;
+              padding = 1;
+              text = "%icon%";
+            };
+            occupied = {
+              background = colors.background;
+              foreground = colors.text;
+              padding = 1;
+              text = "%icon%";
+            };
+            urgent = {
+              background = colors.background;
+              foreground = colors.red;
+              padding = 1;
+              text = "%icon%";
+            };
           };
         };
       };
