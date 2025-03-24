@@ -74,7 +74,7 @@ in {
         };
         fonts = lib.mkForce {
           names = ["Fira Sans"];
-          size = 8.0;
+          size = 0.0;
           style = "Bold";
         };
         gaps = {
@@ -147,17 +147,17 @@ in {
           }
           {
             always = false;
-            command = "${pkgs.librewolf}/bin/librewolf";
-            notification = false;
-          }
-          {
-            always = false;
             command = "${pkgs.telegram-desktop}/bin/telegram-desktop";
             notification = false;
           }
           {
             always = false;
             command = "${pkgs.thunderbird}/bin/thunderbird";
+            notification = false;
+          }
+          {
+            always = false;
+            command = "${pkgs.i3}/bin/i3-msg 'workspace ${workspace.browser}; exec --no-startup-id ${pkgs.librewolf}/bin/librewolf'";
             notification = false;
           }
         ];
