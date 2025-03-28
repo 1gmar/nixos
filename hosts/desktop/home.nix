@@ -106,6 +106,7 @@
   bash.enable = true;
   dconf-settings.enable = true;
   direnv.enable = true;
+  dunst.enable = true;
   gammastep.enable = true;
   git.enable = true;
   i3wm.enable = true;

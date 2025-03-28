@@ -18,6 +18,22 @@
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
+    colors = {
+      background = "#fdf6e3";
+      backgroundHigh = "#eee8d5";
+      blue = "#268bd2";
+      cyan = "#2aa198";
+      foreground0 = "#839496";
+      foregroundEmph = "#586e75";
+      green = "#859900";
+      magenta = "#d33682";
+      orange = "#cb4b16";
+      red = "#dc322f";
+      secondaryContent = "#93a1a1";
+      text = "#657b83";
+      violet = "#6c71c4";
+      yellow = "#b58900";
+    };
     system = "x86_64-linux";
     wallpaperPath = ./anime-sky.png;
   in {
@@ -34,7 +50,7 @@
       };
       desktop = nixpkgs.lib.nixosSystem {
         system = system;
-        specialArgs = {inherit inputs system wallpaperPath;};
+        specialArgs = {inherit colors inputs system wallpaperPath;};
         modules = [
           ./hosts/desktop/configuration.nix
           inputs.disko.nixosModules.default

@@ -1,4 +1,5 @@
 {
+  colors,
   lib,
   config,
   pkgs,
@@ -20,6 +21,7 @@
     messenger = "messenger";
     terminal = "terminal";
   };
+  volumeCmdFn = sign: "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%${sign} && x=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print 100 * $2}') && dunstify -a Volume -h int:value:$x -u low \" \"";
 in {
   options = {
     i3wm.enable = lib.mkEnableOption "enable i3wm module";
@@ -34,42 +36,42 @@ in {
           ${workspace.messenger} = [{class = "TelegramDesktop";}];
         };
         bars = [];
-        colors = {
-          background = "#fdf6e3";
+        colors = with colors; {
+          background = background;
           focused = {
-            background = "#fdf6e3";
-            border = "#268bd2";
-            text = "#657b83";
-            indicator = "#859900";
-            childBorder = "#268db2";
+            background = background;
+            border = blue;
+            text = text;
+            indicator = green;
+            childBorder = blue;
           };
           focusedInactive = {
-            background = "#eee8d5";
-            border = "#839496";
-            text = "#93a1a1";
-            indicator = "#859900";
-            childBorder = "#839496";
+            background = backgroundHigh;
+            border = foreground0;
+            text = secondaryContent;
+            indicator = green;
+            childBorder = foreground0;
           };
           placeholder = {
-            background = "#eee8d5";
-            border = "#839496";
-            text = "#93a1a1";
-            indicator = "#859900";
-            childBorder = "#839496";
+            background = backgroundHigh;
+            border = foreground0;
+            text = secondaryContent;
+            indicator = green;
+            childBorder = foreground0;
           };
           unfocused = {
-            background = "#eee8d5";
-            border = "#839496";
-            text = "#93a1a1";
-            indicator = "#859900";
-            childBorder = "#839496";
+            background = backgroundHigh;
+            border = foreground0;
+            text = secondaryContent;
+            indicator = green;
+            childBorder = foreground0;
           };
           urgent = {
-            background = "#eee8d5";
-            border = "#dc322f";
-            text = "#dc322f";
-            indicator = "#859900";
-            childBorder = "#dc322f";
+            background = backgroundHigh;
+            border = magenta;
+            text = red;
+            indicator = green;
+            childBorder = magenta;
           };
         };
         fonts = lib.mkForce {
@@ -109,9 +111,9 @@ in {
           "Mod1+Tab" = "workspace next";
           "Mod1+Shift+Tab" = "workspace prev";
           "Mod1+backslash" = "workspace back_and_forth";
-          "XF86AudioLowerVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          "XF86AudioLowerVolume" = volumeCmdFn "-";
           "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioRaiseVolume" = "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          "XF86AudioRaiseVolume" = volumeCmdFn "+";
           "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any play-pause";
           "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any next";
           "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any previous";

@@ -1,4 +1,5 @@
 {
+  colors,
   config,
   lib,
   pkgs,
@@ -116,7 +117,7 @@ in {
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs system wallpaperPath;};
+    extraSpecialArgs = {inherit colors inputs system wallpaperPath;};
     sharedModules = [
       inputs.self.outputs.homeManagerModules.default
     ];
@@ -216,8 +217,8 @@ in {
   virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [];
+  # networking.firewall.allowedUDPPorts = [];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

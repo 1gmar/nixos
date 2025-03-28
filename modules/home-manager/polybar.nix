@@ -1,24 +1,10 @@
 {
+  colors,
   lib,
   config,
   pkgs,
   ...
-}: let
-  colors = {
-    background = "#fdf6e3";
-    backgroundHigh = "#eee8d5";
-    blue = "#268bd2";
-    cyan = "#2aa198";
-    foregroundEmph = "#586e75";
-    green = "#859900";
-    magenta = "#d33682";
-    orange = "#cb4b16";
-    red = "#dc322f";
-    text = "#657b83";
-    violet = "#6c71c4";
-    yellow = "#b58900";
-  };
-in {
+}: {
   options = {
     polybar.enable = lib.mkEnableOption "enable polybar module";
   };
@@ -45,12 +31,14 @@ in {
             "Material Design Icons:size=18;4"
             "Noto Sans CJK JP:size=12:style=Bold;3"
             "MesloLGS NF:size=18:style=Bold;4"
+            "Fira Sans:size=12:style=Bold;4"
           ];
           height = "2.0%";
+          line.size = "2";
           module.margin = "0";
           modules = {
             center = "cpu cpu-fan cpu-temp network gpu gpu-fan gpu-temp";
-            left = "workspaces";
+            left = "workspaces title";
             right = "tray weather memory disk volume input-method date time";
           };
           padding = "1";
@@ -186,7 +174,7 @@ in {
             foreground = colors.cyan;
             prefix = {
               font = "2";
-              text = "󰖟";
+              text = "󰥻";
             };
             text = "<label>";
           };
@@ -241,6 +229,15 @@ in {
             };
           };
         };
+        "module/title" = {
+          type = "internal/xwindow";
+          label = {
+            font = "5";
+            foreground = colors.foregroundEmph;
+            maxlen = "80";
+            text = "%title%";
+          };
+        };
         "module/tray" = {
           type = "internal/tray";
           format.margin = "1";
@@ -251,6 +248,7 @@ in {
         };
         "module/volume" = {
           type = "internal/pulseaudio";
+          click.right = "${pkgs.pavucontrol}/bin/pavucontrol";
           format.volume = "<ramp-volume><label-volume>";
           label.muted = {
             foreground = colors.red;
@@ -289,14 +287,15 @@ in {
           type = "internal/xworkspaces";
           icon = {
             default = "󰘔";
-            text = ["browser;󰾔" "email;󰇰" "messenger;󱋊" "terminal;󰆍"];
+            text = ["browser;󰖟" "email;󰇰" "messenger;󱋊" "terminal;󰆍"];
           };
           label = {
             active = {
               background = colors.backgroundHigh;
-              foreground = colors.foregroundEmph;
+              foreground = colors.blue;
               padding = 1;
               text = "%icon%";
+              underline = colors.secondaryContent;
             };
             occupied = {
               background = colors.background;

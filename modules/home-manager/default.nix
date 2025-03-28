@@ -5,6 +5,7 @@
     ./bash.nix
     ./dconf.nix
     ./direnv.nix
+    ./dunst.nix
     ./gammastep.nix
     ./git.nix
     ./i3.nix
