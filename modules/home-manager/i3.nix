@@ -21,7 +21,13 @@
     messenger = "messenger";
     terminal = "terminal";
   };
-  volumeCmdFn = sign: "exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%${sign} && x=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print 100 * $2}') && dunstify -a Volume -h int:value:$x -u low \" \"";
+  unmuteCmd = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ 0";
+  getVolumeCmd = "${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | ${pkgs.gawk}/bin/awk '{if ($3 ~ /MUTED/) print 0; else print 100 * $2}'";
+  muteToggleCmd = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+  adjustVolumeCmd = sign: "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%${sign}";
+  sendNotification = volume: "${pkgs.dunst}/bin/dunstify -a Volume -h int:value:$(${volume}) -u low blank";
+  volumeCmd = sign: "exec \"${unmuteCmd} && ${adjustVolumeCmd sign} && ${sendNotification getVolumeCmd}\"";
+  muteVolumeCmd = "exec \"${muteToggleCmd} && ${sendNotification getVolumeCmd}\"";
 in {
   options = {
     i3wm.enable = lib.mkEnableOption "enable i3wm module";
@@ -111,9 +117,9 @@ in {
           "Mod1+Tab" = "workspace next";
           "Mod1+Shift+Tab" = "workspace prev";
           "Mod1+backslash" = "workspace back_and_forth";
-          "XF86AudioLowerVolume" = volumeCmdFn "-";
-          "XF86AudioMute" = "exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          "XF86AudioRaiseVolume" = volumeCmdFn "+";
+          "XF86AudioLowerVolume" = volumeCmd "-";
+          "XF86AudioMute" = muteVolumeCmd;
+          "XF86AudioRaiseVolume" = volumeCmd "+";
           "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any play-pause";
           "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any next";
           "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any previous";

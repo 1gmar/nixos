@@ -14,7 +14,7 @@
       iconTheme = {
         name = "Adwaita";
         package = pkgs.adwaita-icon-theme;
-        size = "scalable";
+        size = "symbolic";
       };
       settings = with colors; {
         global = {
@@ -65,7 +65,7 @@
         };
         volume = {
           appname = "Volume";
-          default_icon = "audio-headset";
+          default_icon = "audio-volume-medium-symbolic";
           hide_text = true;
           set_stack_tag = "volume";
           set_transient = "yes";
