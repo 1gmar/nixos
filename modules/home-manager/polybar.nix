@@ -39,7 +39,7 @@
           modules = {
             center = "cpu cpu-fan cpu-temp network gpu gpu-fan gpu-temp";
             left = "workspaces title";
-            right = "tray weather memory disk volume input-method date time";
+            right = "tray weather memory disk volume input-method date time powermenu";
           };
           padding = "1";
           radius = "1";
@@ -226,6 +226,86 @@
                 text = "󰲛";
               };
               text = "Disconnected";
+            };
+          };
+        };
+        "module/powermenu" = {
+          type = "custom/menu";
+          expand.right = false;
+          label = {
+            close = {
+              font = "2";
+              foreground = colors.violet;
+              text = "󰖭";
+            };
+            open = {
+              font = "2";
+              foreground = colors.orange;
+              text = "󰐥";
+            };
+            separator = {
+              text = "|";
+            };
+          };
+          menu = {
+            "0" = {
+              "0" = {
+                exec = "menu-open-1";
+                font = "2";
+                foreground = colors.yellow;
+                text = "󰍃";
+              };
+              "1" = {
+                exec = "menu-open-2";
+                font = "2";
+                foreground = colors.blue;
+                text = "󰜉";
+              };
+              "2" = {
+                exec = "menu-open-3";
+                font = "2";
+                foreground = colors.red;
+                text = "󰐥";
+              };
+            };
+            "1" = {
+              "0" = {
+                exec = "menu-open-0";
+                font = "2";
+                text = "󰅁";
+              };
+              "1" = {
+                exec = "${pkgs.i3}/bin/i3-msg exit";
+                font = "2";
+                foreground = colors.yellow;
+                text = "󰍃";
+              };
+            };
+            "2" = {
+              "0" = {
+                exec = "menu-open-0";
+                font = "2";
+                text = "󰅁";
+              };
+              "1" = {
+                exec = "${pkgs.systemd}/bin/systemctl reboot";
+                font = "2";
+                foreground = colors.blue;
+                text = "󰜉";
+              };
+            };
+            "3" = {
+              "0" = {
+                exec = "menu-open-0";
+                font = "2";
+                text = "󰅁";
+              };
+              "1" = {
+                exec = "${pkgs.systemd}/bin/systemctl poweroff";
+                font = "2";
+                foreground = colors.red;
+                text = "󰐥";
+              };
             };
           };
         };

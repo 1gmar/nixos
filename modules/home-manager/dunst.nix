@@ -28,7 +28,7 @@
           idle_threshold = 120;
           markup = "full";
           notification_limit = 3;
-          offset = "2x29";
+          offset = "(10, 29)";
           origin = "top-right";
           padding = 12;
           progress_bar = true;
