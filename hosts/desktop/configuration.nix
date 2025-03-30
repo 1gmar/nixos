@@ -64,6 +64,8 @@ in {
       lm_sensors
       pavucontrol
       playerctl
+      qalculate-gtk
+      rofi-power-menu
       statix
       telegram-desktop
       vdpauinfo

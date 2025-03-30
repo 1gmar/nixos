@@ -28,6 +28,7 @@
   sendNotification = volume: "${pkgs.dunst}/bin/dunstify -a Volume -h int:value:$(${volume}) -u low blank";
   volumeCmd = sign: "exec \"${unmuteCmd} && ${adjustVolumeCmd sign} && ${sendNotification getVolumeCmd}\"";
   muteVolumeCmd = "exec \"${muteToggleCmd} && ${sendNotification getVolumeCmd}\"";
+  rofi = "/etc/profiles/per-user/igmar/bin/rofi";
 in {
   options = {
     i3wm.enable = lib.mkEnableOption "enable i3wm module";
@@ -80,6 +81,7 @@ in {
             childBorder = magenta;
           };
         };
+        floating.criteria = [{class = "Qalculate-gtk";} {class = "pavucontrol";}];
         fonts = lib.mkForce {
           names = ["Fira Sans"];
           size = 0.0;
@@ -91,7 +93,9 @@ in {
         };
         keybindings = lib.mergeAttrs defaultWorkspaceMappings {
           "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
-          "${mod}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
+          "${mod}+d" = "exec ${rofi} -show drun";
+          "${mod}+Shift+d" = "exec ${rofi} -show calc -modi calc -no-show-match -no-sort";
+          "${mod}+Shift+p" = "exec ${rofi} -show power-menu -modi power-menu:rofi-power-menu";
           "${mod}+c" = "kill";
           "--release button2" = "kill";
           "${mod}+j" = "focus down";
