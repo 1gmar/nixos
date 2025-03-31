@@ -367,7 +367,7 @@
           type = "internal/xworkspaces";
           icon = {
             default = "󰘔";
-            text = ["browser;󰖟" "email;󰇰" "messenger;󱋊" "terminal;󰆍"];
+            text = ["1: browser;󰖟" "2: email;󰇰" "3: messenger;󱋊" "4: terminal;󰆍"];
           };
           label = {
             active = {

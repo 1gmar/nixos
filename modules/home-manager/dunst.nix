@@ -18,29 +18,29 @@
       };
       settings = with colors; {
         global = {
-          height = 300;
-          width = 400;
           corner_radius = 10;
           follow = "mouse";
           font = "Fira Sans 12";
           format = "<b>%s</b>\\n%b";
           frame_width = 2;
+          height = 300;
+          horizontal_padding = 14;
           idle_threshold = 120;
           markup = "full";
           notification_limit = 3;
-          offset = "(10, 29)";
+          offset = "(5, 27)";
           origin = "top-right";
-          padding = 12;
+          padding = 10;
           progress_bar = true;
           progress_bar_corner_radius = 5;
+          progress_bar_frame_width = 1;
           progress_bar_height = 10;
           progress_bar_horizontal_alignment = "center";
-          progress_bar_frame_width = 1;
-          progress_bar_min_width = 150;
           progress_bar_max_width = 400;
-          horizontal_padding = 14;
-          text_icon_padding = 20;
+          progress_bar_min_width = 150;
+          show_age_threshold = -1;
           transparency = 0;
+          width = 400;
         };
         urgency_low = {
           background = background;
@@ -54,7 +54,7 @@
           foreground = text;
           frame_color = yellow;
           highlight = "${green},${yellow},${orange},${red}";
-          timeout = 10;
+          timeout = 8;
         };
         urgency_critical = {
           background = background;
@@ -69,6 +69,7 @@
           hide_text = true;
           set_stack_tag = "volume";
           set_transient = "yes";
+          timeout = 3;
         };
       };
     };

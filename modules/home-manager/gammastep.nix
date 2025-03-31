@@ -20,7 +20,7 @@
       };
       temperature = {
         day = 6500;
-        night = 2200;
+        night = 2300;
       };
       tray = true;
     };

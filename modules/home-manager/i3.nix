@@ -11,24 +11,25 @@
     s = builtins.toString x;
   in
     lib.mergeAttrs acc {
-      "${mod}+${s}" = "workspace ${s}";
-      "${mod}+Shift+${s}" = "move window to workspace ${s}";
+      "${mod}+${s}" = "workspace number ${s}";
+      "${mod}+Shift+${s}" = "move window to workspace number ${s}";
     };
   defaultWorkspaceMappings = builtins.foldl' foldMapDict {} (lib.range 1 9);
   workspace = {
-    browser = "browser";
-    email = "email";
-    messenger = "messenger";
-    terminal = "terminal";
+    browser = "1: browser";
+    email = "2: email";
+    messenger = "3: messenger";
+    terminal = "4: terminal";
   };
-  unmuteCmd = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ 0";
-  getVolumeCmd = "${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | ${pkgs.gawk}/bin/awk '{if ($3 ~ /MUTED/) print 0; else print 100 * $2}'";
-  muteToggleCmd = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-  adjustVolumeCmd = sign: "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%${sign}";
+  audioSink = "@DEFAULT_AUDIO_SINK@";
+  unmuteCmd = "${pkgs.wireplumber}/bin/wpctl set-mute ${audioSink} 0";
+  getVolumeCmd = "${pkgs.wireplumber}/bin/wpctl get-volume ${audioSink} | ${pkgs.gawk}/bin/awk '{if ($3 ~ /MUTED/) print 0; else print 100 * $2}'";
+  muteToggleCmd = "${pkgs.wireplumber}/bin/wpctl set-mute ${audioSink} toggle";
+  adjustVolumeCmd = sign: "${pkgs.wireplumber}/bin/wpctl set-volume ${audioSink} 5%${sign}";
   sendNotification = volume: "${pkgs.dunst}/bin/dunstify -a Volume -h int:value:$(${volume}) -u low blank";
   volumeCmd = sign: "exec \"${unmuteCmd} && ${adjustVolumeCmd sign} && ${sendNotification getVolumeCmd}\"";
   muteVolumeCmd = "exec \"${muteToggleCmd} && ${sendNotification getVolumeCmd}\"";
-  rofi = "/etc/profiles/per-user/igmar/bin/rofi";
+  rofi = "${config.home.profileDirectory}/bin/rofi";
 in {
   options = {
     i3wm.enable = lib.mkEnableOption "enable i3wm module";
@@ -81,7 +82,14 @@ in {
             childBorder = magenta;
           };
         };
-        floating.criteria = [{class = "Qalculate-gtk";} {class = "pavucontrol";}];
+        floating.criteria = [
+          {
+            class = "librewolf";
+            window_role = "About";
+          }
+          {class = "Qalculate-gtk";}
+          {class = "pavucontrol";}
+        ];
         fonts = lib.mkForce {
           names = ["Fira Sans"];
           size = 0.0;
@@ -94,8 +102,8 @@ in {
         keybindings = lib.mergeAttrs defaultWorkspaceMappings {
           "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
           "${mod}+d" = "exec ${rofi} -show drun";
-          "${mod}+Shift+d" = "exec ${rofi} -show calc -modi calc -no-show-match -no-sort";
-          "${mod}+Shift+p" = "exec ${rofi} -show power-menu -modi power-menu:rofi-power-menu";
+          "${mod}+Shift+d" = "exec ${rofi} -font \"Fira Mono 14\" -show calc -no-show-match -no-sort";
+          "${mod}+Shift+p" = "exec \"${rofi} -show power-menu -theme-str 'window {width: 8em;} listview {lines: 6;}'\"";
           "${mod}+c" = "kill";
           "--release button2" = "kill";
           "${mod}+j" = "focus down";

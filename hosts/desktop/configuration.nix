@@ -70,6 +70,7 @@ in {
       telegram-desktop
       vdpauinfo
       wthrr
+      xclip
       xss-lock
     ];
     variables = {
