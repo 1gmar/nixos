@@ -87,6 +87,10 @@ in {
             class = "librewolf";
             window_role = "About";
           }
+          {
+            class = "librewolf";
+            window_role = "Organizer";
+          }
           {class = "Qalculate-gtk";}
           {class = "pavucontrol";}
         ];
@@ -163,6 +167,11 @@ in {
           {
             always = false;
             command = "${pkgs.keepassxc}/bin/keepassxc --localconfig ${config.home.homeDirectory}/.config/keepassxc/keepassxc_local.ini";
+            notification = false;
+          }
+          {
+            always = false;
+            command = "${pkgs.crow-translate}/bin/crow";
             notification = false;
           }
           {

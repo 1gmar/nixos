@@ -54,6 +54,8 @@ in {
     systemPackages = with pkgs; [
       adwaita-icon-theme
       alejandra
+      crow-translate
+      cryptsetup
       denaro
       dmidecode
       docker-compose
@@ -63,12 +65,13 @@ in {
       keepassxc
       lm_sensors
       pavucontrol
+      pika-backup
       playerctl
       qalculate-gtk
       rofi-power-menu
       statix
       telegram-desktop
-      vdpauinfo
+      timeshift
       wthrr
       xclip
       xss-lock

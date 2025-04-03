@@ -23,7 +23,9 @@
           font = "Fira Sans 12";
           format = "<b>%s</b>\\n%b";
           frame_width = 2;
+          fullscreen = "delay";
           height = 300;
+          highlight = "${green},${yellow},${orange},${red}";
           horizontal_padding = 14;
           idle_threshold = 120;
           markup = "full";
@@ -46,26 +48,23 @@
           background = background;
           foreground = text;
           frame_color = green;
-          highlight = "${green},${yellow},${orange},${red}";
           timeout = 5;
         };
         urgency_normal = {
           background = background;
           foreground = text;
           frame_color = yellow;
-          highlight = "${green},${yellow},${orange},${red}";
           timeout = 8;
         };
         urgency_critical = {
           background = background;
           foreground = orange;
           frame_color = red;
-          highlight = "${green},${yellow},${orange},${red}";
           timeout = 1000;
         };
         volume = {
           appname = "Volume";
-          default_icon = "audio-volume-medium-symbolic";
+          default_icon = "audio-volume-high-symbolic";
           hide_text = true;
           set_stack_tag = "volume";
           set_transient = "yes";
