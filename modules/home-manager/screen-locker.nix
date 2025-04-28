@@ -12,7 +12,7 @@
     services.screen-locker = {
       enable = true;
       inactiveInterval = 0;
-      lockCmd = "${pkgs.i3lock}/bin/i3lock --nofork --ignore-empty-password --image=${wallpaperPath}";
+      lockCmd = "${pkgs.i3lock}/bin/i3lock --nofork --ignore-empty-password --image=${wallpaperPath} --show-keyboard-layout";
       xautolock.enable = false;
       xss-lock = {
         extraOptions = ["--transfer-sleep-lock"];

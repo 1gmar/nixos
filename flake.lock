@@ -23,6 +23,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
+          "nixvim-1gmar",
           "nixvim",
           "nixpkgs"
         ]
@@ -82,11 +83,13 @@
     "ixx": {
       "inputs": {
         "flake-utils": [
+          "nixvim-1gmar",
           "nixvim",
           "nuschtosSearch",
           "flake-utils"
         ],
         "nixpkgs": [
+          "nixvim-1gmar",
           "nixvim",
           "nuschtosSearch",
           "nixpkgs"
@@ -127,20 +130,42 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": [
+          "nixvim-1gmar",
           "nixpkgs"
         ],
         "nuschtosSearch": "nuschtosSearch"
       },
       "locked": {
-        "lastModified": 1743598191,
-        "narHash": "sha256-30aI8rWjX64E9vIlE4iqgQguTjItvTnQLTqHtFppF/w=",
+        "lastModified": 1744429493,
+        "narHash": "sha256-T3nhF5uBFaLSoR4EM7/Yf5TuD2kghyqRlNCmcN4tQx0=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "a183298bf67307bdb7a25a2a3c565e76029f1b9e",
+        "rev": "1095b7f89192c1e2bc9b52d0d9660c02752afe5a",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "repo": "nixvim",
+        "type": "github"
+      }
+    },
+    "nixvim-1gmar": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixvim": "nixvim"
+      },
+      "locked": {
+        "lastModified": 1745855949,
+        "narHash": "sha256-6EvD2pz/StV/6EEttvCUctBNxxs14L5zHBFwilWymbs=",
+        "owner": "1gmar",
+        "repo": "nixvim",
+        "rev": "27099e61284dc12b8a110b7f25b87799aee5a1a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "1gmar",
         "repo": "nixvim",
         "type": "github"
       }
@@ -150,16 +175,17 @@
         "flake-utils": "flake-utils",
         "ixx": "ixx",
         "nixpkgs": [
+          "nixvim-1gmar",
           "nixvim",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1743201766,
-        "narHash": "sha256-bb/dqoIjtIWtJRzASOe8g4m8W2jUIWtuoGPXdNjM/Tk=",
+        "lastModified": 1743683223,
+        "narHash": "sha256-LdXtHFvhEC3S64dphap1pkkzwjErbW65eH1VRerCUT0=",
         "owner": "NuschtOS",
         "repo": "search",
-        "rev": "2651dbfad93d6ef66c440cbbf23238938b187bde",
+        "rev": "56a49ffef2908dad1e9a8adef1f18802bc760962",
         "type": "github"
       },
       "original": {
@@ -173,7 +199,7 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim-1gmar": "nixvim-1gmar"
       }
     },
     "systems": {

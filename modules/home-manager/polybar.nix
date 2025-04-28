@@ -79,11 +79,14 @@
           label = "%output:4%";
         };
         "module/cpu-temp" = {
-          type = "internal/temperature";
-          format.foreground = colors.blue;
-          hwmon.path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input";
-          thermal.zone = "0";
-          zone.type = "x86_pkg_temp";
+          type = "custom/script";
+          exec = "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep \"Package id 0:\" | ${pkgs.gawk}/bin/awk '{gsub(/(\\+|\\.[0-9])/, \"\", $4); print $4}'";
+          format = {
+            foreground = colors.blue;
+            text = "<label>";
+          };
+          interval = "0.5";
+          label = "%output:4%";
         };
         "module/date" = {
           type = "custom/script";
@@ -136,6 +139,7 @@
           type = "custom/script";
           exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits";
           format = {
+            fail = "<label-fail>";
             foreground = colors.green;
             prefix = {
               font = "2";
@@ -144,31 +148,64 @@
             };
             text = "<label>";
           };
-          interval = "0.5";
-          label = "%output:2%%";
+          interval = {
+            fail = "6000";
+            text = "0.5";
+          };
+          label = {
+            fail = {
+              font = "2";
+              foreground = colors.red;
+              text = "󱄋";
+            };
+            text = "%output:2%%";
+          };
         };
         "module/gpu-fan" = {
           type = "custom/script";
-          exec = "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan1 | ${pkgs.gawk}/bin/awk '{print $2}'";
+          exec = "(set -o pipefail && ${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan1 | ${pkgs.gawk}/bin/awk '{print $2}')";
           format = {
+            fail = "<label-fail>";
             foreground = colors.green;
             text = "<label>";
           };
-          interval = "0.5";
-          label = "%output:4%";
+          interval = {
+            fail = "6000";
+            text = "0.5";
+          };
+          label = {
+            fail = {
+              font = "2";
+              foreground = colors.red;
+              text = "󱄋";
+            };
+            text = "%output:4%";
+          };
         };
         "module/gpu-temp" = {
           type = "custom/script";
           exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits";
           format = {
+            fail = "<label-fail>";
             foreground = colors.green;
             text = "<label>";
           };
-          interval = "0.5";
-          label = "%output:2%°C";
+          interval = {
+            fail = "6000";
+            text = "0.5";
+          };
+          label = {
+            fail = {
+              font = "2";
+              foreground = colors.red;
+              text = "󱄋";
+            };
+            text = "%output:2%°C";
+          };
         };
         "module/input-method" = {
           type = "custom/script";
+          click.right = "${pkgs.ibus-with-plugins}/bin/ibus-setup";
           exec = "${pkgs.ibus-with-plugins}/bin/ibus engine | ${pkgs.gawk}/bin/awk '{if ($1 ~ /^mozc/) print \"ja\"; else split($1, L, \":\"); print L[2]}'";
           format = {
             foreground = colors.cyan;
@@ -240,7 +277,7 @@
             };
             open = {
               font = "2";
-              foreground = colors.orange;
+              foreground = colors.red;
               text = "󰐥";
             };
             separator = {
@@ -358,7 +395,7 @@
             fail = {
               font = "2";
               foreground = colors.red;
-              text = "󱯻 ";
+              text = "󱯻";
             };
             text = "%output:8%";
           };

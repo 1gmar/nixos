@@ -125,7 +125,7 @@ in {
           "${mod}+e" = "layout toggle split";
           "${mod}+f" = "floating toggle";
           "${mod}+r" = "mode resize";
-          "${mod}+Escape" = "exec ${pkgs.systemd}/bin/loginctl lock-session && ${pkgs.coreutils-full}/bin/sleep 5 && ${pkgs.xorg.xset}/bin/xset dpms force off";
+          "${mod}+Escape" = "exec ${pkgs.ibus-with-plugins}/bin/ibus engine xkb:us::eng && ${pkgs.systemd}/bin/loginctl lock-session && ${pkgs.coreutils-full}/bin/sleep 3 && ${pkgs.xorg.xset}/bin/xset dpms force off";
           "${mod}+Shift+z" = "workspace ${workspace.browser}";
           "${mod}+Shift+x" = "workspace ${workspace.email}";
           "${mod}+Shift+c" = "workspace ${workspace.messenger}";

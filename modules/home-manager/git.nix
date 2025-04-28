@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: {
-  options = {
-    git.enable = lib.mkEnableOption "enable git module";
+  options.git = {
+    enable = lib.mkEnableOption "enable git module";
   };
   config = lib.mkIf config.git.enable {
     programs.git = {
@@ -17,6 +17,7 @@
           helper = "store";
           "https://github.com".username = "1gmar";
         };
+        init.defaultBranch = "main";
       };
     };
   };

@@ -53,7 +53,6 @@ in {
   environment = {
     systemPackages = with pkgs; [
       adwaita-icon-theme
-      alejandra
       crow-translate
       cryptsetup
       denaro
@@ -69,7 +68,6 @@ in {
       playerctl
       qalculate-gtk
       rofi-power-menu
-      statix
       telegram-desktop
       timeshift
       wthrr

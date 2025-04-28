@@ -11,8 +11,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    nixvim-1gmar = {
+      url = "github:1gmar/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -49,7 +49,7 @@
         ];
       };
       desktop = nixpkgs.lib.nixosSystem {
-        system = system;
+        inherit system;
         specialArgs = {inherit colors inputs system wallpaperPath;};
         modules = [
           ./hosts/desktop/configuration.nix
@@ -59,7 +59,6 @@
         ];
       };
     };
-    nixosModules.neovim = import ./modules/exposed/nixvim.nix;
     homeManagerModules.default = ./modules/home-manager;
   };
 }
