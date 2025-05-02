@@ -6,6 +6,7 @@
     ./dconf.nix
     ./direnv.nix
     ./dunst.nix
+    ./firefox.nix
     ./gammastep.nix
     ./git.nix
     ./i3.nix

@@ -39,7 +39,7 @@ in {
       enable = true;
       config = {
         assigns = {
-          ${workspace.browser} = [{class = "librewolf";}];
+          ${workspace.browser} = [{class = "firefox";}];
           ${workspace.email} = [{class = "thunderbird";}];
           ${workspace.messenger} = [{class = "TelegramDesktop";}];
         };
@@ -84,6 +84,14 @@ in {
         };
         floating.criteria = [
           {
+            class = "firefox";
+            window_role = "About";
+          }
+          {
+            class = "firefox";
+            window_role = "Organizer";
+          }
+          {
             class = "librewolf";
             window_role = "About";
           }
@@ -126,10 +134,10 @@ in {
           "${mod}+f" = "floating toggle";
           "${mod}+r" = "mode resize";
           "${mod}+Escape" = "exec ${pkgs.ibus-with-plugins}/bin/ibus engine xkb:us::eng && ${pkgs.systemd}/bin/loginctl lock-session && ${pkgs.coreutils-full}/bin/sleep 3 && ${pkgs.xorg.xset}/bin/xset dpms force off";
-          "${mod}+Shift+z" = "workspace ${workspace.browser}";
-          "${mod}+Shift+x" = "workspace ${workspace.email}";
-          "${mod}+Shift+c" = "workspace ${workspace.messenger}";
-          "${mod}+Shift+comma" = "workspace ${workspace.terminal}";
+          "${mod}+i" = "workspace ${workspace.browser}";
+          "${mod}+o" = "workspace ${workspace.email}";
+          "${mod}+p" = "workspace ${workspace.messenger}";
+          "${mod}+bracketleft" = "workspace ${workspace.terminal}";
           "Mod1+Tab" = "workspace next";
           "Mod1+Shift+Tab" = "workspace prev";
           "Mod1+backslash" = "workspace back_and_forth";
@@ -186,7 +194,7 @@ in {
           }
           {
             always = false;
-            command = "${pkgs.i3}/bin/i3-msg 'workspace ${workspace.browser}; exec --no-startup-id ${pkgs.librewolf}/bin/librewolf'";
+            command = "${pkgs.i3}/bin/i3-msg 'workspace ${workspace.browser}; exec --no-startup-id ${pkgs.firefox}/bin/firefox'";
             notification = false;
           }
         ];

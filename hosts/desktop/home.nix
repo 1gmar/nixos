@@ -75,6 +75,40 @@
         )
       '';
     };
+    ".mozilla/firefox/igmar/user.js".text = ''
+      user_pref("browser.bookmarks.restore_default_bookmarks", false);
+      user_pref("browser.fullscreen.autohide", false);
+      user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
+      user_pref("browser.newtabpage.activity-stream.showSearch", false);
+      user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+      user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+      user_pref("browser.newtabpage.activity-stream.topSitesRows", 2);
+      user_pref("browser.newtabpage.pinned", "[{\"baseDomain\":\"twitch.tv\",\"url\":\"https://www.twitch.tv/\"},{\"baseDomain\":\"otpinternetbanking.md\",\"label\":\"OTP Internet Banking\",\"url\":\"https://www.otpinternetbanking.md/\"},{\"baseDomain\":\"translate.google.com\",\"url\":\"https://translate.google.com/\"},{\"baseDomain\":\"myanimelist.net\",\"label\":\"Anime - MyAnimeList.net\",\"url\":\"https://myanimelist.net/anime.php\"},{\"baseDomain\":\"pairdrop.net\",\"label\":\"PairDrop | Transfer Files Cross-Platform. No Setup; No Signup.\",\"url\":\"https://pairdrop.net/\"},{\"baseDomain\":\"evms.md\",\"label\":\"eVMS.md – prima platformă online pentru investiții directe în Valori Mobiliare de Stat\",\"url\":\"https://evms.md/\"},{\"label\":\"Cabinetul Personal\",\"url\":\"https://oficiulonline.premierenergy.md/office/\"},{\"label\":\"Bine ați venit în cabinetul personal al consumatorului SA „Moldovagaz”!\",\"url\":\"https://my.moldovagaz.md/home\"},{\"label\":\"Curs.md - Curs valutar\",\"url\":\"https://www.curs.md/ro\"}]");
+      user_pref("browser.preferences.defaultPerformanceSettings.enabled", false);
+      user_pref("browser.sessionstore.restore_on_demand", true);
+      user_pref("browser.sessionstore.restore_pinned_tabs_on_demand", true);
+      user_pref("browser.sessionstore.restore_tabs_lazily", true);
+      user_pref("browser.toolbars.bookmarks.visibility", "newtab");
+      user_pref("browser.translations.automaticallyPopup", false);
+      user_pref("browser.urlbar.placeholderName", "DuckDuckGo");
+      user_pref("browser.urlbar.placeholderName.private", "DuckDuckGo");
+      user_pref("browser.urlbar.suggest.searches", true);
+      user_pref("browser.warnOnQuitShortcut", false);
+      user_pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org");
+      user_pref("media.ffmpeg.vaapi.enabled", true);
+      user_pref("middlemouse.paste", false);
+      user_pref("privacy.clearOnShutdown.cookies", false);
+      user_pref("privacy.clearOnShutdown.history", false);
+      user_pref("privacy.clearOnShutdown_v2.cookiesAndStorage", false);
+      user_pref("privacy.resistFingerprinting", false);
+      user_pref("reader.color_scheme", "sepia");
+      user_pref("reader.content_width", 5);
+      user_pref("reader.font_size", 8);
+      user_pref("sidebar.position_start", false);
+      user_pref("sidebar.revamp", true);
+      user_pref("sidebar.verticalTabs", true);
+      user_pref("webgl.disabled", false);
+    '';
   };
 
   # Home Manager can also manage your environment variables through
@@ -101,12 +135,12 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.firefox.enable = false;
   activity-watch.enable = true;
   bash.enable = true;
   dconf-settings.enable = true;
   direnv.enable = true;
   dunst.enable = true;
+  firefox.enable = true;
   gammastep.enable = true;
   git.enable = true;
   i3wm.enable = true;
@@ -115,7 +149,7 @@
   nixvim.enable = true;
   polybar.enable = true;
   rofi.enable = true;
-  screen-locker.enable = true;
+  screen-locker.enable = false;
   ssh.enable = true;
   thunderbird.enable = true;
   vim.enable = true;

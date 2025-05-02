@@ -72,7 +72,7 @@ in {
       timeshift
       wthrr
       xclip
-      xss-lock
+      xfce.thunar
     ];
     variables = {
       GLFW_IM_MODULE = "ibus";
@@ -154,12 +154,6 @@ in {
     ];
   };
 
-  main-user = {
-    enable = true;
-    description = "Igor Marta";
-    userName = "${userName}";
-  };
-
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
@@ -219,6 +213,13 @@ in {
   time.timeZone = "Europe/Chisinau";
 
   virtualisation.docker.enable = true;
+
+  main-user = {
+    enable = true;
+    description = "Igor Marta";
+    userName = "${userName}";
+  };
+  screen-locker.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [];
