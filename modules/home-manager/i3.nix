@@ -31,8 +31,8 @@
   muteVolumeCmd = "exec \"${muteToggleCmd} && ${sendNotification getVolumeCmd}\"";
   rofi = "${config.home.profileDirectory}/bin/rofi";
 in {
-  options = {
-    i3wm.enable = lib.mkEnableOption "enable i3wm module";
+  options.i3wm = {
+    enable = lib.mkEnableOption "enable i3wm module";
   };
   config = lib.mkIf config.i3wm.enable {
     xsession.windowManager.i3 = {
@@ -101,6 +101,7 @@ in {
           }
           {class = "Qalculate-gtk";}
           {class = "pavucontrol";}
+          {class = ".protonvpn-app-wrapped";}
         ];
         fonts = lib.mkForce {
           names = ["Fira Sans"];
@@ -194,7 +195,12 @@ in {
           }
           {
             always = false;
-            command = "${pkgs.i3}/bin/i3-msg 'workspace ${workspace.browser}; exec --no-startup-id ${pkgs.firefox}/bin/firefox'";
+            command = "${config.home.profileDirectory}/bin/firefox";
+            notification = false;
+          }
+          {
+            always = false;
+            command = "${config.home.profileDirectory}/bin/i3-msg 'workspace ${workspace.browser}'";
             notification = false;
           }
         ];

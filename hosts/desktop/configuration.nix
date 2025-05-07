@@ -66,6 +66,7 @@ in {
       pavucontrol
       pika-backup
       playerctl
+      protonvpn-gui
       qalculate-gtk
       rofi-power-menu
       telegram-desktop

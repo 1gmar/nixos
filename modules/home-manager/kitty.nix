@@ -20,11 +20,14 @@
         "ctrl+shift+d>ctrl+shift+f" = "scroll_end";
       };
       settings = {
+        cursor_blink_interval = 0;
+        cursor_shape = "block";
         enabled_layouts = "splits:split_axis=auto";
         scrollback_lines = 10000;
         tab_bar_style = "powerline";
         tab_powerline_style = "angled";
       };
+      shellIntegration.mode = "no-cursor";
       themeFile = "Solarized_Light";
     };
   };
