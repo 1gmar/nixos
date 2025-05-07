@@ -13,6 +13,7 @@
     ./kitty.nix
     ./librewolf.nix
     ./nixvim.nix
+    ./picom.nix
     ./polybar.nix
     ./rofi.nix
     ./screen-locker.nix

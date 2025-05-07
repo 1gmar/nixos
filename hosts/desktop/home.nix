@@ -147,6 +147,7 @@
   kitty.enable = true;
   librewolf.enable = true;
   nixvim.enable = true;
+  picom.enable = true;
   polybar.enable = true;
   rofi.enable = true;
   screen-locker.enable = false;
