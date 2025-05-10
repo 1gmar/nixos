@@ -78,6 +78,8 @@ in {
     variables = {
       GLFW_IM_MODULE = "ibus";
       LIBVA_DRIVER_NAME = "nvidia";
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+      NVD_BACKEND = "direct";
     };
   };
 

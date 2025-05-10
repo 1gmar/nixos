@@ -94,7 +94,8 @@
         user_pref("browser.urlbar.suggest.searches", true);
         user_pref("browser.warnOnQuitShortcut", false);
         user_pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org");
-        user_pref("media.ffmpeg.vaapi.enabled", true);
+        user_pref("gfx.x11-egl.force-enabled", true);
+        user_pref("media.hardware-video-decoding.force-enabled", true);
         user_pref("middlemouse.paste", false);
         user_pref("privacy.clearOnShutdown.cookies", false);
         user_pref("privacy.clearOnShutdown.history", false);
@@ -107,6 +108,7 @@
         user_pref("sidebar.revamp", true);
         user_pref("sidebar.verticalTabs", true);
         user_pref("webgl.disabled", false);
+        user_pref("widget.dmabuf.force-enabled", true);
       '';
     };
 
