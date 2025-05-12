@@ -73,7 +73,6 @@ in {
       timeshift
       wthrr
       xclip
-      xfce.thunar
     ];
     variables = {
       GLFW_IM_MODULE = "ibus";
@@ -171,15 +170,6 @@ in {
     settings.experimental-features = ["nix-command" "flakes"];
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "corefonts"
-      "vista-fonts"
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
-    ];
-
   # Enable the X11 windowing system.
   services = {
     displayManager = {
@@ -223,6 +213,7 @@ in {
     userName = "${userName}";
   };
   screen-locker.enable = true;
+  thunar.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [];
