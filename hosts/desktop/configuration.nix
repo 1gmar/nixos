@@ -170,6 +170,15 @@ in {
     settings.experimental-features = ["nix-command" "flakes"];
   };
 
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "corefonts"
+      "vista-fonts"
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
+    ];
+
   # Enable the X11 windowing system.
   services = {
     displayManager = {
