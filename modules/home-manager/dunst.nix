@@ -27,7 +27,7 @@
           height = 300;
           highlight = "${green},${yellow},${orange},${red}";
           horizontal_padding = 14;
-          idle_threshold = 120;
+          idle_threshold = "10m";
           markup = "full";
           notification_limit = 3;
           offset = "(5, 27)";
@@ -45,19 +45,19 @@
           width = 400;
         };
         urgency_low = {
-          background = background;
+          inherit background;
           foreground = text;
           frame_color = green;
           timeout = 5;
         };
         urgency_normal = {
-          background = background;
+          inherit background;
           foreground = text;
           frame_color = yellow;
-          timeout = 8;
+          timeout = 5;
         };
         urgency_critical = {
-          background = background;
+          inherit background;
           foreground = orange;
           frame_color = red;
           timeout = 1000;
@@ -68,7 +68,7 @@
           hide_text = true;
           set_stack_tag = "volume";
           set_transient = "yes";
-          timeout = 3;
+          timeout = 2;
         };
       };
     };

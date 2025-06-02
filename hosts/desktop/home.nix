@@ -143,6 +143,7 @@
   direnv.enable = true;
   dunst.enable = true;
   firefox.enable = true;
+  foliate.enable = true;
   gammastep.enable = true;
   git.enable = true;
   i3wm.enable = true;

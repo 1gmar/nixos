@@ -19,7 +19,7 @@
       script = "polybar &";
       settings = {
         "bar/i3-bar" = {
-          background = colors.background;
+          inherit (colors) background;
           foreground = colors.text;
           border = {
             left.size = "0";
@@ -90,7 +90,7 @@
         };
         "module/date" = {
           type = "custom/script";
-          exec = "${pkgs.coreutils-full}/bin/date +%Y年%-m月%-e日";
+          exec = "${pkgs.coreutils-full}/bin/date +%-e/%-m";
           format = {
             foreground = colors.yellow;
             text = "<label>";
@@ -100,7 +100,7 @@
         };
         "module/time" = {
           type = "custom/script";
-          exec = "${pkgs.coreutils-full}/bin/date +%-H時%M分%S秒";
+          exec = "${pkgs.coreutils-full}/bin/date +%H:%M:%S";
           format = {
             foreground = colors.green;
             text = "<label>";
@@ -415,13 +415,13 @@
               underline = colors.secondaryContent;
             };
             occupied = {
-              background = colors.background;
+              inherit (colors) background;
               foreground = colors.text;
               padding = 1;
               text = "%icon%";
             };
             urgent = {
-              background = colors.background;
+              inherit (colors) background;
               foreground = colors.red;
               padding = 1;
               text = "%icon%";

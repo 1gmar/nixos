@@ -7,6 +7,7 @@
     ./direnv.nix
     ./dunst.nix
     ./firefox.nix
+    ./foliate.nix
     ./gammastep.nix
     ./git.nix
     ./i3.nix

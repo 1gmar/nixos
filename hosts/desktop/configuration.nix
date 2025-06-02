@@ -1,6 +1,5 @@
 {
   colors,
-  config,
   lib,
   pkgs,
   inputs,
