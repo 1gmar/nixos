@@ -40,6 +40,15 @@ in {
       extraConfig = ''
         polkit.addRule(function(action, subject) {
           var permissions = [
+            "org.freedesktop.udisks2.filesystem-mount",
+            "org.freedesktop.udisks2.encrypted-unlock",
+            "org.freedesktop.udisks2.eject-media",
+            "org.freedesktop.udisks2.power-off-drive",
+            "org.freedesktop.udisks2.filesystem-mount-other-seat",
+            "org.freedesktop.udisks2.filesystem-unmount-others",
+            "org.freedesktop.udisks2.encrypted-unlock-other-seat",
+            "org.freedesktop.udisks2.eject-media-other-seat",
+            "org.freedesktop.udisks2.power-off-drive-other-seat",
             "org.freedesktop.udisks2.filesystem-mount-system",
             "org.freedesktop.udisks2.encrypted-unlock-system",
             "org.freedesktop.udisks2.eject-media-system",

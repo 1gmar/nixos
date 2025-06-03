@@ -69,7 +69,6 @@ in {
       qalculate-gtk
       rofi-power-menu
       telegram-desktop
-      timeshift
       wthrr
       xclip
     ];
