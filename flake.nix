@@ -11,6 +11,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak/?ref=latest";
+    };
     nixvim-1gmar = {
       url = "github:1gmar/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,12 +38,13 @@
       yellow = "#b58900";
     };
     system = "x86_64-linux";
+    userName = "igmar";
     wallpaperPath = ./anime-sky.png;
   in {
     nixosConfigurations = {
       default = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs system wallpaperPath;};
+        specialArgs = {inherit inputs system userName wallpaperPath;};
         modules = [
           ./hosts/default/configuration.nix
           inputs.disko.nixosModules.default
@@ -50,11 +54,12 @@
       };
       desktop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit colors inputs system wallpaperPath;};
+        specialArgs = {inherit colors inputs system userName wallpaperPath;};
         modules = [
-          ./hosts/desktop/configuration.nix
+          inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.disko.nixosModules.default
           ./hosts/desktop/disk-config.nix
+          ./hosts/desktop/configuration.nix
           ./modules/nixos
         ];
       };

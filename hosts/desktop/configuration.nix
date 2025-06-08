@@ -4,10 +4,10 @@
   pkgs,
   inputs,
   system,
+  userName,
   wallpaperPath,
   ...
 }: let
-  userName = "igmar";
   hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix {};
 in {
   imports = [
@@ -54,7 +54,6 @@ in {
       adwaita-icon-theme
       crow-translate
       cryptsetup
-      denaro
       dmidecode
       docker-compose
       fastfetch
@@ -121,8 +120,9 @@ in {
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit colors inputs system wallpaperPath;};
+    extraSpecialArgs = {inherit colors inputs system userName wallpaperPath;};
     sharedModules = [
+      inputs.nixvim-1gmar.homeManagerModules.nixvim
       inputs.self.outputs.homeManagerModules.default
     ];
     useGlobalPkgs = true;
@@ -214,6 +214,7 @@ in {
 
   virtualisation.docker.enable = true;
 
+  flatpak.enable = true;
   main-user = {
     enable = true;
     description = "Igor Marta";

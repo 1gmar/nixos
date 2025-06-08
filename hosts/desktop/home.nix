@@ -3,13 +3,15 @@
   pkgs,
   inputs,
   system,
+  userName,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
+  fonts.fontconfig.enable = true;
   home = {
-    username = "igmar";
-    homeDirectory = "/home/igmar";
+    username = userName;
+    homeDirectory = "/home/${userName}";
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
@@ -74,7 +76,7 @@
           )
         '';
       };
-      ".mozilla/firefox/igmar/user.js".text = ''
+      ".mozilla/firefox/${userName}/user.js".text = ''
         user_pref("browser.bookmarks.restore_default_bookmarks", false);
         user_pref("browser.fullscreen.autohide", false);
         user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
@@ -148,7 +150,7 @@
   git.enable = true;
   i3wm.enable = true;
   kitty.enable = true;
-  librewolf.enable = true;
+  librewolf.enable = false;
   nixvim.enable = true;
   picom.enable = true;
   polybar.enable = true;

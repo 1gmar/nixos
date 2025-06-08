@@ -1,6 +1,5 @@
-{inputs, ...}: {
+{...}: {
   imports = [
-    inputs.nixvim-1gmar.homeManagerModules.nixvim
     ./activity-watch.nix
     ./bash.nix
     ./dconf.nix
