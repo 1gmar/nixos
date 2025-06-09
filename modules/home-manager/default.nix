@@ -16,7 +16,6 @@
     ./picom.nix
     ./polybar.nix
     ./rofi.nix
-    ./screen-locker.nix
     ./ssh.nix
     ./thunderbird.nix
     ./vim.nix

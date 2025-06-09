@@ -8,29 +8,27 @@
     enable = lib.mkEnableOption "enable activity-watch module";
   };
   config = lib.mkIf config.activity-watch.enable {
-    services.activitywatch = {
-      enable = true;
-      watchers = {
-        aw-watcher-afk = {
-          package = pkgs.activitywatch;
-          settings = {
-            aw-watcher-afk = {
-              poll_time = 5;
-              timeout = 600;
-            };
-          };
-        };
-        aw-watcher-window = {
-          package = pkgs.activitywatch;
-        };
+    home = {
+      file.".config/activitywatch/aw-watcher-afk/aw-watcher-afk.toml" = {
+        force = true;
+        text = ''
+          [aw-watcher-afk]
+          timeout = 600
+          poll_time = 5
+
+          [aw-watcher-afk-testing]
+          #timeout = 20
+          #poll_time = 180
+        '';
       };
+      packages = [pkgs.activitywatch];
     };
-    systemd.user.targets.activitywatch = {
-      Unit = {
-        After = lib.mkForce ["graphical-session.target"];
-        Requires = lib.mkForce ["graphical-session.target"];
-      };
-      Install.WantedBy = lib.mkForce ["graphical-session.target"];
-    };
+    xsession.windowManager.i3.config.startup = [
+      {
+        always = false;
+        command = "${pkgs.activitywatch}/bin/aw-qt";
+        notification = false;
+      }
+    ];
   };
 }

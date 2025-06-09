@@ -45,11 +45,11 @@ in {
         };
         bars = [];
         colors = with colors; {
-          background = background;
+          inherit background;
           focused = {
-            background = background;
+            inherit background;
             border = blue;
-            text = text;
+            inherit text;
             indicator = green;
             childBorder = blue;
           };

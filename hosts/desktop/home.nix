@@ -155,7 +155,6 @@
   picom.enable = true;
   polybar.enable = true;
   rofi.enable = true;
-  screen-locker.enable = false;
   ssh.enable = true;
   thunderbird.enable = true;
   vim.enable = true;
