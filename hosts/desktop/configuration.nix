@@ -69,7 +69,6 @@ in {
       rofi-power-menu
       telegram-desktop
       wthrr
-      xclip
     ];
     variables = {
       GLFW_IM_MODULE = "ibus";
