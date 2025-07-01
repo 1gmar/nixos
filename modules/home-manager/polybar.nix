@@ -43,7 +43,7 @@
           };
           padding = "1";
           radius = "1";
-          separator = "|";
+          separator = " ";
         };
         "module/cpu" = {
           type = "internal/cpu";
@@ -256,7 +256,7 @@
           interface = "enp5s0";
           interval = "0.5";
           label = {
-            connected = "%downspeed:10%󰜮%{F${colors.text}}|%{F${colors.yellow}}%upspeed:10%󰜷";
+            connected = "%downspeed:10%󰜮%upspeed:10%󰜷";
             disconnected = {
               prefix = {
                 font = "2";
@@ -348,6 +348,7 @@
         };
         "module/title" = {
           type = "internal/xwindow";
+          format.prefix = "│";
           label = {
             font = "5";
             foreground = colors.foregroundEmph;
@@ -357,7 +358,7 @@
         };
         "module/tray" = {
           type = "internal/tray";
-          format.margin = "1";
+          format.suffix = "│";
           tray = {
             size = "70%";
             spacing = "2";
