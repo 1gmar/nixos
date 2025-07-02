@@ -8,6 +8,13 @@
   };
   config = lib.mkIf config.git.enable {
     programs.git = {
+      difftastic = {
+        background = "light";
+        color = "auto";
+        display = "inline";
+        enable = true;
+        enableAsDifftool = true;
+      };
       enable = true;
       userEmail = "mr.igor.marta@gmail.com";
       userName = "Igor Marta";

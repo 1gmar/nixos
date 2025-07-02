@@ -185,7 +185,7 @@ in {
           }
           {
             always = false;
-            command = "${pkgs.telegram-desktop}/bin/telegram-desktop";
+            command = "${pkgs.telegram-desktop}/bin/Telegram";
             notification = false;
           }
           {
