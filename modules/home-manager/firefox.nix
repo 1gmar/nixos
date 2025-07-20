@@ -107,9 +107,16 @@
           "sidebar.position_start" = false;
           "sidebar.revamp" = true;
           "sidebar.verticalTabs" = true;
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           "webgl.disabled" = false;
           "widget.dmabuf.force-enabled" = true;
         };
+        userChrome = ''
+          /*** Hide Tab Close buttons ***/
+          .tabbrowser-tab .tab-close-button {
+            visibility: collapse !important;
+          }
+        '';
       };
     };
   };
