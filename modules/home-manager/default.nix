@@ -19,5 +19,6 @@
     ./ssh.nix
     ./thunderbird.nix
     ./vim.nix
+    ./wthrr.nix
   ];
 }

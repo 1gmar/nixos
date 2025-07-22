@@ -3,8 +3,8 @@
   config,
   ...
 }: {
-  options = {
-    kitty.enable = lib.mkEnableOption "enable kitty module";
+  options.kitty = {
+    enable = lib.mkEnableOption "enable kitty module";
   };
   config = lib.mkIf config.kitty.enable {
     programs.kitty = {

@@ -60,6 +60,7 @@
           inputs.disko.nixosModules.default
           ./hosts/desktop/disk-config.nix
           ./hosts/desktop/configuration.nix
+          ./hosts/desktop/home-configuration.nix
           ./modules/nixos
         ];
       };

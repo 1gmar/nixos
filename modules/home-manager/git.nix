@@ -1,4 +1,5 @@
 {
+  colors,
   lib,
   config,
   ...
@@ -11,15 +12,15 @@
       difftastic = {
         background = "light";
         color = "auto";
-        display = "inline";
+        display = "side-by-side";
         enable = false;
         enableAsDifftool = true;
       };
       enable = true;
       userEmail = "mr.igor.marta@gmail.com";
       userName = "Igor Marta";
-      extraConfig = {
-        color.blame.highlightRecent = "#268bd2,12 month ago,#2aa198,6 month ago,#859900,3 month ago,#b58900,1 month ago,#cb4b16,1 week ago,#dc322f";
+      extraConfig = with colors; {
+        color.blame.highlightRecent = "${blue},12 month ago,${cyan},6 month ago,${green},3 month ago,${yellow},1 month ago,${orange},1 week ago,${red}";
         credential = {
           helper = "store";
           "https://github.com".username = "1gmar";

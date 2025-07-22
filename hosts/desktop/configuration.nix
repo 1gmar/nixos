@@ -1,11 +1,7 @@
 {
-  colors,
   lib,
   pkgs,
-  inputs,
-  system,
   userName,
-  wallpaperPath,
   ...
 }: let
   hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix {};
@@ -13,7 +9,6 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -116,17 +111,6 @@ in {
       unifont_upper
       vistafonts
     ];
-  };
-
-  home-manager = {
-    extraSpecialArgs = {inherit colors inputs system userName wallpaperPath;};
-    sharedModules = [
-      inputs.nixvim-1gmar.homeManagerModules.nixvim
-      inputs.self.outputs.homeManagerModules.default
-    ];
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.${userName} = import ./home.nix;
   };
 
   # Select internationalisation properties.

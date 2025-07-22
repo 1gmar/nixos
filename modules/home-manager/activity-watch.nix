@@ -10,16 +10,12 @@
   config = lib.mkIf config.activity-watch.enable {
     home = {
       file.".config/activitywatch/aw-watcher-afk/aw-watcher-afk.toml" = {
-        force = true;
-        text = ''
-          [aw-watcher-afk]
-          timeout = 600
-          poll_time = 5
-
-          [aw-watcher-afk-testing]
-          #timeout = 20
-          #poll_time = 180
-        '';
+        source = pkgs.writers.writeTOML "aw-watcher-afk.toml" {
+          aw-watcher-afk = {
+            timeout = 600;
+            poll_time = 5;
+          };
+        };
       };
       packages = [pkgs.activitywatch];
     };
