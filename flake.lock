@@ -60,6 +60,22 @@
         "type": "github"
       }
     },
+    "flatpaks": {
+      "locked": {
+        "lastModified": 1751376711,
+        "narHash": "sha256-/H7ZAGuVePVCLmV0hOk3vvgZ45JGN/17B5C3Op6DJNQ=",
+        "owner": "in-a-dil-emma",
+        "repo": "declarative-flatpak",
+        "rev": "d464c22ab8e176910a6f66291fa9133802d3246a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "in-a-dil-emma",
+        "ref": "stable-v3",
+        "repo": "declarative-flatpak",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -107,22 +123,6 @@
         "owner": "NuschtOS",
         "ref": "v0.0.8",
         "repo": "ixx",
-        "type": "github"
-      }
-    },
-    "nix-flatpak": {
-      "locked": {
-        "lastModified": 1739444422,
-        "narHash": "sha256-iAVVHi7X3kWORftY+LVbRiStRnQEob2TULWyjMS6dWg=",
-        "owner": "gmodena",
-        "repo": "nix-flatpak",
-        "rev": "5e54c3ca05a7c7d968ae1ddeabe01d2a9bc1e177",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gmodena",
-        "ref": "latest",
-        "repo": "nix-flatpak",
         "type": "github"
       }
     },
@@ -174,11 +174,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1753023261,
-        "narHash": "sha256-wpS/EX1ADCWaPVtmPY1uxbTltAOlNDI/7JJ2n0NITf0=",
+        "lastModified": 1753455265,
+        "narHash": "sha256-155o0eTDUyNjm2mfrLKUdaz+G58SMHp31gXnEjp2OkI=",
         "owner": "1gmar",
         "repo": "nixvim",
-        "rev": "a27cafbe6b25e4822df265fc5e3d4b3d4e8ea807",
+        "rev": "1241360b36018fbe9d80cfa47ffaa94eb9bfb913",
         "type": "github"
       },
       "original": {
@@ -214,8 +214,8 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "flatpaks": "flatpaks",
         "home-manager": "home-manager",
-        "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs",
         "nixvim-1gmar": "nixvim-1gmar"
       }

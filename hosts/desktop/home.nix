@@ -1,4 +1,5 @@
 {
+  sysConfig,
   inputs,
   userName,
   ...
@@ -7,7 +8,6 @@
     inputs.self.homeManagerModules.default
   ];
 
-  fonts.fontconfig.enable = true;
   home = {
     username = userName;
     homeDirectory = "/home/${userName}";
@@ -27,6 +27,7 @@
   direnv.enable = true;
   dunst.enable = true;
   firefox.enable = true;
+  flatpak.enable = sysConfig.flatpak.enable;
   foliate.enable = true;
   gammastep.enable = true;
   git.enable = true;

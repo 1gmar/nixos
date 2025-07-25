@@ -2,6 +2,7 @@
   lib,
   pkgs,
   userName,
+  wallpaperPath,
   ...
 }: let
   hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix {};
@@ -63,7 +64,6 @@ in {
       qalculate-gtk
       rofi-power-menu
       telegram-desktop
-      wthrr
     ];
     variables = {
       GLFW_IM_MODULE = "ibus";
@@ -92,7 +92,6 @@ in {
       ];
     };
     fontDir.enable = true;
-    enableGhostscriptFonts = true;
     packages = with pkgs; [
       cantarell-fonts
       corefonts
@@ -162,10 +161,7 @@ in {
 
   # Enable the X11 windowing system.
   services = {
-    displayManager = {
-      defaultSession = "none+i3";
-      sddm.enable = true;
-    };
+    displayManager.defaultSession = "none+i3";
     libinput.mouse = {
       accelProfile = "flat";
       naturalScrolling = true;
@@ -184,6 +180,14 @@ in {
             Option "SuspendTime" "0"
         EndSection
       '';
+      displayManager.lightdm = {
+        background = wallpaperPath;
+        enable = true;
+        greeters.enso = {
+          blur = true;
+          enable = true;
+        };
+      };
       enable = true;
       exportConfiguration = true;
       videoDrivers = ["nvidia"];

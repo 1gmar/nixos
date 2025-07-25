@@ -1,5 +1,6 @@
 {
   colors,
+  config,
   inputs,
   system,
   userName,
@@ -11,7 +12,10 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = {inherit colors inputs system userName wallpaperPath;};
+    extraSpecialArgs = {
+      inherit colors inputs system userName wallpaperPath;
+      sysConfig = config;
+    };
     useGlobalPkgs = true;
     useUserPackages = true;
     users.${userName} = ./home.nix;

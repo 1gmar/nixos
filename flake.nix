@@ -7,12 +7,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/stable-v3";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-flatpak = {
-      url = "github:gmodena/nix-flatpak/?ref=latest";
     };
     nixvim-1gmar = {
       url = "github:1gmar/nixvim";
@@ -56,7 +54,6 @@
         inherit system;
         specialArgs = {inherit colors inputs system userName wallpaperPath;};
         modules = [
-          inputs.nix-flatpak.nixosModules.nix-flatpak
           inputs.disko.nixosModules.default
           ./hosts/desktop/disk-config.nix
           ./hosts/desktop/configuration.nix

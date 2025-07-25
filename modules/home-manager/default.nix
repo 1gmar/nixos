@@ -1,5 +1,7 @@
 {...}: {
   imports = [
+    ./flatpak
+
     ./activity-watch.nix
     ./bash.nix
     ./dconf.nix
