@@ -11,15 +11,9 @@ in {
   };
   config = lib.mkIf config.denaro.enable {
     home.file = {
-      ".local/share/fonts/denaro/inter" = {
-        recursive = true;
-        source = ./fonts;
-      };
+      ".local/share/fonts/denaro/inter".source = ./fonts;
       ".local/share/fonts/denaro/noto-sans-cjk".source = "${pkgs.noto-fonts-cjk-sans}/share/fonts";
-      ".var/app/${app-id}/config/fontconfig" = {
-        recursive = true;
-        source = ./fontconfig;
-      };
+      ".var/app/${app-id}/config/fontconfig".source = ./fontconfig;
     };
     services.flatpak = {
       overrides.${app-id}.filesystems = [
