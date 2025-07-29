@@ -4,6 +4,7 @@
 
     ./activity-watch.nix
     ./bash.nix
+    ./bat.nix
     ./dconf.nix
     ./direnv.nix
     ./dunst.nix

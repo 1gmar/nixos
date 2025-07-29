@@ -23,6 +23,7 @@
 
   activity-watch.enable = true;
   bash.enable = true;
+  bat.enable = true;
   dconf-settings.enable = true;
   direnv.enable = true;
   dunst.enable = true;
