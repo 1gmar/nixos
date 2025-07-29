@@ -48,7 +48,6 @@ in {
   environment = {
     systemPackages = with pkgs; [
       adwaita-icon-theme
-      crow-translate
       cryptsetup
       dmidecode
       docker-compose

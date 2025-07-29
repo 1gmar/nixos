@@ -180,11 +180,6 @@ in {
           }
           {
             always = false;
-            command = "${pkgs.crow-translate}/bin/crow";
-            notification = false;
-          }
-          {
-            always = false;
             command = "${pkgs.telegram-desktop}/bin/Telegram";
             notification = false;
           }

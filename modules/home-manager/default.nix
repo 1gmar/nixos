@@ -20,6 +20,7 @@
     ./rofi.nix
     ./ssh.nix
     ./thunderbird.nix
+    ./translate-selected.nix
     ./vim.nix
     ./wthrr.nix
   ];

@@ -40,6 +40,7 @@
   rofi.enable = true;
   ssh.enable = true;
   thunderbird.enable = true;
+  translate-selected.enable = true;
   vim.enable = true;
   wthrr.enable = true;
 }
