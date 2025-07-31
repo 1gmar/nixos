@@ -13,9 +13,15 @@
       (
         inputs.nixvim-1gmar.packages.${system}.default.extend
         {
-          lsp.servers.nixd.settings.settings.nixd = {
-            nixpkgs.expr = "import (builtins.getFlake \"${config.home.homeDirectory}/nixos\").inputs.nixpkgs { }";
-            options.nixos.expr = "(builtins.getFlake \"${config.home.homeDirectory}/nixos\").nixosConfigurations.desktop.options";
+          lsp.servers.nixd.settings.settings.nixd = let
+            nixosOptions = "${thisFlake}.nixosConfigurations.desktop.options";
+            thisFlake = "(builtins.getFlake \"${config.home.homeDirectory}/nixos\")";
+          in {
+            nixpkgs.expr = "import ${thisFlake}.inputs.nixpkgs { }";
+            options = {
+              home-manager.expr = "${nixosOptions}.home-manager.users.type.getSubOptions []";
+              nixos.expr = "${nixosOptions}";
+            };
           };
         }
       )

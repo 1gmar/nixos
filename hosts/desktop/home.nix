@@ -1,13 +1,8 @@
 {
   sysConfig,
-  inputs,
   userName,
   ...
 }: {
-  imports = [
-    inputs.self.homeManagerModules.default
-  ];
-
   home = {
     username = userName;
     homeDirectory = "/home/${userName}";

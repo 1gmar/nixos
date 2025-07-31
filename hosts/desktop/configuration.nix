@@ -48,6 +48,7 @@ in {
   environment = {
     systemPackages = with pkgs; [
       adwaita-icon-theme
+      calibre
       cryptsetup
       dmidecode
       docker-compose

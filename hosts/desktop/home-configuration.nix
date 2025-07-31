@@ -16,6 +16,9 @@
       inherit colors inputs system userName wallpaperPath;
       sysConfig = config;
     };
+    sharedModules = [
+      inputs.self.homeManagerModules.default
+    ];
     useGlobalPkgs = true;
     useUserPackages = true;
     users.${userName} = ./home.nix;
