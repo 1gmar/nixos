@@ -31,6 +31,7 @@
   kitty.enable = true;
   librewolf.enable = false;
   nixvim.enable = true;
+  nushell.enable = true;
   picom.enable = true;
   polybar.enable = true;
   rofi.enable = true;
