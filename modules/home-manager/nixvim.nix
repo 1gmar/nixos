@@ -21,7 +21,7 @@
       (
         inputs.nixvim-1gmar.packages.${system}.default.extend
         (
-          lib.mergeAttrs
+          lib.recursiveUpdate
           config.nixvim.extensions
           {
             lsp.servers.nixd.settings.settings.nixd = let
