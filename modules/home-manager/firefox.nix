@@ -92,6 +92,7 @@
           "browser.urlbar.suggest.searches" = true;
           "browser.warnOnQuitShortcut" = false;
           "extensions.activeThemeId" = "firefox-compact-light@mozilla.org";
+          "extensions.formautofill.creditCards.enabled" = false;
           "gfx.x11-egl.force-enabled" = true;
           "media.ffmpeg.vaapi.enabled" = true;
           "media.hardware-video-decoding.force-enabled" = true;
