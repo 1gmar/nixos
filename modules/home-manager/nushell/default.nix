@@ -8,8 +8,8 @@
     enable = lib.mkEnableOption "enable nushell module";
   };
   config = lib.mkIf config.nushell.enable {
-    nixvim = {
-      treesitterGrammars = [pkgs.vimPlugins.nvim-treesitter.builtGrammars.nu];
+    home.file.".config/nushell/scripts/solarized-light.nu".source = ./solarized-light.nu;
+    nixvim = lib.mkIf config.nixvim.enable {
       extensions = {
         lsp.servers.nushell = {
           enable = true;
@@ -24,15 +24,20 @@
           };
         };
       };
+      treesitterGrammars = [pkgs.vimPlugins.nvim-treesitter.builtGrammars.nu];
+    };
+    programs.kitty = lib.mkIf config.kitty.enable {
+      settings.shell = "${config.home.profileDirectory}/bin/nu";
     };
     programs.nushell = {
       enable = true;
-      extraConfig = ''
-        use std/config light-theme
-        $env.config = {
-          color_config: (light-theme)
-        }
+      extraConfig = lib.mkAfter ''
+        $env.LS_COLORS = (${lib.getExe pkgs.vivid} generate solarized-light)
+        source solarized-light.nu
       '';
+      settings = {
+        show_banner = false;
+      };
     };
   };
 }

@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./flatpak
+    ./nushell
 
     ./activity-watch.nix
     ./bash.nix
@@ -16,7 +17,6 @@
     ./kitty.nix
     ./librewolf.nix
     ./nixvim.nix
-    ./nushell.nix
     ./picom.nix
     ./polybar.nix
     ./rofi.nix
