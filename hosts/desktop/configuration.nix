@@ -54,7 +54,6 @@ in {
       docker-compose
       fastfetch
       feh
-      jellyfin-media-player
       keepassxc
       lm_sensors
       pavucontrol
