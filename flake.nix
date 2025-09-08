@@ -35,6 +35,8 @@
       violet = "#6c71c4";
       yellow = "#b58900";
     };
+    shell-theme = ./modules/home-manager/nushell/solarized-light.nu;
+    sys-diff = ./modules/home-manager/nushell/system-diff.nu;
     system = "x86_64-linux";
     userName = "igmar";
     wallpaperPath = ./anime-sky.png;
@@ -52,7 +54,7 @@
       };
       desktop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit colors inputs system userName wallpaperPath;};
+        specialArgs = {inherit colors inputs shell-theme sys-diff system userName wallpaperPath;};
         modules = [
           inputs.disko.nixosModules.default
           ./hosts/desktop/disk-config.nix

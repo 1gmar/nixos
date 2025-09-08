@@ -30,7 +30,7 @@
             "JetBrainsMono:size=12:style=Bold;3"
             "Material Design Icons:size=18;4"
             "Noto Sans CJK JP:size=12:style=Bold;3"
-            "MesloLGS NF:size=18:style=Bold;4"
+            "MesloLGS Nerd Font:size=18:style=Bold;4"
             "Fira Sans:size=12:style=Bold;4"
           ];
           height = "2.0%";

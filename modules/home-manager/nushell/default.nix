@@ -8,7 +8,10 @@
     enable = lib.mkEnableOption "enable nushell module";
   };
   config = lib.mkIf config.nushell.enable {
-    home.file.".config/nushell/scripts/solarized-light.nu".source = ./solarized-light.nu;
+    home.file = {
+      ".config/nushell/scripts/solarized-light.nu".source = ./solarized-light.nu;
+      ".config/nushell/scripts/prompt.nu".source = ./prompt.nu;
+    };
     nixvim = lib.mkIf config.nixvim.enable {
       extensions = {
         lsp.servers.nushell = {
@@ -34,6 +37,7 @@
       extraConfig = lib.mkAfter ''
         $env.LS_COLORS = (${lib.getExe pkgs.vivid} generate solarized-light)
         source solarized-light.nu
+        source prompt.nu
       '';
       settings = {
         show_banner = false;

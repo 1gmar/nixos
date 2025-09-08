@@ -10,7 +10,7 @@
     programs.kitty = {
       enable = true;
       font = {
-        name = "MesloLGS NF";
+        name = "JetBrainsMono NF";
         size = 14;
       };
       keybindings = {

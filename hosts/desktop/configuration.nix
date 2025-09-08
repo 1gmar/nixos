@@ -1,6 +1,8 @@
 {
   lib,
   pkgs,
+  shell-theme,
+  sys-diff,
   userName,
   wallpaperPath,
   ...
@@ -100,7 +102,8 @@ in {
       jetbrains-mono
       liberation_ttf
       material-design-icons
-      meslo-lgs-nf
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.meslo-lg
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
@@ -194,6 +197,13 @@ in {
       xkb.layout = "us";
     };
   };
+
+  system.activationScripts.system-diff = ''
+    if [[ -e /run/current-system ]]; then
+      ${pkgs.nushell}/bin/nu --config ${shell-theme} ${sys-diff} \
+        ${pkgs.nix}/bin/nix store diff-closures /run/current-system $systemConfig
+    fi
+  '';
 
   # Set your time zone.
   time.timeZone = "Europe/Chisinau";
