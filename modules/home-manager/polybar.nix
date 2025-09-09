@@ -90,7 +90,7 @@
         };
         "module/date" = {
           type = "custom/script";
-          exec = "${pkgs.coreutils-full}/bin/date +%-e/%-m";
+          exec = "${pkgs.coreutils-full}/bin/date +%a%-e";
           format = {
             foreground = colors.yellow;
             text = "<label>";
@@ -383,7 +383,7 @@
         };
         "module/weather" = {
           type = "custom/script";
-          exec = "(set -o pipefail && ${pkgs.wthrr}/bin/wthrr | ${pkgs.gawk}/bin/awk 'NR==4 {split($0, L, \",\"); split(L[2], S, \" \"); print $2, S[1]}')";
+          exec = "${config.home.profileDirectory}/bin/nu -c '${config.home.profileDirectory}/bin/wthrr | lines | get 3 | split row ` ` | get 1 3 | str join `  `'";
           format = {
             fail = "<label-fail>";
             text = "<label>";
