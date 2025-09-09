@@ -70,7 +70,14 @@
         };
         "module/cpu-fan" = {
           type = "custom/script";
-          exec = "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 | ${pkgs.gawk}/bin/awk '{print $2}'";
+          exec =
+            if config.nushell.enable
+            then
+              "${config.home.profileDirectory}/bin/nu -c "
+              + "'${pkgs.lm_sensors}/bin/sensors | find fan2 | split row -r `\\s+` | get 1'"
+            else
+              "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 "
+              + "| ${pkgs.gawk}/bin/awk '{print $2}'";
           format = {
             foreground = colors.blue;
             text = "<label>";
@@ -80,7 +87,15 @@
         };
         "module/cpu-temp" = {
           type = "custom/script";
-          exec = "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep \"Package id 0:\" | ${pkgs.gawk}/bin/awk '{gsub(/(\\+|\\.[0-9])/, \"\", $4); print $4}'";
+          exec =
+            if config.nushell.enable
+            then
+              "${config.home.profileDirectory}/bin/nu -c "
+              + "'${pkgs.lm_sensors}/bin/sensors | find `Package id 0:` | split row -r `\\s+` "
+              + "| get 3 | str replace -a -r `(\\+|\\.\\d)` ``'"
+            else
+              "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep \"Package id 0:\" "
+              + "| ${pkgs.gawk}/bin/awk '{gsub(/(\\+|\\.[0-9])/, \"\", $4); print $4}'";
           format = {
             foreground = colors.blue;
             text = "<label>";
@@ -137,7 +152,9 @@
         };
         "module/gpu" = {
           type = "custom/script";
-          exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits";
+          exec =
+            "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu "
+            + "--format=csv,noheader,nounits";
           format = {
             fail = "<label-fail>";
             foreground = colors.green;
@@ -163,7 +180,14 @@
         };
         "module/gpu-fan" = {
           type = "custom/script";
-          exec = "(set -o pipefail && ${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan1 | ${pkgs.gawk}/bin/awk '{print $2}')";
+          exec =
+            if config.nushell.enable
+            then
+              "${config.home.profileDirectory}/bin/nu -c "
+              + "'${pkgs.lm_sensors}/bin/sensors | find fan1 | split row -r `\\s+` | get 1'"
+            else
+              "(set -o pipefail && ${pkgs.lm_sensors}/bin/sensors "
+              + "| ${pkgs.gnugrep}/bin/grep fan1 | ${pkgs.gawk}/bin/awk '{print $2}')";
           format = {
             fail = "<label-fail>";
             foreground = colors.green;
@@ -184,7 +208,9 @@
         };
         "module/gpu-temp" = {
           type = "custom/script";
-          exec = "/run/current-system/sw/bin/nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits";
+          exec =
+            "/run/current-system/sw/bin/nvidia-smi --query-gpu=temperature.gpu "
+            + "--format=csv,noheader,nounits";
           format = {
             fail = "<label-fail>";
             foreground = colors.green;
@@ -206,7 +232,16 @@
         "module/input-method" = {
           type = "custom/script";
           click.right = "${pkgs.ibus-with-plugins}/bin/ibus-setup";
-          exec = "${pkgs.ibus-with-plugins}/bin/ibus engine | ${pkgs.gawk}/bin/awk '{if ($1 ~ /^mozc/) print \"ja\"; else split($1, L, \":\"); print L[2]}'";
+          exec =
+            if config.nushell.enable
+            then
+              "${config.home.profileDirectory}/bin/nu -c "
+              + "'${pkgs.ibus-with-plugins}/bin/ibus engine | if $in =~ `^mozc` { \"ja\" } "
+              + "else { $in | split row `:` | get 1 }'"
+            else
+              "${pkgs.ibus-with-plugins}/bin/ibus engine "
+              + "| ${pkgs.gawk}/bin/awk '{if ($1 ~ /^mozc/) print \"ja\"; "
+              + "else split($1, L, \":\"); print L[2]}'";
           format = {
             foreground = colors.cyan;
             prefix = {
@@ -383,7 +418,16 @@
         };
         "module/weather" = {
           type = "custom/script";
-          exec = "${config.home.profileDirectory}/bin/nu -c '${config.home.profileDirectory}/bin/wthrr | lines | get 3 | split row ` ` | get 1 3 | str join `  `'";
+          exec =
+            if config.nushell.enable
+            then
+              "${config.home.profileDirectory}/bin/nu -c "
+              + "'${config.home.profileDirectory}/bin/wthrr "
+              + "| lines | get 3 | split row ` ` | get 1 3 | str join `  `'"
+            else
+              "(set -o pipefail && ${pkgs.wthrr}/bin/wthrr "
+              + "| ${pkgs.gawk}/bin/awk 'NR==4 {split($0, L, \",\"); "
+              + "split(L[2], S, \" \"); print $2, S[1]}')";
           format = {
             fail = "<label-fail>";
             text = "<label>";

@@ -34,7 +34,7 @@ export def main [] {
 
     datetime: {|| (date now) - $in |
       if $in < 1hr {
-        {fg: $red attr: 'b'}
+        {fg: $red attr: b}
       } else if $in < 6hr {
         $red
       } else if $in < 1day {
@@ -42,7 +42,7 @@ export def main [] {
       } else if $in < 3day {
         $green
       } else if $in < 1wk {
-        {fg: $green attr: 'b'}
+        {fg: $green attr: b}
       } else if $in < 6wk {
         $cyan
       } else if $in < 52wk {
@@ -58,43 +58,43 @@ export def main [] {
       } else { {fg: $blue} }
     }
 
-    shape_and: {fg: $violet attr: 'b'}
-    shape_binary: {fg: $violet attr: 'b'}
-    shape_block: {fg: $blue attr: 'b'}
+    shape_and: {fg: $violet attr: b}
+    shape_binary: {fg: $violet attr: b}
+    shape_block: {fg: $blue attr: b}
     shape_bool: $cyan
-    shape_closure: {fg: $cyan attr: 'b'}
+    shape_closure: {fg: $cyan attr: b}
     shape_custom: $green
-    shape_datetime: {fg: $cyan attr: 'b'}
+    shape_datetime: {fg: $cyan attr: b}
     shape_directory: $cyan
     shape_external: $cyan
     shape_external_resolved: $cyan
-    shape_externalarg: {fg: $green attr: 'b'}
+    shape_externalarg: {fg: $green attr: b}
     shape_filepath: $cyan
-    shape_flag: {fg: $blue attr: 'b'}
-    shape_float: {fg: $red attr: 'b'}
-    shape_garbage: {fg: $background bg: $magenta attr: 'b'}
-    shape_glob_interpolation: {fg: $cyan attr: 'b'}
-    shape_globpattern: {fg: $cyan attr: 'b'}
-    shape_int: {fg: $violet attr: 'b'}
-    shape_internalcall: {fg: $cyan attr: 'b'}
-    shape_keyword: {fg: $violet attr: 'b'}
-    shape_list: {fg: $cyan attr: 'b'}
+    shape_flag: {fg: $blue attr: b}
+    shape_float: {fg: $red attr: b}
+    shape_garbage: {fg: $background bg: $magenta attr: b}
+    shape_glob_interpolation: {fg: $cyan attr: b}
+    shape_globpattern: {fg: $cyan attr: b}
+    shape_int: {fg: $violet attr: b}
+    shape_internalcall: {fg: $cyan attr: b}
+    shape_keyword: {fg: $violet attr: b}
+    shape_list: {fg: $cyan attr: b}
     shape_literal: $blue
     shape_match_pattern: $green
-    shape_matching_brackets: {attr: 'u'}
+    shape_matching_brackets: {attr: u}
     shape_nothing: $red
     shape_operator: $yellow
-    shape_or: {fg: $violet attr: 'b'}
-    shape_pipe: {fg: $violet attr: 'b'}
-    shape_range: {fg: $yellow attr: 'b'}
-    shape_raw_string: {fg: $black attr: 'b'}
-    shape_record: {fg: $cyan attr: 'b'}
-    shape_redirection: {fg: $violet attr: 'b'}
-    shape_signature: {fg: $green attr: 'b'}
+    shape_or: {fg: $violet attr: b}
+    shape_pipe: {fg: $violet attr: b}
+    shape_range: {fg: $yellow attr: b}
+    shape_raw_string: {fg: $black attr: b}
+    shape_record: {fg: $cyan attr: b}
+    shape_redirection: {fg: $violet attr: b}
+    shape_signature: {fg: $green attr: b}
     shape_string: $green
-    shape_string_interpolation: {fg: $cyan attr: 'b'}
-    shape_table: {fg: $blue attr: 'b'}
-    shape_vardecl: {fg: $blue attr: 'u'}
+    shape_string_interpolation: {fg: $cyan attr: b}
+    shape_table: {fg: $blue attr: b}
+    shape_vardecl: {fg: $blue attr: u}
     shape_variable: $violet
 
     foreground: $textEmph
@@ -102,11 +102,11 @@ export def main [] {
     cursor: $textEmph
 
     empty: $blue
-    header: {fg: $green attr: 'b'}
+    header: {fg: $green attr: b}
     hints: $base
-    leading_trailing_space_bg: {attr: 'n'}
-    row_index: {fg: $green attr: 'b'}
-    search_result: {fg: $red bg: $textEmph}
+    leading_trailing_space_bg: {attr: n}
+    row_index: {fg: $green attr: b}
+    search_result: {fg: $red bg: $backgroundHigh attr: bu}
     separator: $textEmph
   }
 }
