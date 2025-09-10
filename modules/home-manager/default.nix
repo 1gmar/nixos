@@ -15,6 +15,7 @@
     ./git.nix
     ./i3.nix
     ./kitty.nix
+    ./kodi.nix
     ./librewolf.nix
     ./nixvim.nix
     ./picom.nix
