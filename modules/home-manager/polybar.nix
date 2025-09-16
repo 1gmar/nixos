@@ -424,7 +424,7 @@
               "${config.home.profileDirectory}/bin/nu -c "
               + "'${config.home.profileDirectory}/bin/wthrr "
               + "| lines | get 3 | split row `,` | each { split row -r `\\s+` } "
-              + "| get 0.1 1.1 | str join ` `'"
+              + "| get 0.1 1.1 | str join `  `'"
             else
               "(set -o pipefail && ${pkgs.wthrr}/bin/wthrr "
               + "| ${pkgs.gawk}/bin/awk 'NR==4 {split($0, L, \",\"); "
