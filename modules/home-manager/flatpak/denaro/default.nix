@@ -16,7 +16,7 @@ in {
       ".var/app/${app-id}/config/fontconfig".source = ./fontconfig;
     };
     services.flatpak = {
-      overrides.${app-id}.filesystems = [
+      overrides.${app-id}.Context.filesystems = [
         "/nix/store/:ro"
       ];
       packages = [

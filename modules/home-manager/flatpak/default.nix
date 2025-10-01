@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    inputs.flatpaks.homeModule
+    inputs.flatpaks.homeModules.default
     ./denaro
   ];
   options.flatpak = {

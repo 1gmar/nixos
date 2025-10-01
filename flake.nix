@@ -7,7 +7,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/stable-v3";
+    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
