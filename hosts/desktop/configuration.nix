@@ -199,7 +199,7 @@ in {
 
   system.activationScripts.system-diff = ''
     if [[ -e /run/current-system ]]; then
-      ${pkgs.nushell}/bin/nu --config ${shell-theme} ${sys-diff} \
+      ${pkgs.nushell}/bin/nu --config ${shell-theme} ${sys-diff} ${userName}\
         ${pkgs.nix}/bin/nix store diff-closures /run/current-system $systemConfig
     fi
   '';

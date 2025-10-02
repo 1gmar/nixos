@@ -41,6 +41,7 @@
       '';
       settings = {
         show_banner = false;
+        use_kitty_protocol = true;
       };
     };
   };

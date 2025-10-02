@@ -29,7 +29,7 @@
   git.enable = true;
   i3wm.enable = true;
   kitty.enable = true;
-  kodi.enable = true;
+  kodi.enable = false;
   librewolf.enable = false;
   nixvim.enable = true;
   nushell.enable = true;
