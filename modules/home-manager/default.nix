@@ -3,6 +3,7 @@
     ./flatpak
     ./kodi
     ./nushell
+    ./polybar
 
     ./activity-watch.nix
     ./bash.nix
@@ -19,7 +20,6 @@
     ./librewolf.nix
     ./nixvim.nix
     ./picom.nix
-    ./polybar.nix
     ./rofi.nix
     ./ssh.nix
     ./thunderbird.nix
