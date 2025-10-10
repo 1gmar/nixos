@@ -28,6 +28,7 @@
   gammastep.enable = true;
   git.enable = true;
   i3wm.enable = true;
+  keepassxc.enable = true;
   kitty.enable = true;
   kodi.enable = false;
   librewolf.enable = false;

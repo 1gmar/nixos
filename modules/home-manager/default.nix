@@ -16,6 +16,7 @@
     ./gammastep.nix
     ./git.nix
     ./i3.nix
+    ./keepassxc.nix
     ./kitty.nix
     ./librewolf.nix
     ./nixvim.nix

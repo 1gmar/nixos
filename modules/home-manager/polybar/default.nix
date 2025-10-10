@@ -63,11 +63,8 @@
           module.margin = "0";
           modules = {
             center = lib.concatStringsSep " " config.polybar.centerModules;
-            # center = "cpu cpu-fan cpu-temp network gpu gpu-fan gpu-temp";
             left = lib.concatStringsSep " " config.polybar.leftModules;
-            # left = "workspaces title";
             right = lib.concatStringsSep " " config.polybar.rightModules;
-            # right = "tray weather memory disk volume input-method date time powermenu";
           };
           padding = "1";
           radius = "1";
@@ -75,6 +72,13 @@
         };
       };
     };
+    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+      {
+        always = true;
+        command = "systemctl --user restart polybar.service";
+        notification = false;
+      }
+    ];
     cpu.enable = true;
     datetime.enable = true;
     gpu.enable = true;

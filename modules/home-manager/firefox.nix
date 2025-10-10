@@ -120,5 +120,12 @@
         '';
       };
     };
+    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+      {
+        always = false;
+        command = "${config.home.profileDirectory}/bin/firefox";
+        notification = false;
+      }
+    ];
   };
 }

@@ -14,5 +14,12 @@
         isDefault = true;
       };
     };
+    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+      {
+        always = false;
+        command = "${pkgs.thunderbird}/bin/thunderbird";
+        notification = false;
+      }
+    ];
   };
 }

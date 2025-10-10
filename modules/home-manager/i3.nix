@@ -1,7 +1,7 @@
 {
   colors,
-  lib,
   config,
+  lib,
   pkgs,
   wallpaperPath,
   ...
@@ -164,33 +164,13 @@ in {
             notification = false;
           }
           {
-            always = true;
-            command = "systemctl --user restart polybar.service";
-            notification = false;
-          }
-          {
             always = false;
             command = "${pkgs.ibus}/bin/ibus start";
             notification = false;
           }
           {
             always = false;
-            command = "${pkgs.keepassxc}/bin/keepassxc --localconfig ${config.home.homeDirectory}/.config/keepassxc/keepassxc_local.ini";
-            notification = false;
-          }
-          {
-            always = false;
             command = "${pkgs.telegram-desktop}/bin/Telegram";
-            notification = false;
-          }
-          {
-            always = false;
-            command = "${pkgs.thunderbird}/bin/thunderbird";
-            notification = false;
-          }
-          {
-            always = false;
-            command = "${config.home.profileDirectory}/bin/firefox";
             notification = false;
           }
           {

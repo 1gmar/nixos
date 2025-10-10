@@ -56,7 +56,6 @@ in {
       docker-compose
       fastfetch
       feh
-      keepassxc
       lm_sensors
       pavucontrol
       pika-backup
