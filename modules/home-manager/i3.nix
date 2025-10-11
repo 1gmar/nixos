@@ -165,11 +165,6 @@ in {
           }
           {
             always = false;
-            command = "${pkgs.ibus}/bin/ibus start";
-            notification = false;
-          }
-          {
-            always = false;
             command = "${pkgs.telegram-desktop}/bin/Telegram";
             notification = false;
           }

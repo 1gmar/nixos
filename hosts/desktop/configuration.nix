@@ -66,7 +66,6 @@ in {
       telegram-desktop
     ];
     variables = {
-      GLFW_IM_MODULE = "ibus";
       LIBVA_DRIVER_NAME = "nvidia";
       MOZ_DISABLE_RDD_SANDBOX = "1";
       NVD_BACKEND = "direct";
@@ -124,11 +123,6 @@ in {
       LC_NUMERIC = "ja_JP.UTF-8";
       LC_PAPER = "ja_JP.UTF-8";
       LC_TIME = "ja_JP.UTF-8";
-    };
-    inputMethod = {
-      enable = true;
-      type = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [mozc];
     };
     supportedLocales = [
       "en_US.UTF-8/UTF-8"
@@ -209,6 +203,7 @@ in {
   virtualisation.docker.enable = true;
 
   flatpak.enable = true;
+  ibus.enable = true;
   main-user = {
     enable = true;
     description = "Igor Marta";

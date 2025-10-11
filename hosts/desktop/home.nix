@@ -19,7 +19,6 @@
   activity-watch.enable = true;
   bash.enable = true;
   bat.enable = true;
-  dconf-settings.enable = true;
   direnv.enable = true;
   dunst.enable = true;
   firefox.enable = true;
@@ -28,6 +27,7 @@
   gammastep.enable = true;
   git.enable = true;
   i3wm.enable = true;
+  ibus.enable = sysConfig.ibus.enable;
   keepassxc.enable = true;
   kitty.enable = true;
   kodi.enable = false;

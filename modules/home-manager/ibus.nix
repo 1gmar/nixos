@@ -1,12 +1,13 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
-  options.dconf-settings = {
-    enable = lib.mkEnableOption "enable dconf settings module";
+  options.ibus = {
+    enable = lib.mkEnableOption "enable ibus module";
   };
-  config = lib.mkIf config.dconf-settings.enable {
+  config = lib.mkIf config.ibus.enable {
     dconf.settings = {
       "desktop/ibus/general" = {
         engines-order = ["xkb:us::eng" "xkb:ro:std:ron" "xkb:ru:phonetic_YAZHERTY:rus" "mozc-on"];
@@ -25,5 +26,12 @@
         unicode-hotkey = ["<Control><Shift>u"];
       };
     };
+    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+      {
+        always = false;
+        command = "${pkgs.ibus}/bin/ibus start";
+        notification = false;
+      }
+    ];
   };
 }
