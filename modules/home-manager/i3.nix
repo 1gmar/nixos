@@ -29,7 +29,6 @@
   sendNotification = volume: "${pkgs.dunst}/bin/dunstify -a Volume -h int:value:$(${volume}) -u low blank";
   volumeCmd = sign: "exec \"${unmuteCmd} && ${adjustVolumeCmd sign} && ${sendNotification getVolumeCmd}\"";
   muteVolumeCmd = "exec \"${muteToggleCmd} && ${sendNotification getVolumeCmd}\"";
-  rofi = "${config.home.profileDirectory}/bin/rofi";
 in {
   options.i3wm = {
     enable = lib.mkEnableOption "enable i3wm module";
@@ -113,10 +112,6 @@ in {
           outer = 0;
         };
         keybindings = lib.mergeAttrs defaultWorkspaceMappings {
-          "${mod}+Return" = "exec ${pkgs.kitty}/bin/kitty";
-          "${mod}+d" = "exec ${rofi} -show drun";
-          "${mod}+Shift+d" = "exec ${rofi} -font \"Fira Mono 14\" -show calc -no-show-match -no-sort";
-          "${mod}+Shift+p" = "exec \"${rofi} -show power-menu -theme-str 'window {width: 8em;} listview {lines: 6;}'\"";
           "${mod}+c" = "kill";
           "--release button2" = "kill";
           "${mod}+j" = "focus down";
@@ -134,13 +129,10 @@ in {
           "${mod}+e" = "layout toggle split";
           "${mod}+f" = "floating toggle";
           "${mod}+r" = "mode resize";
-          "${mod}+Escape" = "exec ${pkgs.ibus-with-plugins}/bin/ibus engine xkb:us::eng && ${pkgs.systemd}/bin/loginctl lock-session && ${pkgs.coreutils-full}/bin/sleep 3 && ${pkgs.xorg.xset}/bin/xset dpms force off";
           "${mod}+i" = "workspace ${workspace.browser}";
           "${mod}+o" = "workspace ${workspace.email}";
           "${mod}+p" = "workspace ${workspace.messenger}";
           "${mod}+bracketleft" = "workspace ${workspace.terminal}";
-          "Mod1+Tab" = "workspace next";
-          "Mod1+Shift+Tab" = "workspace prev";
           "Mod1+backslash" = "workspace back_and_forth";
           "XF86AudioLowerVolume" = volumeCmd "-";
           "XF86AudioMute" = muteVolumeCmd;

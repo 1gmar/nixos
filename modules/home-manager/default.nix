@@ -22,6 +22,7 @@
     ./nixvim.nix
     ./picom.nix
     ./rofi.nix
+    ./screen-locker.nix
     ./ssh.nix
     ./thunderbird.nix
     ./translate-selected.nix

@@ -37,6 +37,7 @@
   picom.enable = true;
   polybar.enable = true;
   rofi.enable = true;
+  screen-locker.enable = sysConfig.screen-locker.enable;
   ssh.enable = true;
   thunderbird.enable = true;
   translate-selected.enable = true;

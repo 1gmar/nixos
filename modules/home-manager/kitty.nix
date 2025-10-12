@@ -1,6 +1,7 @@
 {
-  lib,
   config,
+  lib,
+  pkgs,
   ...
 }: {
   options.kitty = {
@@ -29,6 +30,9 @@
       };
       shellIntegration.mode = "no-cursor";
       themeFile = "Solarized_Light";
+    };
+    xsession.windowManager.i3.config.keybindings = lib.mkIf config.i3wm.enable {
+      "Mod4+Return" = "exec ${pkgs.kitty}/bin/kitty";
     };
   };
 }

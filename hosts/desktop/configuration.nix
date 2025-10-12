@@ -62,7 +62,6 @@ in {
       playerctl
       protonvpn-gui
       qalculate-gtk
-      rofi-power-menu
       telegram-desktop
     ];
     variables = {
