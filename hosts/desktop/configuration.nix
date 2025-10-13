@@ -54,21 +54,13 @@ in {
       cryptsetup
       dmidecode
       docker-compose
-      fastfetch
-      feh
       lm_sensors
       pavucontrol
       pika-backup
-      playerctl
       protonvpn-gui
       qalculate-gtk
       telegram-desktop
     ];
-    variables = {
-      LIBVA_DRIVER_NAME = "nvidia";
-      MOZ_DISABLE_RDD_SANDBOX = "1";
-      NVD_BACKEND = "direct";
-    };
   };
 
   fonts = {

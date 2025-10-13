@@ -21,6 +21,8 @@
   bat.enable = true;
   direnv.enable = true;
   dunst.enable = true;
+  fastfetch.enable = true;
+  feh.enable = true;
   firefox.enable = true;
   flatpak.enable = sysConfig.flatpak.enable;
   foliate.enable = true;
@@ -31,7 +33,7 @@
   keepassxc.enable = true;
   kitty.enable = true;
   kodi.enable = false;
-  librewolf.enable = false;
+  media-keys.enable = true;
   nixvim.enable = true;
   nushell.enable = true;
   picom.enable = true;

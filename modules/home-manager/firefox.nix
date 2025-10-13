@@ -7,6 +7,11 @@
     enable = lib.mkEnableOption "enable firefox module";
   };
   config = lib.mkIf config.firefox.enable {
+    home.sessionVariables = {
+      LIBVA_DRIVER_NAME = "nvidia";
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+      NVD_BACKEND = "direct";
+    };
     programs.firefox = {
       enable = true;
       languagePacks = ["en-US" "ja"];

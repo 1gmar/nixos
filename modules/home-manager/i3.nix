@@ -3,7 +3,6 @@
   config,
   lib,
   pkgs,
-  wallpaperPath,
   ...
 }: let
   mod = "Mod4";
@@ -21,14 +20,6 @@
     messenger = "3: messenger";
     terminal = "4: terminal";
   };
-  audioSink = "@DEFAULT_AUDIO_SINK@";
-  unmuteCmd = "${pkgs.wireplumber}/bin/wpctl set-mute ${audioSink} 0";
-  getVolumeCmd = "${pkgs.wireplumber}/bin/wpctl get-volume ${audioSink} | ${pkgs.gawk}/bin/awk '{if ($3 ~ /MUTED/) print 0; else print 100 * $2}'";
-  muteToggleCmd = "${pkgs.wireplumber}/bin/wpctl set-mute ${audioSink} toggle";
-  adjustVolumeCmd = sign: "${pkgs.wireplumber}/bin/wpctl set-volume ${audioSink} 5%${sign}";
-  sendNotification = volume: "${pkgs.dunst}/bin/dunstify -a Volume -h int:value:$(${volume}) -u low blank";
-  volumeCmd = sign: "exec \"${unmuteCmd} && ${adjustVolumeCmd sign} && ${sendNotification getVolumeCmd}\"";
-  muteVolumeCmd = "exec \"${muteToggleCmd} && ${sendNotification getVolumeCmd}\"";
 in {
   options.i3wm = {
     enable = lib.mkEnableOption "enable i3wm module";
@@ -134,12 +125,6 @@ in {
           "${mod}+p" = "workspace ${workspace.messenger}";
           "${mod}+bracketleft" = "workspace ${workspace.terminal}";
           "Mod1+backslash" = "workspace back_and_forth";
-          "XF86AudioLowerVolume" = volumeCmd "-";
-          "XF86AudioMute" = muteVolumeCmd;
-          "XF86AudioRaiseVolume" = volumeCmd "+";
-          "XF86AudioPlay" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any play-pause";
-          "XF86AudioNext" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any next";
-          "XF86AudioPrev" = "exec ${pkgs.playerctl}/bin/playerctl --player=%any previous";
         };
         modes.resize = {
           "h" = "resize grow width 5 px or 5 ppt";
@@ -150,11 +135,6 @@ in {
         };
         modifier = mod;
         startup = [
-          {
-            always = true;
-            command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaperPath}";
-            notification = false;
-          }
           {
             always = false;
             command = "${pkgs.telegram-desktop}/bin/Telegram";

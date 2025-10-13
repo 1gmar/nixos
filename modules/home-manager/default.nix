@@ -10,6 +10,8 @@
     ./bat.nix
     ./direnv.nix
     ./dunst.nix
+    ./fastfetch.nix
+    ./feh.nix
     ./firefox.nix
     ./foliate.nix
     ./gammastep.nix
@@ -18,7 +20,7 @@
     ./ibus.nix
     ./keepassxc.nix
     ./kitty.nix
-    ./librewolf.nix
+    ./media-keys.nix
     ./nixvim.nix
     ./picom.nix
     ./rofi.nix
