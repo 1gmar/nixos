@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.activity-watch = {
     enable = lib.mkEnableOption "enable activity-watch module";
   };
@@ -17,12 +18,12 @@
           };
         };
       };
-      packages = [pkgs.activitywatch];
+      packages = [ pkgs.activitywatch ];
     };
-    xsession.windowManager.i3.config.startup = [
+    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
       {
         always = false;
-        command = "${pkgs.activitywatch}/bin/aw-qt";
+        command = "${config.home.profileDirectory}/bin/aw-qt";
         notification = false;
       }
     ];
