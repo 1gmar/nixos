@@ -1,10 +1,11 @@
 {
   colors,
-  lib,
   config,
+  lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./cpu.nix
     ./datetime.nix
@@ -22,15 +23,15 @@
     enable = lib.mkEnableOption "enable polybar module";
     centerModules = lib.mkOption {
       type = listOf str;
-      default = [];
+      default = [ ];
     };
     leftModules = lib.mkOption {
       type = listOf str;
-      default = [];
+      default = [ ];
     };
     rightModules = lib.mkOption {
       type = listOf str;
-      default = [];
+      default = [ ];
     };
   };
   config = lib.mkIf config.polybar.enable {

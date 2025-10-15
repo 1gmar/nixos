@@ -11,20 +11,20 @@
   };
   config = lib.mkIf config.thunar.enable {
     environment.systemPackages = [
-      (pkgs.xarchiver.overrideAttrs (old: {
+      (pkgs.xarchiver.overrideAttrs {
         postInstall = ''
           rm -rf $out/libexec
         '';
-      }))
+      })
     ];
     programs.thunar = {
       enable = true;
       plugins = with pkgs.xfce; [
-        (thunar-archive-plugin.overrideAttrs (old: {
+        (thunar-archive-plugin.overrideAttrs {
           postInstall = ''
             cp ${pkgs.xarchiver}/libexec/thunar-archive-plugin/* $out/libexec/thunar-archive-plugin/
           '';
-        }))
+        })
         thunar-volman
       ];
     };

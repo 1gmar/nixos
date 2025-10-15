@@ -6,9 +6,11 @@
   userName,
   wallpaperPath,
   ...
-}: let
-  hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix {};
-in {
+}:
+let
+  hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix { };
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -43,7 +45,7 @@ in {
       "fdf6e3"
     ];
     font = "ter-u18b";
-    packages = [pkgs.terminus_font];
+    packages = [ pkgs.terminus_font ];
     keyMap = "us";
   };
 
@@ -132,10 +134,14 @@ in {
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    settings.experimental-features = ["nix-command" "flakes"];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "corefonts"
       "vista-fonts"
@@ -175,7 +181,7 @@ in {
       };
       enable = true;
       exportConfiguration = true;
-      videoDrivers = ["nvidia"];
+      videoDrivers = [ "nvidia" ];
       windowManager.i3.enable = true;
       xkb.layout = "us";
     };
@@ -200,6 +206,7 @@ in {
     description = "Igor Marta";
     userName = "${userName}";
   };
+  media-server-proxy.enable = true;
   screen-locker.enable = true;
   thunar.enable = true;
 
