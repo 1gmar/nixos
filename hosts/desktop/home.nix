@@ -2,7 +2,8 @@
   sysConfig,
   userName,
   ...
-}: {
+}:
+{
   home = {
     username = userName;
     homeDirectory = "/home/${userName}";
@@ -24,6 +25,7 @@
   fastfetch.enable = true;
   feh.enable = true;
   firefox.enable = true;
+  flameshot.enable = true;
   flatpak.enable = sysConfig.flatpak.enable;
   foliate.enable = true;
   gammastep.enable = true;

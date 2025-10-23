@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./flatpak
     ./kodi
@@ -13,6 +14,7 @@
     ./fastfetch.nix
     ./feh.nix
     ./firefox.nix
+    ./flameshot.nix
     ./foliate.nix
     ./gammastep.nix
     ./git.nix
