@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.fastfetch = {
     enable = lib.mkEnableOption "enable fastfetch module";
   };
@@ -12,81 +13,120 @@
       settings = {
         logo = {
           padding = {
-            top = 2;
+            top = 1;
           };
         };
+        display = {
+          separator = " ➜  ";
+        };
         modules = [
-          "title"
-          "separator"
-          "os"
-          "host"
-          "bios"
-          "board"
-          "kernel"
-          "initsystem"
-          "packages"
-          "shell"
-          "display"
-          "lm"
-          "de"
-          "wm"
-          "wmtheme"
-          "theme"
-          "icons"
-          "font"
-          "cursor"
-          "wallpaper"
-          "terminal"
-          "terminalfont"
+          "break"
+          {
+            type = "os";
+            key = "OS  ";
+            keyColor = "31";
+          }
+          {
+            type = "kernel";
+            key = " ├  ";
+            keyColor = "31";
+          }
+          {
+            type = "initsystem";
+            key = " ├  ";
+            keyColor = "31";
+          }
+          {
+            type = "packages";
+            key = " ├ 󰏖 ";
+            keyColor = "31";
+          }
+          {
+            type = "shell";
+            key = " └  ";
+            keyColor = "31";
+          }
+          "break"
+          {
+            type = "wm";
+            key = "WM  ";
+            keyColor = "32";
+          }
+          {
+            type = "wmtheme";
+            key = " ├ 󰉼 ";
+            keyColor = "32";
+          }
+          {
+            type = "lm";
+            key = " ├ 󰧨 ";
+            keyColor = "32";
+          }
+          {
+            type = "de";
+            key = " ├  ";
+            keyColor = "32";
+          }
+          {
+            type = "icons";
+            key = " ├ 󰀻 ";
+            keyColor = "32";
+          }
+          {
+            type = "cursor";
+            key = " ├  ";
+            keyColor = "32";
+          }
+          {
+            type = "terminal";
+            key = " ├  ";
+            keyColor = "32";
+          }
+          {
+            type = "terminalfont";
+            key = " └  ";
+            keyColor = "32";
+          }
+          "break"
+          {
+            type = "host";
+            format = "{5} {1} Type {2}";
+            key = "PC 󰌢 ";
+            keyColor = "33";
+          }
           {
             type = "cpu";
-            showPeCoreCount = true;
-            temp = true;
+            format = "{1} ({3}) @ {7} GHz";
+            key = " ├  ";
+            keyColor = "33";
           }
           {
             type = "gpu";
-            driverSpecific = true;
-            temp = true;
+            format = "{1} {2} @ {12} GHz";
+            key = " ├ 󰢮 ";
+            keyColor = "33";
           }
-          "memory"
-          "physicalmemory"
+          {
+            type = "memory";
+            key = " ├  ";
+            keyColor = "33";
+          }
           {
             type = "swap";
-            separate = true;
-          }
-          "disk"
-          "btrfs"
-          "zpool"
-          {
-            type = "battery";
-            temp = true;
+            key = " ├ 󰓡 ";
+            keyColor = "33";
           }
           {
-            type = "publicip";
-            timeout = 1000;
+            type = "disk";
+            key = " ├ 󰋊 ";
+            keyColor = "33";
           }
           {
-            type = "localip";
-            showIpv6 = true;
-            showMac = true;
-            showSpeed = true;
-            showMtu = true;
-            showLoop = true;
-            showFlags = true;
-            showAllIps = true;
+            type = "monitor";
+            key = " └  ";
+            keyColor = "33";
           }
-          "dns"
-          "locale"
-          "vulkan"
-          "opengl"
-          "opencl"
-          {
-            type = "physicaldisk";
-            temp = true;
-          }
-          "version"
           "break"
-          "colors"
         ];
       };
     };

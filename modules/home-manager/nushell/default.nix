@@ -9,10 +9,6 @@
     enable = lib.mkEnableOption "enable nushell module";
   };
   config = lib.mkIf config.nushell.enable {
-    home.file = {
-      ".config/nushell/scripts/solarized-light.nu".source = ./solarized-light.nu;
-      ".config/nushell/scripts/prompt.nu".source = ./prompt.nu;
-    };
     home.packages = [
       (pkgs.writers.makeScriptWriter {
         interpreter = "${lib.getExe pkgs.nushell} --stdin";
@@ -47,8 +43,9 @@
         lib.mkAfter # nu
           ''
             $env.LS_COLORS = (${lib.getExe pkgs.vivid} generate solarized-light)
-            source solarized-light.nu
-            source prompt.nu
+            source ${./nix.nu}
+            source ${./prompt.nu}
+            source ${./solarized-light.nu}
           '';
       settings = {
         show_banner = false;
