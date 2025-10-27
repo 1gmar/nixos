@@ -42,6 +42,22 @@
             keyColor = "31";
           }
           {
+            type = "memory";
+            key = " ├ 󰓌 ";
+            keyColor = "31";
+          }
+          {
+            type = "swap";
+            key = " ├ 󰓡 ";
+            keyColor = "31";
+          }
+          {
+            type = "disk";
+            format = "{name}, {filesystem} - {size-used} / {size-total} ({size-percentage})";
+            key = " ├  ";
+            keyColor = "31";
+          }
+          {
             type = "shell";
             key = " └  ";
             keyColor = "31";
@@ -90,39 +106,43 @@
           "break"
           {
             type = "host";
-            format = "{5} {1} Type {2}";
-            key = "PC 󰌢 ";
+            format = "{vendor} {name}";
+            key = "PC 󰇅 ";
+            keyColor = "33";
+          }
+          {
+            type = "bios";
+            format = "{type}, {version} ({release})";
+            key = " ├ 󰘚 ";
             keyColor = "33";
           }
           {
             type = "cpu";
-            format = "{1} ({3}) @ {7} GHz";
+            format = "{name} ({cores-physical}) @ {freq-max}";
             key = " ├  ";
             keyColor = "33";
           }
           {
             type = "gpu";
-            format = "{1} {2} @ {12} GHz";
+            format = "{vendor} {name} [{type}]";
             key = " ├ 󰢮 ";
             keyColor = "33";
           }
           {
-            type = "memory";
-            key = " ├  ";
+            type = "physicalmemory";
+            format = "{vendor}, {type}, {size}, {max-speed} MT/s";
+            key = " ├  ";
             keyColor = "33";
           }
           {
-            type = "swap";
-            key = " ├ 󰓡 ";
-            keyColor = "33";
-          }
-          {
-            type = "disk";
+            type = "physicaldisk";
+            format = "{name}, {size}, [{physical-type}, {removable-type}]";
             key = " ├ 󰋊 ";
             keyColor = "33";
           }
           {
             type = "monitor";
+            format = "{name} {width}x{height} in {inch}\", {refresh-rate} Hz";
             key = " └  ";
             keyColor = "33";
           }
