@@ -100,7 +100,7 @@ in
       noto-fonts-color-emoji
       unifont
       unifont_upper
-      vistafonts
+      vista-fonts
     ];
   };
 

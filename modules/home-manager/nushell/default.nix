@@ -18,7 +18,7 @@
       extensions = {
         lsp.servers.nushell = {
           enable = true;
-          settings = {
+          config = {
             cmd = [
               "nu"
               "--lsp"
