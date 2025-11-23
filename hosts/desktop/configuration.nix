@@ -124,6 +124,12 @@ in
   };
 
   networking = {
+    firewall = {
+      enable = true;
+      extraCommands = ''
+        iptables -I nixos-fw-log-refuse -s 192.168.100.0/24 -j nixos-fw-accept
+      '';
+    };
     hostName = "nixos";
     networkmanager.enable = true;
   };
@@ -133,6 +139,10 @@ in
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
+    };
+    optimise = {
+      automatic = true;
+      dates = "monthly";
     };
     settings.experimental-features = [
       "nix-command"
@@ -207,7 +217,7 @@ in
     userName = "${userName}";
   };
   media-server-proxy.enable = true;
-  pairdrop.enable = false;
+  pairdrop.enable = true;
   screen-locker.enable = true;
   thunar.enable = true;
 

@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options.firefox = {
     enable = lib.mkEnableOption "enable firefox module";
   };
@@ -14,7 +15,10 @@
     };
     programs.firefox = {
       enable = true;
-      languagePacks = ["en-US" "ja"];
+      languagePacks = [
+        "en-US"
+        "ja"
+      ];
       policies = {
         DefaultDownloadDirectory = "${config.home.homeDirectory}/Downloads";
         DisableFirefoxAccounts = true;
@@ -57,8 +61,8 @@
             }
             {
               basedomain = "pairdrop.net";
-              label = "pairdrop | transfer files cross-platform. no setup; no signup.";
-              url = "https://pairdrop.net/";
+              label = "pairdrop";
+              url = "http://192.168.100.11:3000/";
             }
             {
               basedomain = "evms.md";
@@ -66,12 +70,12 @@
               url = "https://evms.md/";
             }
             {
-              label = "cabinetul personal";
+              label = "Premierenergy";
               url = "https://oficiulonline.premierenergy.md/office/";
             }
             {
-              label = "bine ați venit în cabinetul personal al consumatorului sa „moldovagaz”!";
-              url = "https://my.moldovagaz.md/home";
+              label = "Energocom";
+              url = "https://my.energocom.md/home";
             }
             {
               label = "curs.md - curs valutar";
