@@ -15,24 +15,7 @@
       } "/bin/docker-logs-decorator" (builtins.readFile ./docker-logs-decorator.nu))
     ];
     nixvim = lib.mkIf config.nixvim.enable {
-      extensions = {
-        lsp.servers.nushell = {
-          enable = true;
-          config = {
-            cmd = [
-              "nu"
-              "--lsp"
-            ];
-            filetypes = [ "nu" ];
-            root_dir.__raw = ''
-              function(bufnr, on_dir)
-                on_dir(vim.fs.root(bufnr, { '.git' }) or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)))
-              end
-            '';
-          };
-        };
-      };
-      treesitterGrammars = [ pkgs.vimPlugins.nvim-treesitter.builtGrammars.nu ];
+      extensions.nushell.enable = true;
     };
     programs.kitty = lib.mkIf config.kitty.enable {
       settings.shell = "${config.home.profileDirectory}/bin/nu";
