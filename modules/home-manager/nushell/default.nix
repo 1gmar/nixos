@@ -22,17 +22,28 @@
     };
     programs.nushell = {
       enable = true;
+      environmentVariables = {
+        LS_COLORS =
+          lib.hm.nushell.mkNushellInline # nu
+            ''
+              ${lib.getExe pkgs.vivid} generate solarized-light
+            '';
+      };
       extraConfig =
         lib.mkAfter # nu
           ''
-            $env.LS_COLORS = (${lib.getExe pkgs.vivid} generate solarized-light)
+            source ${./keybindings.nu}
             source ${./nix.nu}
             source ${./prompt.nu}
             source ${./solarized-light.nu}
           '';
+      plugins = [ pkgs.nushellPlugins.gstat ];
       settings = {
         show_banner = false;
         use_kitty_protocol = true;
+      };
+      shellAliases = {
+        ls = "ls -s";
       };
     };
   };

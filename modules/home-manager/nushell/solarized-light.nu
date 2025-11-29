@@ -30,10 +30,11 @@ export def main [] {
     record: $cyan
     string: $green
 
-    bool: {|| if $in { $green } else { $red } }
+    bool: { if $in { $green } else { $red } }
 
-    datetime: {|| (date now) - $in |
-      if $in < 1hr {
+    datetime: {
+      (date now) - $in
+      | if $in < 1hr {
         {fg: $red attr: b}
       } else if $in < 6hr {
         $red

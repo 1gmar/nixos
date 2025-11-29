@@ -31,6 +31,7 @@
         lib.mergeAttrs gotoTabKeys {
           "ctrl+alt+d" = "scroll_page_down";
           "ctrl+alt+u" = "scroll_page_up";
+          "ctrl+shift+l" = "";
           "ctrl+shift+d>ctrl+shift+d" = "scroll_home";
           "ctrl+shift+d>ctrl+shift+f" = "scroll_end";
           "alt+h" = "launch --location=hsplit";
