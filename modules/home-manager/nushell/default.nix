@@ -43,7 +43,7 @@
         use_kitty_protocol = true;
       };
       shellAliases = {
-        ls = "ls -s";
+        lss = "ls -s";
       };
     };
   };

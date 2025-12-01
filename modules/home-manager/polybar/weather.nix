@@ -4,18 +4,18 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.weather = {
     enable = lib.mkEnableOption "enable polybar weather module";
   };
   config = lib.mkIf config.weather.enable {
-    polybar.rightModules = lib.mkOrder 1040 ["weather"];
+    polybar.rightModules = lib.mkOrder 1040 [ "weather" ];
     services.polybar.settings = {
       "module/weather" = {
         type = "custom/script";
         exec =
-          if config.nushell.enable
-          then
+          if config.nushell.enable then
             "${config.home.profileDirectory}/bin/nu -c "
             + "'${config.home.profileDirectory}/bin/wthrr "
             + "| lines | get 3 | split row `,` | each { split row -r `\\s+` } "
@@ -29,8 +29,8 @@
           text = "<label>";
         };
         interval = {
-          fail = "5";
-          text = "300";
+          fail = "10";
+          text = "600";
         };
         label = {
           fail = {
