@@ -35,6 +35,15 @@
         settings = {
           "browser.bookmarks.restore_default_bookmarks" = false;
           "browser.fullscreen.autohide" = false;
+          "browser.ml.chat.enabled" = false;
+          "browser.ml.chat.menu" = false;
+          "browser.ml.chat.page" = false;
+          "browser.ml.chat.page.footerBadge" = false;
+          "browser.ml.chat.page.menuBadge" = false;
+          "browser.ml.enable" = false;
+          "browser.ml.linkPreview.enabled" = false;
+          "browser.ml.pageAssist.enabled" = false;
+          "browser.ml.smartAssist.enabled" = false;
           "browser.newtabpage.activity-stream.feeds.topsites" = true;
           "browser.newtabpage.activity-stream.showSearch" = false;
           "browser.newtabpage.activity-stream.showSponsored" = false;
@@ -91,21 +100,28 @@
             }
           ];
           "browser.preferences.defaultPerformanceSettings.enabled" = false;
+          "browser.search.visualSearch.featureGate" = false;
           "browser.sessionstore.restore_on_demand" = true;
           "browser.sessionstore.restore_pinned_tabs_on_demand" = true;
           "browser.sessionstore.restore_tabs_lazily" = true;
+          "browser.tabs.groups.smart.enabled" = false;
+          "browser.tabs.groups.smart.userEnabled" = false;
           "browser.toolbars.bookmarks.visibility" = "newtab";
           "browser.translations.automaticallyPopup" = false;
           "browser.urlbar.placeholderName" = "DuckDuckGo";
           "browser.urlbar.placeholderName.private" = "DuckDuckGo";
+          "browser.urlbar.quicksuggest.mlEnabled" = false;
           "browser.urlbar.suggest.searches" = true;
           "browser.warnOnQuitShortcut" = false;
           "extensions.activeThemeId" = "firefox-compact-light@mozilla.org";
           "extensions.formautofill.creditCards.enabled" = false;
+          "extensions.ml.enabled" = false;
           "gfx.x11-egl.force-enabled" = true;
           "media.ffmpeg.vaapi.enabled" = true;
           "media.hardware-video-decoding.force-enabled" = true;
           "middlemouse.paste" = false;
+          "pdfjs.enableAltText" = false;
+          "places.semanticHistory.featureGate" = false;
           "privacy.clearOnShutdown.cookies" = false;
           "privacy.clearOnShutdown.history" = false;
           "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;

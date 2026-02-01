@@ -5,8 +5,10 @@ $env.config.keybindings ++= [
     keycode: Char_l
     mode: [Emacs Vi_Normal Vi_Insert]
     event: [
-      {send: ClearScreen}
-      {send: ClearScrollback}
+      {
+        send: ExecuteHostCommand
+        cmd: "clear"
+      }
     ]
   }
 ]
