@@ -32,6 +32,7 @@
   git.enable = true;
   i3wm.enable = true;
   ibus.enable = sysConfig.ibus.enable;
+  jellyfin-desktop.enable = true;
   keepassxc.enable = true;
   kitty.enable = true;
   kodi.enable = false;

@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.keepassxc = {
     enable = lib.mkEnableOption "enable keepassxc module";
   };
@@ -28,6 +29,7 @@
         Security = {
           ClearClipboard = false;
           ClearClipboardTimeout = 60;
+          LockDatabaseIdle = false;
         };
       };
     };

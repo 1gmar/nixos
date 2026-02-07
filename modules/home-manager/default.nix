@@ -20,6 +20,7 @@
     ./git.nix
     ./i3.nix
     ./ibus.nix
+    ./jellyfin-desktop.nix
     ./keepassxc.nix
     ./kitty.nix
     ./media-keys.nix
