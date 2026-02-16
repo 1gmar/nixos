@@ -6,26 +6,30 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   boot = {
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
-      kernelModules = [];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ];
+      kernelModules = [ ];
     };
-    kernelModules = ["kvm-intel" "coretemp" "nct6775"];
-    extraModulePackages = [];
-  };
-
-  fileSystems = {
-    "/mnt/Multimedia" = {
-      device = "/dev/disk/by-label/Multimedia";
-      fsType = "ntfs";
-      options = ["nosuid" "nodev" "nofail" "x-gvfs-show"];
-    };
+    kernelModules = [
+      "kvm-intel"
+      "coretemp"
+      "nct6775"
+    ];
+    extraModulePackages = [ ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
