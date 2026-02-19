@@ -50,7 +50,7 @@ def get-dirpath [path_color: string]: string -> string {
   let repo_folder = (git rev-parse --show-toplevel | path basename)
   let repo_prefix = ($dirpath | path split | take until { $in == $repo_folder } | path join)
   let git_dirpath = ($dirpath | path relative-to $repo_prefix)
-  let gs_summary = (summarize-gs $gs)
+  let gs_summary = summarize-gs $gs
   [
     ($git_dirpath | get-default-dirpath $path_color $basename_color)
     $"(ansi chartreuse3b) (get-git-remote-icon)"
@@ -77,14 +77,12 @@ def summarize-gs [gs] {
     $gs.idx_renamed
     $gs.idx_modified_staged
     $gs.idx_deleted_staged
-  ]
-  | math sum
+  ] | math sum
   let unstaged_changes = [
     $gs.wt_modified
     $gs.wt_deleted
     $gs.wt_renamed
-  ]
-  | math sum
+  ] | math sum
   {
     staged_changes : $staged_changes
     unstaged_changes : $unstaged_changes
