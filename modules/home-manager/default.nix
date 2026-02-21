@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./fastfetch
     ./flatpak
     ./kodi
     ./nushell
@@ -11,7 +12,6 @@
     ./bat.nix
     ./direnv.nix
     ./dunst.nix
-    ./fastfetch.nix
     ./feh.nix
     ./firefox.nix
     ./flameshot.nix

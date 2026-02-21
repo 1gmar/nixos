@@ -1,7 +1,5 @@
-def main []: any -> nothing {
-  for line in ($in | lines) {
-    $line | decorate-line | print
-  }
+def main []: string -> list<nothing> {
+  lines | each { decorate-line | print }
 }
 
 def decorate-line []: string -> string {

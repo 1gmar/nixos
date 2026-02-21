@@ -15,6 +15,8 @@
           padding = {
             top = 1;
           };
+          source = ./nixos-logo.png;
+          type = "kitty-icat";
         };
         display = {
           separator = " ➜  ";
