@@ -1,8 +1,9 @@
 {
-  lib,
   config,
+  lib,
   ...
-}: {
+}:
+{
   options.direnv = {
     enable = lib.mkEnableOption "enable direnv module";
   };

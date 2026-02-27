@@ -1,11 +1,13 @@
-$env.PROMPT_COMMAND = { get-prompt-text }
-$env.TRANSIENT_PROMPT_COMMAND = ""
-$env.PROMPT_COMMAND_RIGHT = { get-right-prompt-text }
-$env.TRANSIENT_PROMPT_COMMAND_RIGHT = { (get-execution-segment) }
-$env.PROMPT_INDICATOR = { $"(get-indicator-color)❯ " }
-$env.PROMPT_INDICATOR_VI_INSERT = { $"(get-indicator-color)❯ " }
-$env.PROMPT_INDICATOR_VI_NORMAL = { $"(get-indicator-color)❮ " }
-$env.PROMPT_MULTILINE_INDICATOR = "> "
+export-env {
+  $env.PROMPT_COMMAND = { get-prompt-text }
+  $env.TRANSIENT_PROMPT_COMMAND = ""
+  $env.PROMPT_COMMAND_RIGHT = { get-right-prompt-text }
+  $env.TRANSIENT_PROMPT_COMMAND_RIGHT = { get-execution-segment }
+  $env.PROMPT_INDICATOR = { $"(get-indicator-color)❯ " }
+  $env.PROMPT_INDICATOR_VI_INSERT = { $"(get-indicator-color)❯ " }
+  $env.PROMPT_INDICATOR_VI_NORMAL = { $"(get-indicator-color)❮ " }
+  $env.PROMPT_MULTILINE_INDICATOR = "> "
+}
 
 def get-prompt-text []: nothing -> string {
   let os_segment = (get-os-segment)

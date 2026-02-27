@@ -10,6 +10,7 @@
     ./activity-watch.nix
     ./bash.nix
     ./bat.nix
+    ./carapace.nix
     ./direnv.nix
     ./dunst.nix
     ./feh.nix

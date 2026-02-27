@@ -1,4 +1,4 @@
-export def main [] {
+def color-config [] {
   let background = '#fdf6e3'
   let backgroundHigh = '#eee8d5'
   let blue = '#268bd2'
@@ -112,16 +112,6 @@ export def main [] {
   }
 }
 
-# Update the Nushell configuration
-export def --env "set color_config" [] {
-  $env.config.color_config = (main)
+export-env {
+  $env.config.color_config = (color-config)
 }
-
-export module activate {
-  export-env {
-    set color_config
-  }
-}
-
-# Activate the theme when sourced
-use activate

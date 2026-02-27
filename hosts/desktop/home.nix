@@ -11,6 +11,7 @@
       EDITOR = "nvim";
       TERMINAL = "kitty";
     };
+    shell.enableShellIntegration = false;
     stateVersion = "24.11";
   };
 
@@ -20,6 +21,7 @@
   activity-watch.enable = true;
   bash.enable = true;
   bat.enable = true;
+  carapace.enable = true;
   direnv.enable = true;
   dunst.enable = true;
   fastfetch.enable = true;
