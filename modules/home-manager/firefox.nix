@@ -24,6 +24,13 @@
         DisableFirefoxAccounts = true;
         DisablePocket = true;
         DisableTelemetry = true;
+        GenerativeAI = {
+          Enabled = false;
+          Chatbot = false;
+          LinkPreviews = false;
+          TabGroups = false;
+          Locked = true;
+        };
         PasswordManagerEnabled = false;
         PictureInPicture = {
           Enabled = false;
@@ -33,11 +40,15 @@
       profiles."${config.home.username}" = {
         isDefault = true;
         settings = {
+          "browser.ai.control.default" = "blocked";
+          "browser.ai.control.linkPreviewKeyPoints" = "blocked";
+          "browser.ai.control.pdfjsAltText" = "blocked";
+          "browser.ai.control.sidebarChatbot" = "blocked";
+          "browser.ai.control.smartTabGroups" = "blocked";
+          "browser.ai.control.translations" = "blocked";
           "browser.bookmarks.restore_default_bookmarks" = false;
           "browser.fullscreen.autohide" = false;
-          "browser.ml.chat.enabled" = false;
           "browser.ml.chat.menu" = false;
-          "browser.ml.chat.page" = false;
           "browser.ml.chat.page.footerBadge" = false;
           "browser.ml.chat.page.menuBadge" = false;
           "browser.ml.enable" = false;
@@ -98,6 +109,10 @@
               label = "mcabinet";
               url = "https://mcabinet.gov.md";
             }
+            {
+              label = "Fagura";
+              url = "https://fagura.com";
+            }
           ];
           "browser.preferences.defaultPerformanceSettings.enabled" = false;
           "browser.search.visualSearch.featureGate" = false;
@@ -105,7 +120,6 @@
           "browser.sessionstore.restore_pinned_tabs_on_demand" = true;
           "browser.sessionstore.restore_tabs_lazily" = true;
           "browser.tabs.groups.smart.enabled" = false;
-          "browser.tabs.groups.smart.userEnabled" = false;
           "browser.toolbars.bookmarks.visibility" = "newtab";
           "browser.translations.automaticallyPopup" = false;
           "browser.urlbar.placeholderName" = "DuckDuckGo";

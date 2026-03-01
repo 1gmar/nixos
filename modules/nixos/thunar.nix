@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  userName,
   ...
 }:
 {
@@ -28,9 +27,6 @@
         thunar-volman
       ];
     };
-    home-manager.users.${userName}.nixvim.treesitterGrammars = [
-      pkgs.vimPlugins.nvim-treesitter.builtGrammars.javascript
-    ];
     security.polkit = {
       adminIdentities = [ "unix-group:wheel" ];
       enable = true;

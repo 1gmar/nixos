@@ -45,23 +45,6 @@
     in
     {
       nixosConfigurations = {
-        default = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit
-              inputs
-              system
-              userName
-              wallpaperPath
-              ;
-          };
-          modules = [
-            ./hosts/default/configuration.nix
-            inputs.disko.nixosModules.default
-            ./hosts/default/disk-config.nix
-            ./modules/nixos
-          ];
-        };
         desktop = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
