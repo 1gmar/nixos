@@ -30,7 +30,7 @@
               '';
         };
         extraConfig =
-          lib.mkAfter # nu
+          lib.mkBefore # nu
             ''
               use ${./solarized-light.nu}
               use ${./prompt.nu}

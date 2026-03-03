@@ -10,15 +10,15 @@ export-env {
 }
 
 def get-prompt-text []: nothing -> string {
-  let os_segment = (get-os-segment)
-  let path_segment = (get-path-segment)
+  let os_segment = get-os-segment
+  let path_segment = get-path-segment
 
   $"($os_segment) ($path_segment)"
 }
 
 def get-right-prompt-text []: nothing -> string {
-  let time_segment = (get-time-segment)
-  let execution_segment = (get-execution-segment)
+  let time_segment = get-time-segment
+  let execution_segment = get-execution-segment
 
   $"($execution_segment) ($time_segment) "
 }
@@ -33,8 +33,8 @@ def get-indicator-color []: nothing -> string {
 
 def get-path-segment []: nothing -> string {
   let path_color = ansi deepskyblue3a
-  let dir = (get-dir-metadata | update icon { $"($path_color)($in)" })
-  let dirpath = ($dir.path | get-dirpath $path_color)
+  let dir = get-dir-metadata | update icon { $"($path_color)($in)" }
+  let dirpath = $dir.path | get-dirpath $path_color
 
   $"($dir.icon) ($dirpath)"
 }
@@ -43,15 +43,15 @@ def get-dirpath [path_color: string]: string -> string {
   let dirpath = $in
   let basename_color = ansi {fg: deepskyblue1 attr: b}
   if $dirpath !~ '^~' {
-    return ($dirpath | get-default-dirpath $path_color $basename_color)
+    return $dirpath | get-default-dirpath $path_color $basename_color
   }
-  let gs = (gstat)
+  let gs = gstat
   if $gs.state == 'no_state' {
-    return ($dirpath | get-default-dirpath $path_color $basename_color)
+    return $dirpath | get-default-dirpath $path_color $basename_color
   }
-  let repo_folder = (git rev-parse --show-toplevel | path basename)
-  let repo_prefix = ($dirpath | path split | take until { $in == $repo_folder } | path join)
-  let git_dirpath = ($dirpath | path relative-to $repo_prefix)
+  let repo_folder = git rev-parse --show-toplevel | path basename
+  let repo_prefix = $dirpath | path split | take until { $in == $repo_folder } | path join
+  let git_dirpath = $dirpath | path relative-to $repo_prefix
   let gs_summary = summarize-gs $gs
   [
     ($git_dirpath | get-default-dirpath $path_color $basename_color)
@@ -128,7 +128,7 @@ def decorate-git-state []: string -> string {
 def get-default-dirpath [path_color: string basename_color: string]: string -> string {
   let dirpath = $in
   let basename = $"($basename_color)($dirpath | path basename)"
-  let dirname = ($dirpath | get-dirname $path_color)
+  let dirname = $dirpath | get-dirname $path_color
   $"($dirname | path join $basename)"
 }
 
@@ -163,16 +163,14 @@ def get-time-segment []: nothing -> string {
 }
 
 def get-execution-segment []: nothing -> duration {
-  let exec_duration = (
-    $env.CMD_DURATION_MS
+  let exec_duration = $env.CMD_DURATION_MS
     | into int
     | $in // 1000
-    | if $in > 3600 {
-      ($in // 60 | into duration --unit min)
+    | if $in < 3600 {
+      $in | into duration --unit sec
     } else {
-      ($in | into duration --unit sec)
+      $in // 60 | into duration --unit min
     }
-  )
 
   if $exec_duration >= 3sec {
     $"(ansi darkseagreen4a) ($exec_duration)"
