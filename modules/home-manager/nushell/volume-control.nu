@@ -23,10 +23,10 @@ def adjust-volume [step: int] {
   match $new_volume {
     0..100 => {
       set-volume $new_volume
-      $new_volume | send-notification
+      $new_volume
     }
-    _ => ($volume | send-notification)
-  }
+    _ => $volume
+  } | send-notification
 }
 
 def current-volume []: nothing -> int {
@@ -41,7 +41,14 @@ def current-volume []: nothing -> int {
 }
 
 def send-notification []: int -> nothing {
-  dunstify -a "Volume" -h $"int:value:($in)" -u "low" "blank"
+  let icon = match $in {
+    0 => "muted"
+    1..30 => "low"
+    31..60 => "medium"
+    61..99 => "high"
+    100 => "overamplified"
+  }
+  dunstify -a "Volume" -i $"audio-volume-($icon)-symbolic" -h $"int:value:($in)" -u "low" "blank"
 }
 
 def set-volume [value: int] {
