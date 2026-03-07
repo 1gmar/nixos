@@ -43,6 +43,7 @@
           use_kitty_protocol = true;
         };
         shellAliases = {
+          gs = "git status";
           lss = "ls -s";
         };
       };

@@ -12,13 +12,14 @@
     let
       playerctl = "${config.home.profileDirectory}/bin/playerctl";
       volume = pkgs.writers.writeNuBin "volume" (builtins.readFile ./nushell/volume-control.nu);
+      volumeExe = lib.getExe volume;
     in
     {
       services.playerctld.enable = true;
       xsession.windowManager.i3.config.keybindings = {
-        "XF86AudioLowerVolume" = "exec ${lib.getExe volume} down";
-        "XF86AudioMute" = "exec ${lib.getExe volume} mute-toggle";
-        "XF86AudioRaiseVolume" = "exec ${lib.getExe volume} up";
+        "XF86AudioLowerVolume" = "exec ${volumeExe} down";
+        "XF86AudioMute" = "exec ${volumeExe} mute-toggle";
+        "XF86AudioRaiseVolume" = "exec ${volumeExe} up";
         "XF86AudioPlay" = "exec ${playerctl} --player=%any play-pause";
         "XF86AudioNext" = "exec ${playerctl} --player=%any next";
         "XF86AudioPrev" = "exec ${playerctl} --player=%any previous";

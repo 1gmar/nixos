@@ -1,5 +1,3 @@
-const audioSink = "@DEFAULT_AUDIO_SINK@"
-
 def main [] { }
 
 def "main up" [] {
@@ -13,7 +11,7 @@ def "main down" [] {
 }
 
 def "main mute-toggle" [] {
-  wpctl "set-mute" $audioSink "toggle"
+  wpctl "set-mute" "toggle"
   current-volume | send-notification
 }
 
@@ -30,7 +28,7 @@ def adjust-volume [step: int] {
 }
 
 def current-volume []: nothing -> int {
-  wpctl "get-volume" $audioSink
+  wpctl "get-volume"
   | split words
   | skip
   | match $in {
@@ -52,9 +50,13 @@ def send-notification []: int -> nothing {
 }
 
 def set-volume [value: int] {
-  wpctl "set-volume" $audioSink $"($value / 100)"
+  wpctl "set-volume" $"($value / 100)"
 }
 
 def unmute [] {
-  wpctl "set-mute" $audioSink 0
+  wpctl "set-mute" 0
+}
+
+def wpctl [sub_cmd: string cmd_opt?: string] {
+  ^wpctl $sub_cmd "@DEFAULT_AUDIO_SINK@" ($cmd_opt | default "")
 }

@@ -85,6 +85,7 @@ in
     };
     fontDir.enable = true;
     packages = with pkgs; [
+      adwaita-fonts
       cantarell-fonts
       corefonts
       dejavu_fonts
@@ -171,7 +172,6 @@ in
       enable = true;
       pulse.enable = true;
     };
-    openssh.enable = true;
     xserver = {
       config = lib.mkAfter ''
         Section "ServerFlags"
@@ -197,12 +197,13 @@ in
     };
   };
 
-  system.activationScripts.system-diff = ''
-    if [[ -e /run/current-system ]]; then
-      ${pkgs.nushell}/bin/nu --config ${shell-theme} ${sys-diff} ${userName}\
-        ${pkgs.nix}/bin/nix store diff-closures /run/current-system $systemConfig
-    fi
-  '';
+  system.activationScripts.system-diff = # bash
+    ''
+      if [[ -e /run/current-system ]]; then
+        ${pkgs.nushell}/bin/nu --config ${shell-theme} ${sys-diff} ${userName}\
+          ${pkgs.nix}/bin/nix store diff-closures /run/current-system $systemConfig
+      fi
+    '';
 
   # Set your time zone.
   time.timeZone = "Europe/Chisinau";
