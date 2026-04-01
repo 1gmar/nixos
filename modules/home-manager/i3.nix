@@ -4,23 +4,27 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   mod = "Mod4";
-  foldMapDict = acc: x: let
-    s = builtins.toString x;
-  in
+  foldMapDict =
+    acc: x:
+    let
+      s = builtins.toString x;
+    in
     lib.mergeAttrs acc {
       "${mod}+${s}" = "workspace number ${s}";
       "${mod}+Shift+${s}" = "move window to workspace number ${s}";
     };
-  defaultWorkspaceMappings = builtins.foldl' foldMapDict {} (lib.range 1 9);
+  defaultWorkspaceMappings = builtins.foldl' foldMapDict { } (lib.range 1 9);
   workspace = {
     browser = "1: browser";
     email = "2: email";
     messenger = "3: messenger";
     terminal = "4: terminal";
   };
-in {
+in
+{
   options.i3wm = {
     enable = lib.mkEnableOption "enable i3wm module";
   };
@@ -29,11 +33,11 @@ in {
       enable = true;
       config = {
         assigns = {
-          ${workspace.browser} = [{class = "firefox";}];
-          ${workspace.email} = [{class = "thunderbird";}];
-          ${workspace.messenger} = [{class = "TelegramDesktop";}];
+          ${workspace.browser} = [ { class = "firefox"; } ];
+          ${workspace.email} = [ { class = "thunderbird"; } ];
+          ${workspace.messenger} = [ { class = "TelegramDesktop"; } ];
         };
-        bars = [];
+        bars = [ ];
         colors = with colors; {
           inherit background;
           focused = {
@@ -89,12 +93,12 @@ in {
             class = "librewolf";
             window_role = "Organizer";
           }
-          {class = "Qalculate-gtk";}
-          {class = "pavucontrol";}
-          {class = ".protonvpn-app-wrapped";}
+          { class = "Qalculate-gtk"; }
+          { class = "pavucontrol"; }
+          { class = ".protonvpn-app-wrapped"; }
         ];
         fonts = lib.mkForce {
-          names = ["Fira Sans"];
+          names = [ "Fira Sans" ];
           size = 0.0;
           style = "Bold";
         };

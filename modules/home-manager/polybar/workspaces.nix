@@ -3,12 +3,16 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.workspaces = {
     enable = lib.mkEnableOption "enable polybar workspaces module";
   };
   config = lib.mkIf config.workspaces.enable {
-    polybar.leftModules = lib.mkOrder 1050 ["workspaces" "title"];
+    polybar.leftModules = lib.mkOrder 1050 [
+      "workspaces"
+      "title"
+    ];
     services.polybar.settings = {
       "module/title" = {
         type = "internal/xwindow";
@@ -24,7 +28,12 @@
         type = "internal/xworkspaces";
         icon = {
           default = "󰘔";
-          text = ["1: browser;󰖟" "2: email;󰇰" "3: messenger;󱋊" "4: terminal;󰆍"];
+          text = [
+            "1: browser;󰖟"
+            "2: email;󰇰"
+            "3: messenger;󱋊"
+            "4: terminal;󰆍"
+          ];
         };
         label = {
           active = {

@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.flatpak = {
     enable = lib.mkEnableOption "enable flatpak module";
   };
@@ -12,7 +13,7 @@
     xdg.portal = {
       config.common.default = "gtk";
       enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
   };
 }

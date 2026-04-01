@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 {
   options.keepassxc = {
     enable = lib.mkEnableOption "enable keepassxc module";

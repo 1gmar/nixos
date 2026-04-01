@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.ibus = {
     enable = lib.mkEnableOption "enable ibus module";
   };
@@ -12,7 +13,7 @@
     i18n.inputMethod = {
       enable = true;
       type = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [mozc];
+      ibus.engines = with pkgs.ibus-engines; [ mozc ];
     };
   };
 }

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   app-id = "org.nickvision.money";
-in {
+in
+{
   options.denaro = {
     enable = lib.mkEnableOption "enable denaro module";
   };

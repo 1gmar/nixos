@@ -51,6 +51,7 @@
           })
         ];
       };
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           inherit system;

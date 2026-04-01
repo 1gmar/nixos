@@ -4,12 +4,17 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.cpu = {
     enable = lib.mkEnableOption "enable polybar cpu module";
   };
   config = lib.mkIf config.cpu.enable {
-    polybar.centerModules = lib.mkOrder 1040 ["cpu" "cpu-fan" "cpu-temp"];
+    polybar.centerModules = lib.mkOrder 1040 [
+      "cpu"
+      "cpu-fan"
+      "cpu-temp"
+    ];
     services.polybar.settings = {
       "module/cpu" = {
         type = "internal/cpu";
@@ -37,8 +42,7 @@
       "module/cpu-fan" = {
         type = "custom/script";
         exec =
-          if config.nushell.enable
-          then
+          if config.nushell.enable then
             "${config.home.profileDirectory}/bin/nu -c "
             + "'${pkgs.lm_sensors}/bin/sensors | find fan2 | split row -r `\\s+` | get 1'"
           else
@@ -54,8 +58,7 @@
       "module/cpu-temp" = {
         type = "custom/script";
         exec =
-          if config.nushell.enable
-          then
+          if config.nushell.enable then
             "${config.home.profileDirectory}/bin/nu -c "
             + "'${pkgs.lm_sensors}/bin/sensors | find `Package id 0:` | split row -r `\\s+` "
             + "| get 3 | str replace -a -r `(\\+|\\.\\d)` ``'"

@@ -6,14 +6,21 @@
   userName,
   wallpaperPath,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
 
   home-manager = {
     extraSpecialArgs = {
-      inherit colors inputs system userName wallpaperPath;
+      inherit
+        colors
+        inputs
+        system
+        userName
+        wallpaperPath
+        ;
       sysConfig = config;
     };
     sharedModules = [

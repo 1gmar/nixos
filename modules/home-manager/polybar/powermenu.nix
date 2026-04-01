@@ -4,12 +4,13 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.powermenu = {
     enable = lib.mkEnableOption "enable polybar powermenu module";
   };
   config = lib.mkIf config.powermenu.enable {
-    polybar.rightModules = lib.mkOrder 1090 ["powermenu"];
+    polybar.rightModules = lib.mkOrder 1090 [ "powermenu" ];
     services.polybar.settings = {
       "module/powermenu" = {
         type = "custom/menu";

@@ -3,12 +3,16 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.memory = {
     enable = lib.mkEnableOption "enable polybar memory module";
   };
   config = lib.mkIf config.memory.enable {
-    polybar.rightModules = lib.mkOrder 1050 ["ram" "disk"];
+    polybar.rightModules = lib.mkOrder 1050 [
+      "ram"
+      "disk"
+    ];
     services.polybar.settings = {
       "module/disk" = {
         type = "internal/fs";

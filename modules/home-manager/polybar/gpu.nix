@@ -4,12 +4,17 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.gpu = {
     enable = lib.mkEnableOption "enable polybar gpu module";
   };
   config = lib.mkIf config.gpu.enable {
-    polybar.centerModules = lib.mkOrder 1060 ["gpu" "gpu-fan" "gpu-temp"];
+    polybar.centerModules = lib.mkOrder 1060 [
+      "gpu"
+      "gpu-fan"
+      "gpu-temp"
+    ];
     services.polybar.settings = {
       "module/gpu" = {
         type = "custom/script";
@@ -42,8 +47,7 @@
       "module/gpu-fan" = {
         type = "custom/script";
         exec =
-          if config.nushell.enable
-          then
+          if config.nushell.enable then
             "${config.home.profileDirectory}/bin/nu -c "
             + "'${pkgs.lm_sensors}/bin/sensors | find fan1 | split row -r `\\s+` | get 1'"
           else

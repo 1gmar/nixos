@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 {
   options.foliate = {
     enable = lib.mkEnableOption "enable foliate module";

@@ -4,12 +4,13 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.sound-volume = {
     enable = lib.mkEnableOption "enable polybar sound-volume module";
   };
   config = lib.mkIf config.sound-volume.enable {
-    polybar.rightModules = lib.mkOrder 1060 ["volume"];
+    polybar.rightModules = lib.mkOrder 1060 [ "volume" ];
     services.polybar.settings = {
       "module/volume" = {
         type = "internal/pulseaudio";
@@ -25,7 +26,11 @@
           "1".foreground = colors.yellow;
           "2".foreground = colors.orange;
           font = "2";
-          text = ["󰕿" "󰖀" "󰕾"];
+          text = [
+            "󰕿"
+            "󰖀"
+            "󰕾"
+          ];
         };
       };
     };

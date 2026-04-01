@@ -1,8 +1,5 @@
+{ lib, config, ... }:
 {
-  lib,
-  config,
-  ...
-}: {
   options.picom = {
     enable = lib.mkEnableOption "enable picom module";
   };
@@ -10,7 +7,7 @@
     services.picom = {
       backend = "glx";
       enable = true;
-      extraArgs = ["--xrender-sync-fence"];
+      extraArgs = [ "--xrender-sync-fence" ];
       vSync = true;
     };
   };

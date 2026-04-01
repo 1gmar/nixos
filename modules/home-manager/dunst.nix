@@ -4,7 +4,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.dunst = {
     enable = lib.mkEnableOption "enable dunst module";
   };

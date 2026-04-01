@@ -1,10 +1,8 @@
-{
-  lib,
-  config,
-  ...
-}: let
+{ lib, config, ... }:
+let
   cfg = config.main-user;
-in {
+in
+{
   options.main-user = with lib.types; {
     enable = lib.mkEnableOption "enable main user module";
     userName = lib.mkOption {
@@ -19,17 +17,21 @@ in {
     };
     sshPubKeys = lib.mkOption {
       type = listOf singleLineStr;
-      default = [];
+      default = [ ];
       description = "A list of verbatim OpenSSH public keys that should be added to the user's authorized keys.";
     };
   };
   config = lib.mkIf cfg.enable {
     users.users.${cfg.userName} = {
       inherit (cfg) description;
-      extraGroups = ["wheel" "networkmanager" "docker"];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+      ];
       isNormalUser = true;
       openssh.authorizedKeys.keys = cfg.sshPubKeys;
-      packages = [];
+      packages = [ ];
     };
   };
 }

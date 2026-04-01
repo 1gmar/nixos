@@ -3,14 +3,15 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     vim.enable = lib.mkEnableOption "enable vim module";
   };
   config = lib.mkIf config.vim.enable {
     programs.vim = {
       enable = true;
-      plugins = with pkgs.vimPlugins; [ale];
+      plugins = with pkgs.vimPlugins; [ ale ];
       settings = {
         background = "light";
         expandtab = true;

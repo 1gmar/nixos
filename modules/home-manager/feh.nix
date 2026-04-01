@@ -3,7 +3,8 @@
   lib,
   wallpaperPath,
   ...
-}: {
+}:
+{
   options.feh = {
     enable = lib.mkEnableOption "enable feh module";
   };

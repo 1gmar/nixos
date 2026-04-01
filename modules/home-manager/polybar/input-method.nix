@@ -4,19 +4,19 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options.input-method = {
     enable = lib.mkEnableOption "enable polybar input-method module";
   };
   config = lib.mkIf config.input-method.enable {
-    polybar.rightModules = lib.mkOrder 1070 ["input-method"];
+    polybar.rightModules = lib.mkOrder 1070 [ "input-method" ];
     services.polybar.settings = {
       "module/input-method" = {
         type = "custom/script";
         click.right = "${pkgs.ibus-with-plugins}/bin/ibus-setup";
         exec =
-          if config.nushell.enable
-          then
+          if config.nushell.enable then
             "${config.home.profileDirectory}/bin/nu -c "
             + "'${pkgs.ibus-with-plugins}/bin/ibus engine | if $in =~ `^mozc` { \"ja\" } "
             + "else { $in | split row `:` | get 1 }'"

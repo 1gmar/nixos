@@ -4,12 +4,16 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.datetime = {
     enable = lib.mkEnableOption "enable polybar datetime module";
   };
   config = lib.mkIf config.datetime.enable {
-    polybar.rightModules = lib.mkOrder 1080 ["date" "time"];
+    polybar.rightModules = lib.mkOrder 1080 [
+      "date"
+      "time"
+    ];
     services.polybar.settings = {
       "module/date" = {
         type = "custom/script";

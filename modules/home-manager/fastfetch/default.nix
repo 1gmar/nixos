@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 {
   options.fastfetch = {
     enable = lib.mkEnableOption "enable fastfetch module";

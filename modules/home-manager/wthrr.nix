@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   options.wthrr = {
     enable = lib.mkEnableOption "enable wthrr module";
   };
@@ -35,7 +36,7 @@
           )
         '';
       };
-      packages = [pkgs.wthrr];
+      packages = [ pkgs.wthrr ];
     };
   };
 }

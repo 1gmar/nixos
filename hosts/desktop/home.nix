@@ -1,8 +1,4 @@
-{
-  sysConfig,
-  userName,
-  ...
-}:
+{ sysConfig, userName, ... }:
 {
   home = {
     username = userName;

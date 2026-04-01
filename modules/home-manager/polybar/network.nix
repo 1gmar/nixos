@@ -3,12 +3,13 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.network = {
     enable = lib.mkEnableOption "enable polybar network module";
   };
   config = lib.mkIf config.network.enable {
-    polybar.centerModules = lib.mkOrder 1050 ["network"];
+    polybar.centerModules = lib.mkOrder 1050 [ "network" ];
     services.polybar.settings = {
       "module/network" = {
         type = "internal/network";
