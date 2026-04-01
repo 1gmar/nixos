@@ -23,6 +23,7 @@
         DefaultDownloadDirectory = "${config.home.homeDirectory}/Downloads";
         DisableFirefoxAccounts = true;
         DisablePocket = true;
+        DisableRemoteImprovements = true;
         DisableTelemetry = true;
         GenerativeAI = {
           Enabled = false;

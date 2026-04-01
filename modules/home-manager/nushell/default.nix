@@ -32,10 +32,10 @@
         extraConfig =
           lib.mkBefore # nu
             ''
-              use ${./solarized-light.nu}
+              use ${./nix.nu} *
               use ${./prompt.nu}
+              use ${./solarized-light.nu}
               source ${./keybindings.nu}
-              source ${./nix.nu}
             '';
         plugins = [ pkgs.nushellPlugins.gstat ];
         settings = {

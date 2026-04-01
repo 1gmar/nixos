@@ -19,7 +19,7 @@
   };
 
   outputs =
-    { nixpkgs, ... }@inputs:
+    { self, nixpkgs, ... }@inputs:
     let
       colors = {
         background = "#fdf6e3";
@@ -44,6 +44,13 @@
       wallpaperPath = ./anime-sky.png;
     in
     {
+      devShells.${system}.default = nixpkgs.legacyPackages.${system}.mkShellNoCC {
+        packages = [
+          (self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package.extend {
+            git.enable = true;
+          })
+        ];
+      };
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           inherit system;
