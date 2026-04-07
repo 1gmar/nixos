@@ -27,6 +27,7 @@
     ./media-keys.nix
     ./nixvim.nix
     ./picom.nix
+    ./pointer-cursor.nix
     ./rofi.nix
     ./screen-locker.nix
     ./ssh.nix

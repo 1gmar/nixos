@@ -1,4 +1,8 @@
-{ sysConfig, userName, ... }:
+{
+  sysConfig,
+  userName,
+  ...
+}:
 {
   home = {
     username = userName;
@@ -38,6 +42,7 @@
   nixvim.enable = true;
   nushell.enable = true;
   picom.enable = true;
+  pointer-cursor.enable = true;
   polybar.enable = true;
   rofi.enable = true;
   screen-locker.enable = sysConfig.screen-locker.enable;
