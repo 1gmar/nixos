@@ -31,11 +31,35 @@ in
         "ja"
       ];
       policies = {
+        AppAutoUpdate = false;
+        AutofillAddressEnabled = false;
+        AutofillCreditCardEnabled = false;
+        BackgroundAppUpdate = false;
         DefaultDownloadDirectory = "${config.home.homeDirectory}/Downloads";
+        DisableAppUpdate = true;
         DisableFirefoxAccounts = true;
+        DisableFirefoxScreenshots = true;
+        DisableFirefoxStudies = true;
+        DisableMasterPasswordCreation = true;
         DisablePocket = true;
+        DisableProfileRefresh = true;
         DisableRemoteImprovements = true;
+        DisableSetDesktopBackground = true;
         DisableTelemetry = true;
+        DisplayBookmarksToolbar = "newtab";
+        DisplayMenuBar = "never";
+        DontCheckDefaultBrowser = true;
+        EnableTrackingProtection = {
+          BaselineExceptions = false;
+          Category = "strict";
+          ConvenienceExceptions = false;
+          Locked = true;
+          Value = true;
+        };
+        EncryptedMediaExtensions = {
+          Enabled = true;
+          Locked = true;
+        };
         ExtensionSettings = {
           "*" = {
             allowed_types = [
@@ -116,18 +140,90 @@ in
             private_browsing = true;
           };
         };
-        GenerativeAI = {
-          Enabled = false;
-          Chatbot = false;
-          LinkPreviews = false;
-          TabGroups = false;
+        FirefoxHome = {
           Locked = true;
+          Search = false;
+          SponsoredPocket = false;
+          SponsoredStories = false;
+          SponsoredTopSites = false;
+          TopSites = true;
         };
+        FirefoxSuggest = {
+          ImproveSuggest = false;
+          Locked = true;
+          SponsoredSuggestions = false;
+          WebSuggestions = true;
+        };
+        GenerativeAI = {
+          Chatbot = false;
+          Enabled = false;
+          LinkPreviews = false;
+          Locked = true;
+          TabGroups = false;
+        };
+        HardwareAcceleration = true;
+        Homepage = {
+          Locked = true;
+          StartPage = "homepage";
+          URL = "about:home";
+        };
+        HttpsOnlyMode = "enabled";
+        NewTabPage = true;
+        NoDefaultBookmarks = true;
         PasswordManagerEnabled = false;
+        Permissions = {
+          Autoplay = {
+            Default = "block-audio-video";
+            Locked = true;
+          };
+          Location = {
+            BlockNewRequests = true;
+            Locked = true;
+          };
+          Notifications = {
+            BlockNewRequests = true;
+            Locked = true;
+          };
+          VirtualReality = {
+            BlockNewRequests = true;
+            Locked = true;
+          };
+        };
         PictureInPicture = {
           Enabled = false;
           Locked = true;
         };
+        PopupBlocking = {
+          Default = true;
+          Locked = true;
+        };
+        SanitizeOnShutdown = {
+          Cache = true;
+          Cookies = false;
+          FormData = true;
+          History = false;
+          Locked = true;
+          Sessions = true;
+          SiteSettings = false;
+        };
+        SearchEngines = {
+          Default = "DuckDuckGo";
+          PreventInstalls = true;
+          Remove = [
+            "Google"
+            "Bing"
+            "Perplexity"
+          ];
+        };
+        SearchSuggestEnabled = true;
+        UserMessaging = {
+          FirefoxLabs = false;
+          Locked = true;
+          MoreFromMozilla = false;
+          SkipOnboarding = false;
+          UrlbarInterventions = false;
+        };
+        VisualSearchEnabled = false;
       };
       profiles."${config.home.username}" = {
         isDefault = true;
@@ -144,11 +240,7 @@ in
           "browser.ml.linkPreview.enabled" = false;
           "browser.ml.pageAssist.enabled" = false;
           "browser.ml.smartAssist.enabled" = false;
-          "browser.newtabpage.activity-stream.feeds.topsites" = true;
-          "browser.newtabpage.activity-stream.showSearch" = false;
-          "browser.newtabpage.activity-stream.showSponsored" = false;
-          "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-          "browser.newtabpage.activity-stream.topSitesSows" = 2;
+          "browser.newtabpage.activity-stream.topSitesRows" = 2;
           "browser.newtabpage.pinned" = [
             {
               basedomain = "twitch.tv";
@@ -202,19 +294,18 @@ in
               label = "Fagura";
               url = "https://fagura.com";
             }
+            {
+              label = "The Story Graph";
+              url = "https://app.thestorygraph.com/";
+            }
           ];
           "browser.preferences.defaultPerformanceSettings.enabled" = false;
-          "browser.search.visualSearch.featureGate" = false;
           "browser.sessionstore.restore_on_demand" = true;
           "browser.sessionstore.restore_pinned_tabs_on_demand" = true;
           "browser.sessionstore.restore_tabs_lazily" = true;
           "browser.tabs.groups.smart.enabled" = false;
-          "browser.toolbars.bookmarks.visibility" = "newtab";
           "browser.translations.automaticallyPopup" = false;
-          "browser.urlbar.placeholderName" = "DuckDuckGo";
-          "browser.urlbar.placeholderName.private" = "DuckDuckGo";
           "browser.urlbar.quicksuggest.mlEnabled" = false;
-          "browser.urlbar.suggest.searches" = true;
           "browser.warnOnQuitShortcut" = false;
           "extensions.activeThemeId" = "firefox-compact-light@mozilla.org";
           "extensions.formautofill.creditCards.enabled" = false;
@@ -225,9 +316,6 @@ in
           "middlemouse.paste" = false;
           "pdfjs.enableAltText" = false;
           "places.semanticHistory.featureGate" = false;
-          "privacy.clearOnShutdown.cookies" = false;
-          "privacy.clearOnShutdown.history" = false;
-          "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
           "privacy.resistFingerprinting" = false;
           "reader.color_scheme" = "sepia";
           "reader.content_width" = 5;
