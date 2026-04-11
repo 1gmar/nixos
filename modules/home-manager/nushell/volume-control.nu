@@ -43,8 +43,8 @@ def send-notification []: int -> nothing {
     0 => "muted"
     1..30 => "low"
     31..60 => "medium"
-    61..99 => "high"
-    100 => "overamplified"
+    61..90 => "high"
+    91..100 => "overamplified"
   }
   dunstify -a "Volume" -i $"audio-volume-($icon)-symbolic" -h $"int:value:($in)" -u "low" "blank"
 }

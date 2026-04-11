@@ -224,11 +224,11 @@
         "topiary": "topiary"
       },
       "locked": {
-        "lastModified": 1775062922,
-        "narHash": "sha256-IN2UhEth4dPvXEd8H2ifnbseth18v03dhl6bQ6qqdNA=",
+        "lastModified": 1775572492,
+        "narHash": "sha256-R9uAwruSIltRS9pNqJa0t2aniMxbA8eZcln91BaG8vE=",
         "owner": "1gmar",
         "repo": "nixvim",
-        "rev": "5a17515e25e212cee1120723ae3e86a32b48be4c",
+        "rev": "09329ab886ece7ea6ff1055e1afc076bc8ec7209",
         "type": "github"
       },
       "original": {

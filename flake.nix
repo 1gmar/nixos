@@ -44,7 +44,7 @@
       wallpaperPath = ./anime-sky.png;
     in
     {
-      devShells.${system}.default = nixpkgs.legacyPackages.${system}.mkShellNoCC {
+      devShells.${system}.desktop = nixpkgs.legacyPackages.${system}.mkShellNoCC {
         packages = [
           (self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package.extend {
             git.enable = true;
