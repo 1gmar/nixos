@@ -14,6 +14,10 @@
           settings.allowDiscards = true;
           content = {
             type = "filesystem";
+            extraArgs = [
+              "-m"
+              "0"
+            ];
             format = "ext4";
             mountpoint = "/store-jet";
             mountOptions = [

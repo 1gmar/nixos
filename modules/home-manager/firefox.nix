@@ -231,7 +231,6 @@ in
           "browser.ai.control.default" = "blocked";
           "browser.ai.control.pdfjsAltText" = "blocked";
           "browser.ai.control.translations" = "blocked";
-          "browser.bookmarks.restore_default_bookmarks" = false;
           "browser.fullscreen.autohide" = false;
           "browser.ml.chat.menu" = false;
           "browser.ml.chat.page.footerBadge" = false;
@@ -267,7 +266,7 @@ in
             }
             {
               basedomain = "evms.md";
-              label = "evms.md – prima platformă online pentru investiții directe în valori mobiliare de stat";
+              label = "eVMS";
               url = "https://evms.md/";
             }
             {
@@ -308,7 +307,6 @@ in
           "browser.urlbar.quicksuggest.mlEnabled" = false;
           "browser.warnOnQuitShortcut" = false;
           "extensions.activeThemeId" = "firefox-compact-light@mozilla.org";
-          "extensions.formautofill.creditCards.enabled" = false;
           "extensions.ml.enabled" = false;
           "gfx.x11-egl.force-enabled" = true;
           "media.ffmpeg.vaapi.enabled" = true;

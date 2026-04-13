@@ -50,6 +50,11 @@
             git.enable = true;
           })
         ];
+        shellHook = ''
+          if [[ ! -f .envrc ]]; then
+            echo "use flake .#desktop" > .envrc
+          fi
+        '';
       };
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
       nixosConfigurations = {
