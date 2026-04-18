@@ -7,9 +7,6 @@
   wallpaperPath,
   ...
 }:
-let
-  hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix { };
-in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -17,11 +14,17 @@ in
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 5;
+  boot = {
+    kernelModules = [
+      "coretemp"
+      "nct6775"
+    ];
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
     };
   };
 
@@ -65,47 +68,6 @@ in
     ];
   };
 
-  fonts = {
-    fontconfig.defaultFonts = {
-      emoji = [
-        "Noto Color Emoji"
-      ];
-      monospace = [
-        "Fira Mono"
-        "Noto Sans Mono CJK JP"
-      ];
-      sansSerif = [
-        "Fira Sans"
-        "Noto Sans CJK JP"
-      ];
-      serif = [
-        "Fira Sans"
-        "Noto Serif CJK JP"
-      ];
-    };
-    fontDir.enable = true;
-    packages = with pkgs; [
-      adwaita-fonts
-      cantarell-fonts
-      corefonts
-      dejavu_fonts
-      fira
-      hiragino-typeface
-      jetbrains-mono
-      liberation_ttf
-      material-design-icons
-      nerd-fonts.jetbrains-mono
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      noto-fonts-color-emoji
-      unifont
-      unifont_upper
-      vista-fonts
-    ];
-  };
-
-  # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -151,16 +113,6 @@ in
     ];
   };
 
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "corefonts"
-      "vista-fonts"
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
-    ];
-
   # Enable the X11 windowing system.
   services = {
     displayManager.defaultSession = "none+i3";
@@ -191,7 +143,6 @@ in
       };
       enable = true;
       exportConfiguration = true;
-      videoDrivers = [ "nvidia" ];
       windowManager.i3.enable = true;
       xkb.layout = "us";
     };
@@ -208,9 +159,9 @@ in
   # Set your time zone.
   time.timeZone = "Europe/Chisinau";
 
-  virtualisation.docker.enable = true;
-
+  docker.enable = true;
   flatpak.enable = true;
+  font-config.enable = true;
   ibus.enable = true;
   main-user = {
     enable = true;
@@ -218,9 +169,11 @@ in
     userName = "${userName}";
   };
   media-server-proxy.enable = true;
+  nvidia.enable = true;
   pairdrop.enable = true;
   screen-locker.enable = true;
   thunar.enable = true;
+  unfree-apps.enable = true;
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.11"; # Did you read the comment?
