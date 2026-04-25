@@ -24,8 +24,10 @@
       colors = {
         background = "#fdf6e3";
         backgroundHigh = "#eee8d5";
+        black = "#073642";
         blue = "#268bd2";
         cyan = "#2aa198";
+        darkBlack = "#002b36";
         foreground0 = "#839496";
         foregroundEmph = "#586e75";
         green = "#859900";
@@ -37,14 +39,14 @@
         violet = "#6c71c4";
         yellow = "#b58900";
       };
+      pkgs = import nixpkgs { inherit system; };
       shell-theme = ./modules/home-manager/nushell/solarized-light.nu;
-      sys-diff = ./modules/home-manager/nushell/system-diff.nu;
       system = "x86_64-linux";
       userName = "igmar";
       wallpaperPath = ./anime-sky.png;
     in
     {
-      devShells.${system}.desktop = nixpkgs.legacyPackages.${system}.mkShellNoCC {
+      devShells.${system}.desktop = pkgs.mkShellNoCC {
         packages = [
           (self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package.extend {
             git.enable = true;
@@ -56,7 +58,7 @@
           fi
         '';
       };
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
+      formatter.${system} = pkgs.nixfmt;
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
@@ -64,7 +66,6 @@
               colors
               inputs
               shell-theme
-              sys-diff
               system
               userName
               wallpaperPath
@@ -74,7 +75,6 @@
             inputs.disko.nixosModules.default
             ./hosts/desktop/disk-config.nix
             ./hosts/desktop/configuration.nix
-            ./hosts/desktop/home-configuration.nix
             ./modules/nixos
           ];
         };

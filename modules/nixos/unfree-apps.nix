@@ -3,7 +3,7 @@
   options.unfree-apps = {
     enable = lib.mkEnableOption "enable unfree-apps module";
     pkg-names = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
+      type = with lib.types; listOf str;
       default = [ ];
     };
   };
