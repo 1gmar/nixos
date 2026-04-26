@@ -47,13 +47,13 @@
         };
         urgency_low = {
           inherit background;
-          foreground = text;
+          foreground = primaryContent;
           frame_color = green;
           timeout = 5;
         };
         urgency_normal = {
           inherit background;
-          foreground = text;
+          foreground = primaryContent;
           frame_color = yellow;
           timeout = 5;
         };

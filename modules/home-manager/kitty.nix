@@ -64,15 +64,15 @@
             "alt+v" = "launch --location=vsplit";
           }
         ];
-      settings = {
-        active_tab_background = colors.secondaryContent;
-        active_tab_foreground = colors.background;
+      settings = with colors; {
+        active_tab_background = secondaryContent;
+        active_tab_foreground = background;
         clear_all_shortcuts = "yes";
         cursor_blink_interval = 0;
         cursor_shape = "block";
         enabled_layouts = "splits:split_axis=auto";
-        inactive_tab_background = colors.background;
-        inactive_tab_foreground = colors.text;
+        inactive_tab_background = background;
+        inactive_tab_foreground = primaryContent;
         scrollback_lines = 10000;
         tab_bar_edge = "top";
         tab_bar_style = "powerline";

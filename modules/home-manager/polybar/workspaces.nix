@@ -13,15 +13,15 @@
       "workspaces"
       "title"
     ];
-    services.polybar.settings = {
+    services.polybar.settings = with colors; {
       "module/title" = {
         type = "internal/xwindow";
         format.prefix = "│";
         label = {
           font = "5";
-          foreground = colors.foregroundEmph;
+          foreground = highlight;
           maxlen = "100";
-          text = "%{F${colors.cyan}}%class% %{F${colors.yellow}}∋%{F-} %title%";
+          text = "%{F${cyan}}%class% %{F${yellow}}∋%{F-} %title%";
         };
       };
       "module/workspaces" = {
@@ -37,21 +37,21 @@
         };
         label = {
           active = {
-            background = colors.backgroundHigh;
-            foreground = colors.blue;
+            background = backHighlight;
+            foreground = blue;
             padding = 1;
             text = "%icon%";
-            underline = colors.secondaryContent;
+            underline = secondaryContent;
           };
           occupied = {
-            inherit (colors) background;
-            foreground = colors.text;
+            inherit background;
+            foreground = primaryContent;
             padding = 1;
             text = "%icon%";
           };
           urgent = {
-            inherit (colors) background;
-            foreground = colors.red;
+            inherit background;
+            foreground = red;
             padding = 1;
             text = "%icon%";
           };

@@ -16,6 +16,21 @@
         "type": "github"
       }
     },
+    "color-themes": {
+      "locked": {
+        "lastModified": 1777226085,
+        "narHash": "sha256-OCaVQ8psJnVeZQcxBhBZvsyncBAd8vi/dYfFQYoXHv4=",
+        "owner": "1gmar",
+        "repo": "color-themes",
+        "rev": "4e102942ac910aaa7f78b02ee0b14f0f48f2f1c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "1gmar",
+        "repo": "color-themes",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1769287525,
@@ -263,6 +278,7 @@
     },
     "root": {
       "inputs": {
+        "color-themes": "color-themes",
         "disko": "disko",
         "flatpaks": "flatpaks",
         "home-manager": "home-manager",

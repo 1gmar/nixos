@@ -1,5 +1,5 @@
 {
-  colors,
+  colors-dark,
   config,
   lib,
   pkgs,
@@ -12,24 +12,24 @@
   config = lib.mkIf config.console-config.enable {
     console = {
       colors =
-        with colors;
+        with colors-dark;
         map (x: builtins.substring 1 (-1) x) [
-          darkBlack
+          backHighlight
           red
           green
           yellow
           blue
           magenta
           cyan
-          backgroundHigh
-          black
-          orange
-          foregroundEmph
-          text
-          foreground0
-          violet
-          secondaryContent
+          white
           background
+          orange
+          secondaryContent
+          brightYellow
+          primaryContent
+          violet
+          highlight
+          brightWhite
         ];
       font = "ter-u18b";
       packages = [ pkgs.terminus_font ];

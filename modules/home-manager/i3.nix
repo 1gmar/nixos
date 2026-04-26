@@ -43,33 +43,33 @@ in
           focused = {
             inherit background;
             border = blue;
-            inherit text;
+            text = primaryContent;
             indicator = green;
             childBorder = blue;
           };
           focusedInactive = {
-            background = backgroundHigh;
-            border = foreground0;
+            background = backHighlight;
+            border = brightBlue;
             text = secondaryContent;
             indicator = green;
-            childBorder = foreground0;
+            childBorder = brightBlue;
           };
           placeholder = {
-            background = backgroundHigh;
-            border = foreground0;
+            background = backHighlight;
+            border = brightBlue;
             text = secondaryContent;
             indicator = green;
-            childBorder = foreground0;
+            childBorder = brightBlue;
           };
           unfocused = {
-            background = backgroundHigh;
-            border = foreground0;
+            background = backHighlight;
+            border = brightBlue;
             text = secondaryContent;
             indicator = green;
-            childBorder = foreground0;
+            childBorder = brightBlue;
           };
           urgent = {
-            background = backgroundHigh;
+            background = backHighlight;
             border = magenta;
             text = red;
             indicator = green;

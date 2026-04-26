@@ -44,9 +44,9 @@
       };
       script = "polybar &";
       settings = {
-        "bar/i3-bar" = {
-          inherit (colors) background;
-          foreground = colors.text;
+        "bar/i3-bar" = with colors; {
+          inherit background;
+          foreground = primaryContent;
           border = {
             left.size = "0";
             right.size = "0";

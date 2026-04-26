@@ -16,29 +16,14 @@
       url = "github:1gmar/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    color-themes.url = "github:1gmar/color-themes";
   };
 
   outputs =
     { self, nixpkgs, ... }@inputs:
     let
-      colors = {
-        background = "#fdf6e3";
-        backgroundHigh = "#eee8d5";
-        black = "#073642";
-        blue = "#268bd2";
-        cyan = "#2aa198";
-        darkBlack = "#002b36";
-        foreground0 = "#839496";
-        foregroundEmph = "#586e75";
-        green = "#859900";
-        magenta = "#d33682";
-        orange = "#cb4b16";
-        red = "#dc322f";
-        secondaryContent = "#93a1a1";
-        text = "#657b83";
-        violet = "#6c71c4";
-        yellow = "#b58900";
-      };
+      colors = inputs.color-themes.themes.solarized.light;
+      colors-dark = inputs.color-themes.themes.solarized.dark;
       pkgs = import nixpkgs { inherit system; };
       shell-theme = ./modules/home-manager/nushell/solarized-light.nu;
       system = "x86_64-linux";
@@ -64,6 +49,7 @@
           specialArgs = {
             inherit
               colors
+              colors-dark
               inputs
               shell-theme
               system
