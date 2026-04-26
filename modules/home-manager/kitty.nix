@@ -47,10 +47,10 @@
             # Scrolling
             "ctrl+shift+j" = "scroll_line_down";
             "ctrl+shift+k" = "scroll_line_up";
-            "ctrl+alt+d" = "scroll_page_down";
-            "ctrl+alt+u" = "scroll_page_up";
-            "ctrl+shift+d>ctrl+shift+d" = "scroll_home";
-            "ctrl+shift+d>ctrl+shift+f" = "scroll_end";
+            "ctrl+alt+d" = "scroll_end";
+            "ctrl+alt+u" = "scroll_home";
+            "ctrl+shift+d" = "scroll_page_down";
+            "ctrl+shift+u" = "scroll_page_up";
             # Tab management
             "ctrl+shift+t" = "new_tab";
             "ctrl+tab" = "next_tab";

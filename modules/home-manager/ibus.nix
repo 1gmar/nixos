@@ -34,7 +34,7 @@
       "desktop/ibus/panel/emoji" = {
         font = "Noto Sans 16";
         hotkey = [ "<Super>period" ];
-        unicode-hotkey = [ "<Control><Shift>u" ];
+        unicode-hotkey = [ "<Super>u" ];
       };
     };
     xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
