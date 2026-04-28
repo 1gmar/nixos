@@ -22,8 +22,8 @@
   outputs =
     { self, nixpkgs, ... }@inputs:
     let
-      colors = inputs.color-themes.themes.solarized.light;
-      colors-dark = inputs.color-themes.themes.solarized.dark;
+      colors = inputs.color-themes.solarized.light;
+      colors-dark = inputs.color-themes.solarized.dark;
       pkgs = import nixpkgs { inherit system; };
       shell-theme = ./modules/home-manager/nushell/solarized-light.nu;
       system = "x86_64-linux";
