@@ -1,4 +1,5 @@
 {
+  pkgs,
   sysConfig,
   userName,
   ...
@@ -7,6 +8,13 @@
   home = {
     username = userName;
     homeDirectory = "/home/${userName}";
+    packages = with pkgs; [
+      adwaita-icon-theme
+      calibre
+      pika-backup
+      qalculate-gtk
+      telegram-desktop
+    ];
     sessionVariables = {
       EDITOR = "nvim";
       TERMINAL = "kitty";

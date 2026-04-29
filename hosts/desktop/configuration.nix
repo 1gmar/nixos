@@ -1,25 +1,9 @@
-{
-  pkgs,
-  userName,
-  ...
-}:
+{ userName, ... }:
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
-  environment = {
-    systemPackages = with pkgs; [
-      adwaita-icon-theme
-      calibre
-      cryptsetup
-      pika-backup
-      protonvpn-gui
-      qalculate-gtk
-      telegram-desktop
-    ];
-  };
 
   audio.enable = true;
   boot-config.enable = true;
