@@ -21,6 +21,7 @@
     enable = true;
     description = "Igor Marta";
     userName = "${userName}";
+    sops-pass-key = "user-igmar-password";
   };
   media-server-proxy.enable = true;
   mouse.enable = true;
@@ -29,6 +30,7 @@
   nvidia.enable = true;
   pairdrop.enable = true;
   screen-locker.enable = true;
+  sops.enable = true;
   system-diff.enable = true;
   thunar.enable = true;
   unfree-apps.enable = true;

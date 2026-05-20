@@ -24,7 +24,7 @@
           host = "github.com";
           identitiesOnly = true;
           identityFile = [
-            "~/.ssh/id_github"
+            "~/.ssh/id_ed25519_key"
           ];
         };
       };

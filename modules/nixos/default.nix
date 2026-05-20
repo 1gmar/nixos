@@ -2,6 +2,7 @@
 {
   imports = [
     ./fonts
+    ./sops
     ./system-diff
 
     ./audio.nix
