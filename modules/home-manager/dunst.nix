@@ -20,6 +20,7 @@
       settings = with colors; {
         global = {
           corner_radius = 10;
+          dmenu = "${config.home.profileDirectory}/bin/rofi -dmenu -p dunst";
           follow = "mouse";
           font = "Fira Sans 12";
           format = "<b>%s</b>\\n%b";
@@ -30,6 +31,7 @@
           horizontal_padding = 14;
           idle_threshold = "10m";
           markup = "full";
+          mouse_right_click = "context";
           notification_limit = 3;
           offset = "(5, 27)";
           origin = "top-right";
@@ -62,6 +64,10 @@
           foreground = orange;
           frame_color = red;
           timeout = 1000;
+        };
+        thunderbird = {
+          appname = "Thunderbird";
+          default_icon = "/run/current-system/sw/share/icons/Papirus/64x64/apps/thunderbird.svg";
         };
         volume = {
           appname = "Volume";
