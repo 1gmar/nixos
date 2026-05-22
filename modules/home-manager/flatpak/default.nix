@@ -7,6 +7,7 @@
 {
   imports = [
     inputs.flatpaks.homeModules.default
+    ./bottles
     ./cozy
     ./denaro
   ];
@@ -14,6 +15,7 @@
     enable = lib.mkEnableOption "enable flatpak module";
   };
   config = lib.mkIf config.flatpak.enable {
+    bottles.enable = true;
     cozy.enable = true;
     denaro.enable = true;
 
