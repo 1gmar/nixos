@@ -133,7 +133,7 @@ def get-default-dirpath [path_color: string basename_color: string]: string -> s
 }
 
 def get-dir-metadata []: nothing -> record<path: string, icon: string> {
-  match (do -i { $env.PWD | path relative-to $nu.home-path }) {
+  match (do -i { $env.PWD | path relative-to $nu.home-dir }) {
     null => {path: $env.PWD icon: (if (is-admin) { '' } else { '' })}
     '' => {path: '~' icon: (if (is-admin) { '󰣬' } else { '' })}
     $relative_pwd => {

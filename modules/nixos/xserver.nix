@@ -23,10 +23,6 @@
         displayManager.lightdm = {
           background = wallpaperPath;
           enable = true;
-          greeters.enso = {
-            blur = true;
-            enable = true;
-          };
         };
         enable = true;
         exportConfiguration = true;

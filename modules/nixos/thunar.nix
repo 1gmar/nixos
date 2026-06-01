@@ -18,7 +18,7 @@
     ];
     programs.thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         (thunar-archive-plugin.overrideAttrs {
           postInstall = ''
             cp ${pkgs.xarchiver}/libexec/thunar-archive-plugin/* $out/libexec/thunar-archive-plugin/

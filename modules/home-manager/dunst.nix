@@ -20,7 +20,7 @@
       settings = with colors; {
         global = {
           corner_radius = 10;
-          dmenu = "${config.home.profileDirectory}/bin/rofi -dmenu -p dunst";
+          dmenu = lib.mkIf config.rofi.enable "${config.home.profileDirectory}/bin/rofi -dmenu -p dunst";
           follow = "mouse";
           font = "Fira Sans 12";
           format = "<b>%s</b>\\n%b";
@@ -67,7 +67,7 @@
         };
         thunderbird = {
           appname = "Thunderbird";
-          default_icon = "/run/current-system/sw/share/icons/Papirus/64x64/apps/thunderbird.svg";
+          default_icon = "/run/current-system/sw/share/icons/Papirus/48x48/apps/thunderbird.svg";
         };
         volume = {
           appname = "Volume";

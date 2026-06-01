@@ -18,7 +18,7 @@
         "Mod4+Escape" =
           "exec ${change-input-method} ${pkgs.systemd}/bin/loginctl lock-session "
           + "&& ${pkgs.coreutils-full}/bin/sleep 3 "
-          + "&& ${pkgs.xorg.xset}/bin/xset dpms force off";
+          + "&& ${pkgs.xset}/bin/xset dpms force off";
       };
   };
 }

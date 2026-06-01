@@ -12,9 +12,10 @@
     };
     services.xserver.videoDrivers = [ "nvidia" ];
     unfree-apps.pkg-names = [
-      "nvidia-x11"
-      "nvidia-settings"
+      "nvidia-kernel-modules"
       "nvidia-persistenced"
+      "nvidia-settings"
+      "nvidia-x11"
     ];
   };
 }
