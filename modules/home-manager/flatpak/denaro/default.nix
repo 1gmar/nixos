@@ -22,7 +22,7 @@ in
         "/nix/store/:ro"
       ];
       packages = [
-        "flathub:app/${app-id}//stable"
+        "flathub:app/${app-id}//stable:4bf6d496e6e3d49d8a57a7e783e51fe8ac1b94148ff94eebda1eb7a917383422"
       ];
     };
   };

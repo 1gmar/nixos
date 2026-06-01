@@ -14,7 +14,6 @@ in
   config = lib.mkIf config.bottles.enable {
     home.file = {
       ".local/share/fonts/bottles/adwaita".source = "${pkgs.adwaita-fonts}/share/fonts";
-      ".local/share/fonts/bottles/fira".source = "${pkgs.fira}/share/fonts";
       ".local/share/fonts/bottles/noto-sans-cjk".source = "${pkgs.noto-fonts-cjk-sans}/share/fonts";
       ".var/app/${app-id}/config/fontconfig".source = ./fontconfig;
     };
@@ -23,7 +22,7 @@ in
         "/nix/store/:ro"
       ];
       packages = [
-        "flathub:app/${app-id}//stable"
+        "flathub:app/${app-id}//stable:bf6246635cdc3ef2986c7cb6a5afc13cb31e30f0784e39ca69da06563855991d"
       ];
     };
   };
