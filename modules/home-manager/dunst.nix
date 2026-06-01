@@ -10,6 +10,7 @@
     enable = lib.mkEnableOption "enable dunst module";
   };
   config = lib.mkIf config.dunst.enable {
+    home.packages = [ pkgs.papirus-icon-theme ];
     services.dunst = {
       enable = true;
       iconTheme = {
@@ -67,7 +68,7 @@
         };
         thunderbird = {
           appname = "Thunderbird";
-          default_icon = "/run/current-system/sw/share/icons/Papirus/48x48/apps/thunderbird.svg";
+          default_icon = "${config.home.profileDirectory}/share/icons/Papirus/64x64/apps/thunderbird.svg";
         };
         volume = {
           appname = "Volume";
