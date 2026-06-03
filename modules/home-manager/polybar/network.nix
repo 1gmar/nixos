@@ -5,10 +5,10 @@
   ...
 }:
 {
-  options.network = {
+  options.polybar.network = {
     enable = lib.mkEnableOption "enable polybar network module";
   };
-  config = lib.mkIf config.network.enable {
+  config = lib.mkIf config.polybar.network.enable {
     polybar.centerModules = lib.mkOrder 1050 [ "network" ];
     services.polybar.settings = {
       "module/network" = {
@@ -24,7 +24,7 @@
         interface = "enp5s0";
         interval = "0.5";
         label = {
-          connected = "%downspeed:10%󰜮%upspeed:10%󰜷";
+          connected = "%downspeed:10%%{T2}󰜮%{T-}%upspeed:10%%{T2}󰜷%{T-}";
           disconnected = {
             prefix = {
               font = "2";

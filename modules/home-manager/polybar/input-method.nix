@@ -6,10 +6,10 @@
   ...
 }:
 {
-  options.input-method = {
+  options.polybar.input-method = {
     enable = lib.mkEnableOption "enable polybar input-method module";
   };
-  config = lib.mkIf config.input-method.enable {
+  config = lib.mkIf config.polybar.input-method.enable {
     polybar.rightModules = lib.mkOrder 1070 [ "input-method" ];
     services.polybar.settings = {
       "module/input-method" = {

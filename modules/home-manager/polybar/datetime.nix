@@ -6,10 +6,10 @@
   ...
 }:
 {
-  options.datetime = {
+  options.polybar.datetime = {
     enable = lib.mkEnableOption "enable polybar datetime module";
   };
-  config = lib.mkIf config.datetime.enable {
+  config = lib.mkIf config.polybar.datetime.enable {
     polybar.rightModules = lib.mkOrder 1080 [
       "date"
       "time"

@@ -6,10 +6,10 @@
   ...
 }:
 {
-  options.sound-volume = {
+  options.polybar.sound-volume = {
     enable = lib.mkEnableOption "enable polybar sound-volume module";
   };
-  config = lib.mkIf config.sound-volume.enable {
+  config = lib.mkIf config.polybar.sound-volume.enable {
     polybar.rightModules = lib.mkOrder 1060 [ "volume" ];
     services.polybar.settings = {
       "module/volume" = {

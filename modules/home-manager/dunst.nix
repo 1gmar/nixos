@@ -32,6 +32,7 @@
           horizontal_padding = 14;
           idle_threshold = "10m";
           markup = "full";
+          min_icon_size = 64;
           mouse_right_click = "context";
           notification_limit = 3;
           offset = "(5, 27)";

@@ -6,10 +6,10 @@
   ...
 }:
 {
-  options.powermenu = {
+  options.polybar.powermenu = {
     enable = lib.mkEnableOption "enable polybar powermenu module";
   };
-  config = lib.mkIf config.powermenu.enable {
+  config = lib.mkIf config.polybar.powermenu.enable {
     polybar.rightModules = lib.mkOrder 1090 [ "powermenu" ];
     services.polybar.settings = {
       "module/powermenu" = {

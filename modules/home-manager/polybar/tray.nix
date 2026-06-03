@@ -1,9 +1,9 @@
 { config, lib, ... }:
 {
-  options.tray = {
+  options.polybar.tray = {
     enable = lib.mkEnableOption "enable polybar tray module";
   };
-  config = lib.mkIf config.tray.enable {
+  config = lib.mkIf config.polybar.tray.enable {
     polybar.rightModules = lib.mkOrder 1030 [ "tray" ];
     services.polybar.settings = {
       "module/tray" = {

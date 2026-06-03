@@ -35,6 +35,10 @@
     };
   };
   config = lib.mkIf config.polybar.enable {
+    home.packages = with pkgs; [
+      jetbrains-mono
+      material-design-icons
+    ];
     services.polybar = {
       enable = true;
       package = pkgs.polybar.override {
@@ -55,9 +59,9 @@
           font = [
             "JetBrainsMono:size=12:style=Bold;3"
             "Material Design Icons:size=18;4"
-            "Noto Sans CJK JP:size=12:style=Bold;3"
-            "JetBrainsMono Nerd Font:size=18:style=Bold;4"
             "Fira Sans:size=12:style=Bold;4"
+            "Hiragino Kaku Gothic ProN:size=14:style=W6;1"
+            "JetBrainsMono Nerd Font:size=18:style=Bold;4"
           ];
           height = "2.0%";
           line.size = "2";
@@ -80,16 +84,18 @@
         notification = false;
       }
     ];
-    cpu.enable = true;
-    datetime.enable = true;
-    gpu.enable = true;
-    input-method.enable = true;
-    memory.enable = true;
-    network.enable = true;
-    powermenu.enable = true;
-    sound-volume.enable = true;
-    tray.enable = true;
-    weather.enable = true;
-    workspaces.enable = true;
+    polybar = {
+      cpu.enable = true;
+      datetime.enable = true;
+      gpu.enable = true;
+      input-method.enable = true;
+      memory.enable = true;
+      network.enable = true;
+      powermenu.enable = true;
+      sound-volume.enable = true;
+      tray.enable = true;
+      weather.enable = true;
+      workspaces.enable = true;
+    };
   };
 }

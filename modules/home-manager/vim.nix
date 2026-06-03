@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -13,8 +13,9 @@
       enable = true;
       plugins = with pkgs.vimPlugins; [ ale ];
       settings = {
-        background = "light";
+        background = "dark";
         expandtab = true;
+        number = true;
         relativenumber = true;
         shiftwidth = 2;
       };
@@ -30,7 +31,7 @@
         vnoremap <A-j> :m '>+1<CR>gv=gv
         vnoremap <A-k> :m '<-2<CR>gv=gv
         let g:ale_fixers = {
-        \  'nix': ['alejandra'],
+        \  'nix': ['${pkgs.nixfmt}/bin/nixfmt'],
         \}
         let g:ale_fix_on_save = 1
       '';

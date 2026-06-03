@@ -5,10 +5,10 @@
   ...
 }:
 {
-  options.workspaces = {
+  options.polybar.workspaces = {
     enable = lib.mkEnableOption "enable polybar workspaces module";
   };
-  config = lib.mkIf config.workspaces.enable {
+  config = lib.mkIf config.polybar.workspaces.enable {
     polybar.leftModules = lib.mkOrder 1050 [
       "workspaces"
       "title"
@@ -18,7 +18,7 @@
         type = "internal/xwindow";
         format.prefix = "│";
         label = {
-          font = "5";
+          font = "3";
           foreground = highlight;
           maxlen = "100";
           text = "%{F${cyan}}%class% %{F${yellow}}∋%{F-} %title%";
@@ -34,6 +34,10 @@
             "3: messenger;󱋊"
             "4: terminal;󰆍"
           ];
+        };
+        format = {
+          font = 2;
+          text = "<label-state>";
         };
         label = {
           active = {

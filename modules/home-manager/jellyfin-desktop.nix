@@ -14,9 +14,11 @@
     in
     lib.mkIf config.jellyfin-desktop.enable {
       home.packages = [ pkgs.jellyfin-desktop ];
-      services.polybar.settings."module/workspaces".icon.text = lib.mkIf config.workspaces.enable [
-        "${workspace};󰼁"
-      ];
+      services.polybar.settings."module/workspaces".icon.text =
+        lib.mkIf config.polybar.workspaces.enable
+          [
+            "${workspace};󰼁"
+          ];
       xsession.windowManager.i3.config = lib.mkIf config.i3wm.enable {
         assigns.${workspace} = [ { class = "jellyfin-desktop"; } ];
         keybindings."Mod4+bracketright" = "workspace ${workspace}";

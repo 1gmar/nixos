@@ -6,10 +6,10 @@
   ...
 }:
 {
-  options.weather = {
+  options.polybar.weather = {
     enable = lib.mkEnableOption "enable polybar weather module";
   };
-  config = lib.mkIf config.weather.enable {
+  config = lib.mkIf config.polybar.weather.enable {
     polybar.rightModules = lib.mkOrder 1040 [ "weather" ];
     services.polybar.settings = {
       "module/weather" = {

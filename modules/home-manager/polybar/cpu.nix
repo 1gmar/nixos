@@ -6,10 +6,10 @@
   ...
 }:
 {
-  options.cpu = {
+  options.polybar.cpu = {
     enable = lib.mkEnableOption "enable polybar cpu module";
   };
-  config = lib.mkIf config.cpu.enable {
+  config = lib.mkIf config.polybar.cpu.enable {
     polybar.centerModules = lib.mkOrder 1040 [
       "cpu"
       "cpu-fan"
@@ -44,7 +44,7 @@
         exec =
           if config.nushell.enable then
             "${config.home.profileDirectory}/bin/nu -c "
-            + "'${pkgs.lm_sensors}/bin/sensors | find fan2 | split row -r `\\s+` | get 1'"
+            + "'${pkgs.lm_sensors}/bin/sensors | find fan3 | split row -r `\\s+` | get 1'"
           else
             "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 "
             + "| ${pkgs.gawk}/bin/awk '{print $2}'";

@@ -5,10 +5,10 @@
   ...
 }:
 {
-  options.memory = {
+  options.polybar.memory = {
     enable = lib.mkEnableOption "enable polybar memory module";
   };
-  config = lib.mkIf config.memory.enable {
+  config = lib.mkIf config.polybar.memory.enable {
     polybar.rightModules = lib.mkOrder 1050 [
       "ram"
       "disk"

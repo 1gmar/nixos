@@ -38,9 +38,7 @@ in
         dejavu_fonts
         fira
         hiragino-typeface
-        jetbrains-mono
         liberation_ttf
-        material-design-icons
         nerd-fonts.jetbrains-mono
         noto-fonts
         noto-fonts-cjk-sans
