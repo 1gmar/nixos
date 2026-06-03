@@ -106,8 +106,13 @@
       "module/gpu-memory" = {
         type = "custom/script";
         exec =
-          "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.memory "
-          + "--format=csv,noheader,nounits";
+          if config.nushell.enable then
+            "${config.home.profileDirectory}/bin/nu -c "
+            + "'/run/current-system/sw/bin/nvidia-smi --query-gpu=memory.total,memory.used "
+            + "--format=csv,noheader | split row `,` | into filesize | $in.1 / $in.0 * 100 | math round'"
+          else
+            "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.memory "
+            + "--format=csv,noheader,nounits";
         format = {
           fail = "<label-fail>";
           foreground = colors.violet;
