@@ -18,7 +18,7 @@
         type = "internal/xwindow";
         format.prefix = "│";
         label = {
-          font = "3";
+          font = 3;
           foreground = highlight;
           maxlen = "100";
           text = "%{F${cyan}}%class% %{F${yellow}}∋%{F-} %title%";

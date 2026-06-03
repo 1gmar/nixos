@@ -24,8 +24,9 @@
         exec =
           if config.nushell.enable then
             "${config.home.profileDirectory}/bin/nu -c "
-            + "'/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu,utilization.decoder,utilization.encoder "
-            + "--format=csv,noheader,nounits | split row `,` | into int | math sum'"
+            + "'/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu,utilization.encoder,utilization.decoder "
+            + "--format=csv,noheader,nounits | split row `,` | each { str trim | fill -a right -c ` ` -w 3 } "
+            + "| zip [`` `E` `D`] | each { reverse | str join } | update 0 { $in + `%` } | str join ` `'"
           else
             "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu "
             + "--format=csv,noheader,nounits";
@@ -33,7 +34,7 @@
           fail = "<label-fail>";
           foreground = colors.green;
           prefix = {
-            font = "2";
+            font = 2;
             padding.right = "5px";
             text = "󰢮";
           };
@@ -45,11 +46,11 @@
         };
         label = {
           fail = {
-            font = "2";
+            font = 2;
             foreground = colors.red;
             text = "󱄋";
           };
-          text = "%output:2%%";
+          text = "%output:15%";
         };
       };
       "module/gpu-fan" = {
@@ -73,7 +74,7 @@
         };
         label = {
           fail = {
-            font = "2";
+            font = 2;
             foreground = colors.red;
             text = "󱄋";
           };
@@ -96,7 +97,7 @@
         };
         label = {
           fail = {
-            font = "2";
+            font = 2;
             foreground = colors.red;
             text = "󱄋";
           };
@@ -117,7 +118,7 @@
           fail = "<label-fail>";
           foreground = colors.violet;
           prefix = {
-            font = "2";
+            font = 2;
             padding.right = "5px";
             text = "󰢮";
           };
@@ -129,7 +130,7 @@
         };
         label = {
           fail = {
-            font = "2";
+            font = 2;
             foreground = colors.red;
             text = "󱄋";
           };

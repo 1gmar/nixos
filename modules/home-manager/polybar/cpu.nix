@@ -35,8 +35,8 @@
           };
         };
         interval = "0.5";
-        label.text = "%percentage:2%%";
-        label.warn = "%percentage:2%%";
+        label.text = "%percentage:3%%";
+        label.warn = "%percentage:3%%";
         warn.percentage = "90";
       };
       "module/cpu-fan" = {
