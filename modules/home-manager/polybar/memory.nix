@@ -4,6 +4,9 @@
   lib,
   ...
 }:
+let
+  utils = import ./utils.nix { inherit lib; };
+in
 {
   options.polybar.memory = {
     enable = lib.mkEnableOption "enable polybar memory module";
@@ -13,59 +16,56 @@
       "ram"
       "disk"
     ];
-    services.polybar.settings = {
-      "module/disk" = {
-        type = "internal/fs";
-        format = {
-          mounted = {
-            foreground = colors.violet;
-            prefix = {
-              font = "2";
-              text = "󰋊";
-            };
-            text = "<label-mounted>";
-          };
-          warn = {
+    services.polybar.settings =
+      let
+        common = {
+          format.warn = {
             foreground = colors.red;
-            prefix = {
-              font = "2";
-              text = "󰋊";
-            };
+            prefix.font = 2;
             text = "<label-warn>";
           };
+          label.warn = "%percentage_used:2%%";
+          warn.percentage = "90";
         };
-        interval = "10";
-        label = {
-          mounted = "%percentage_used:2%%";
-          warn = "%percentage_used:2%%";
-        };
-        warn.percentage = "90";
-      };
-      "module/ram" = {
-        type = "internal/memory";
-        format = {
-          foreground = colors.violet;
-          prefix = {
-            font = "2";
-            text = "󰘚";
-          };
-          text = "<label>";
-          warn = {
-            foreground = colors.red;
-            prefix = {
-              font = "2";
-              text = "󰘚";
+        modules = [
+          {
+            name = "module/disk";
+            value = {
+              type = "internal/fs";
+              format = {
+                mounted = {
+                  foreground = colors.violet;
+                  prefix = {
+                    font = "2";
+                    text = "󰋊";
+                  };
+                  text = "<label-mounted>";
+                };
+                warn.prefix.text = "󰋊";
+              };
+              interval = "10";
+              label.mounted = "%percentage_used:2%%";
             };
-            text = "<label-warn>";
-          };
-        };
-        interval = "1";
-        label = {
-          text = "%percentage_used:2%%";
-          warn = "%percentage_used:2%%";
-        };
-        warn.percentage = "90";
-      };
-    };
+          }
+          {
+            name = "module/ram";
+            value = {
+              type = "internal/memory";
+              format = {
+                foreground = colors.violet;
+                prefix = {
+                  font = "2";
+                  text = "󰘚";
+                };
+                text = "<label>";
+                warn.prefix.text = "󰘚";
+              };
+              interval = "1";
+              label.text = "%percentage_used:2%%";
+            };
+          }
+        ];
+      in
+      utils.modulesWithSharedAttrs modules common;
   };
 }

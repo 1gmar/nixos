@@ -5,6 +5,9 @@
   pkgs,
   ...
 }:
+let
+  utils = import ./utils.nix { inherit lib; };
+in
 {
   options.polybar.cpu = {
     enable = lib.mkEnableOption "enable polybar cpu module";
@@ -15,63 +18,70 @@
       "cpu-fan"
       "cpu-temp"
     ];
-    services.polybar.settings = {
-      "module/cpu" = {
-        type = "internal/cpu";
-        format = {
-          foreground = colors.blue;
-          prefix = {
-            font = "2";
-            text = "󰍛";
+    services.polybar.settings =
+      let
+        common = {
+          type = "custom/script";
+          format = {
+            foreground = colors.blue;
+            text = "<label>";
           };
-          text = "<label>";
-          warn = {
-            foreground = colors.red;
-            prefix = {
-              font = "2";
-              text = "󰍛";
+          interval = "0.5";
+          label = "%output:4%";
+        };
+        modules = [
+          {
+            name = "module/cpu";
+            value = {
+              type = "internal/cpu";
+              format = {
+                prefix = {
+                  font = "2";
+                  text = "󰍛";
+                };
+                warn = {
+                  foreground = colors.red;
+                  prefix = {
+                    font = "2";
+                    text = "󰍛";
+                  };
+                  text = "<label-warn>";
+                };
+              };
+              label = {
+                text = "%percentage:3%%";
+                warn = "%percentage:3%%";
+              };
+              warn.percentage = "90";
             };
-            text = "<label-warn>";
-          };
-        };
-        interval = "0.5";
-        label.text = "%percentage:3%%";
-        label.warn = "%percentage:3%%";
-        warn.percentage = "90";
-      };
-      "module/cpu-fan" = {
-        type = "custom/script";
-        exec =
-          if config.nushell.enable then
-            "${config.home.profileDirectory}/bin/nu -c "
-            + "'${pkgs.lm_sensors}/bin/sensors | find fan2 | split row -r `\\s+` | get 1'"
-          else
-            "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 "
-            + "| ${pkgs.gawk}/bin/awk '{print $2}'";
-        format = {
-          foreground = colors.blue;
-          text = "<label>";
-        };
-        interval = "0.5";
-        label = "%output:4%";
-      };
-      "module/cpu-temp" = {
-        type = "custom/script";
-        exec =
-          if config.nushell.enable then
-            "${config.home.profileDirectory}/bin/nu -c "
-            + "'${pkgs.lm_sensors}/bin/sensors | find `Package id 0:` | split row -r `\\s+` "
-            + "| get 3 | str replace -a -r `(\\+|\\.\\d)` ``'"
-          else
-            "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep \"Package id 0:\" "
-            + "| ${pkgs.gawk}/bin/awk '{gsub(/(\\+|\\.[0-9])/, \"\", $4); print $4}'";
-        format = {
-          foreground = colors.blue;
-          text = "<label>";
-        };
-        interval = "0.5";
-        label = "%output:4%";
-      };
-    };
+          }
+          {
+            name = "module/cpu-fan";
+            value = {
+              exec =
+                if config.nushell.enable then
+                  "${config.home.profileDirectory}/bin/nu -c "
+                  + "'${pkgs.lm_sensors}/bin/sensors | find fan2 | split row -r `\\s+` | get 1'"
+                else
+                  "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 "
+                  + "| ${pkgs.gawk}/bin/awk '{print $2}'";
+            };
+          }
+          {
+            name = "module/cpu-temp";
+            value = {
+              exec =
+                if config.nushell.enable then
+                  "${config.home.profileDirectory}/bin/nu -c "
+                  + "'${pkgs.lm_sensors}/bin/sensors | find `Package id 0:` | split row -r `\\s+` "
+                  + "| get 3 | str replace -a -r `(\\+|\\.\\d)` ``'"
+                else
+                  "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep \"Package id 0:\" "
+                  + "| ${pkgs.gawk}/bin/awk '{gsub(/(\\+|\\.[0-9])/, \"\", $4); print $4}'";
+            };
+          }
+        ];
+      in
+      utils.modulesWithSharedAttrs modules common;
   };
 }
