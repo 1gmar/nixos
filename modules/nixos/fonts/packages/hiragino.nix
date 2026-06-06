@@ -3,14 +3,14 @@
   lib,
 }:
 pkgs.stdenvNoCC.mkDerivation {
-  pname = "hiragino-fonts";
+  pname = "hiragino-kaku-gothic-pro";
   version = "1.0";
   src = ./.;
 
   installPhase = ''
-    mkdir -p $out/share/fonts/truetype/
+    mkdir -p $out/share/fonts/opentype/
     if [ -d "$src/fonts/hiragino" ]; then
-      cp -r $src/fonts/hiragino/*.otf $out/share/fonts/truetype/
+      cp -r $src/fonts/hiragino/*.otf $out/share/fonts/opentype/
     else
       echo "No fonts found in $src/fonts/hiragino"
       exit 0

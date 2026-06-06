@@ -5,7 +5,8 @@
   ...
 }:
 let
-  hiragino-typeface = pkgs.callPackage ./packages/hiragino.nix { };
+  hiragino-kaku-gothic-pro = pkgs.callPackage ./packages/hiragino.nix { };
+  noto-sans-jp = pkgs.callPackage ./packages/noto-sans-jp.nix { };
 in
 {
   options.font-config = {
@@ -23,6 +24,7 @@ in
         ];
         sansSerif = [
           "Fira Sans"
+          "Noto Sans JP"
           "Noto Sans CJK JP"
         ];
         serif = [
@@ -32,20 +34,15 @@ in
       };
       fontDir.enable = true;
       packages = with pkgs; [
-        adwaita-fonts
-        cantarell-fonts
         corefonts
-        dejavu_fonts
         fira
-        hiragino-typeface
-        liberation_ttf
+        hiragino-kaku-gothic-pro
         nerd-fonts.jetbrains-mono
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-color-emoji
-        unifont
-        unifont_upper
+        noto-sans-jp
         vista-fonts
       ];
     };
