@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -12,11 +11,7 @@ in
     enable = lib.mkEnableOption "enable bottles module";
   };
   config = lib.mkIf config.bottles.enable {
-    home.file = {
-      ".local/share/fonts/bottles/adwaita".source = "${pkgs.adwaita-fonts}/share/fonts";
-      ".local/share/fonts/bottles/noto-sans-cjk".source = "${pkgs.noto-fonts-cjk-sans}/share/fonts";
-      ".var/app/${app-id}/config/fontconfig".source = ./fontconfig;
-    };
+    home.file.".var/app/${app-id}/config/fontconfig/fonts.conf".source = ./fonts.conf;
     services.flatpak = {
       overrides.${app-id}.Context.filesystems = [
         "/nix/store/:ro"

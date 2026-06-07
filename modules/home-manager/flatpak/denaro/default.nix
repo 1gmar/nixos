@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -13,9 +12,8 @@ in
   };
   config = lib.mkIf config.denaro.enable {
     home.file = {
-      ".local/share/fonts/denaro/inter".source = ./fonts;
-      ".local/share/fonts/denaro/noto-sans-cjk".source = "${pkgs.noto-fonts-cjk-sans}/share/fonts";
-      ".var/app/${app-id}/config/fontconfig".source = ./fontconfig;
+      ".local/share/fonts/denaro".source = ./fonts;
+      ".var/app/${app-id}/config/fontconfig/fonts.conf".source = ./fonts.conf;
     };
     services.flatpak = {
       overrides.${app-id}.Context.filesystems = [

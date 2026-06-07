@@ -34,6 +34,7 @@ in
       };
       fontDir.enable = true;
       packages = with pkgs; [
+        adwaita-fonts
         corefonts
         fira
         hiragino-kaku-gothic-pro
