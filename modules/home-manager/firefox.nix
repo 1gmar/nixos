@@ -6,13 +6,16 @@ let
   feedbro = "{a9c2ad37-e940-4892-8dce-cd73c6cbbc0c}";
   franker-facez = "frankerfacez@frankerfacez.com";
   keepassxc = "keepassxc-browser@keepassxc.org";
+  kuraji = "colechiodo@gmail.com";
   proton-vpn = "vpn@proton.ch";
   return-youtube-dislike = "{762f9885-5a13-4abd-9c77-433dcd38b8fd}";
   rikaichamp = "{59812185-ea92-4cca-8ab7-cfcacee81281}";
+  spotify-light = "spotify-light-mode@joaco.io";
   stylus = "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}";
   ublock = "uBlock0@raymondhill.net";
   unhook = "myallychou@gmail.com";
   vimium = "{d7742d87-e61d-4b78-b8a1-b469842139fa}";
+  violent-monkey = "{aecec67f-0d10-4fa7-b7c7-609a2db280cf}";
 in
 {
   options.firefox = {
@@ -102,6 +105,10 @@ in
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/${keepassxc}/latest.xpi";
             private_browsing = true;
           };
+          ${kuraji} = {
+            installation_mode = "normal_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${kuraji}/latest.xpi";
+          };
           ${proton-vpn} = {
             default_area = "navbar";
             installation_mode = "force_installed";
@@ -118,6 +125,10 @@ in
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/${rikaichamp}/latest.xpi";
             private_browsing = true;
+          };
+          ${spotify-light} = {
+            installation_mode = "normal_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${spotify-light}/latest.xpi";
           };
           ${stylus} = {
             installation_mode = "normal_installed";
@@ -139,6 +150,10 @@ in
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/${vimium}/latest.xpi";
             private_browsing = true;
+          };
+          ${violent-monkey} = {
+            installation_mode = "normal_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${violent-monkey}/latest.xpi";
           };
         };
         FirefoxHome = {
