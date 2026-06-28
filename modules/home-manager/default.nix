@@ -3,7 +3,6 @@
   imports = [
     ./fastfetch
     ./flatpak
-    ./kodi
     ./nushell
     ./polybar
 
@@ -24,6 +23,7 @@
     ./jellyfin-desktop.nix
     ./keepassxc.nix
     ./kitty.nix
+    ./kodi.nix
     ./media-keys.nix
     ./nixvim.nix
     ./picom.nix

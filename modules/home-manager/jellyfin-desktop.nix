@@ -13,6 +13,12 @@
       workspace = "5: jellyfin";
     in
     lib.mkIf config.jellyfin-desktop.enable {
+      assertions = [
+        {
+          assertion = !config.kodi.enable;
+          description = "Can't enable jellyfin-desktop since Kodi is already enabled.";
+        }
+      ];
       home.packages = [ pkgs.jellyfin-desktop ];
       services.polybar.settings."module/workspaces".icon.text =
         lib.mkIf config.polybar.workspaces.enable

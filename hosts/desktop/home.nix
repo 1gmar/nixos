@@ -59,4 +59,5 @@
   translate-selected.enable = true;
   vim.enable = true;
   wthrr.enable = true;
+  xdg.enable = true;
 }

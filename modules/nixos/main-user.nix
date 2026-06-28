@@ -8,12 +8,10 @@ in
     enable = lib.mkEnableOption "enable main user module";
     userName = lib.mkOption {
       type = passwdEntry str;
-      default = "mainuser";
       description = "username";
     };
     description = lib.mkOption {
       type = passwdEntry str;
-      default = "mainuser";
       description = "user description";
     };
     sshPubKeys = lib.mkOption {

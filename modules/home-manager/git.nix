@@ -37,6 +37,13 @@
           };
         };
       };
+      ssh.settings."Git" = {
+        host = "github.com";
+        identitiesOnly = true;
+        identityFile = [
+          "~/.ssh/id_github"
+        ];
+      };
     };
   };
 }
