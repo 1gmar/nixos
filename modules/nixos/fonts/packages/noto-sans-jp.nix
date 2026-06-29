@@ -1,21 +1,14 @@
 {
-  pkgs,
+  installFonts,
   lib,
+  stdenvNoCC,
 }:
-pkgs.stdenvNoCC.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "noto-sans-jp";
   version = "1.0";
-  src = ./.;
+  src = ./fonts/notosansjp;
 
-  installPhase = ''
-    mkdir -p $out/share/fonts/truetype/
-    if [ -d "$src/fonts/notosansjp" ]; then
-      cp -r $src/fonts/notosansjp/*.ttf $out/share/fonts/truetype/
-    else
-      echo "No fonts found in $src/fonts/notosansjp"
-      exit 0
-    fi
-  '';
+  nativeBuildInputs = [ installFonts ];
 
   meta = with lib; {
     description = "Noto Sans Japanese";

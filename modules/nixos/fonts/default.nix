@@ -5,7 +5,6 @@
   ...
 }:
 let
-  hiragino-kaku-gothic-pro = pkgs.callPackage ./packages/hiragino.nix { };
   noto-sans-jp = pkgs.callPackage ./packages/noto-sans-jp.nix { };
 in
 {
@@ -37,7 +36,6 @@ in
         adwaita-fonts
         corefonts
         fira
-        hiragino-kaku-gothic-pro
         nerd-fonts.jetbrains-mono
         noto-fonts
         noto-fonts-cjk-sans
