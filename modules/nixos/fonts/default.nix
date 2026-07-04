@@ -5,7 +5,11 @@
   ...
 }:
 let
-  noto-sans-jp = pkgs.callPackage ./packages/noto-sans-jp.nix { };
+  line-seed-jp = pkgs.callPackage ./packages/install-font.nix { } {
+    pname = "line-seed-jp";
+    src = ./packages/fonts/line_seed_jp.tar.gz;
+    version = "20241105";
+  };
 in
 {
   options.font-config = {
@@ -23,7 +27,6 @@ in
         ];
         sansSerif = [
           "Fira Sans"
-          "Noto Sans JP"
           "Noto Sans CJK JP"
         ];
         serif = [
@@ -41,7 +44,7 @@ in
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-color-emoji
-        noto-sans-jp
+        line-seed-jp
         vista-fonts
       ];
     };

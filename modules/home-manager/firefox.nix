@@ -324,6 +324,7 @@ in
           "browser.warnOnQuitShortcut" = false;
           "extensions.activeThemeId" = "firefox-compact-light@mozilla.org";
           "extensions.ml.enabled" = false;
+          "font.default.x-western" = "sans-serif";
           "gfx.x11-egl.force-enabled" = true;
           "media.ffmpeg.vaapi.enabled" = true;
           "media.hardware-video-decoding.force-enabled" = true;
