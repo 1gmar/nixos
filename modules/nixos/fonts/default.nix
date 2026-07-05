@@ -5,15 +5,16 @@
   ...
 }:
 let
-  line-seed-jp = pkgs.callPackage ./packages/install-font.nix { } {
-    pname = "line-seed-jp";
-    src = ./packages/fonts/line_seed_jp.tar.gz;
-    version = "20241105";
+  installFont = pkgs.callPackage ./packages/install-font.nix { };
+  free-japanese-fonts = installFont {
+    pname = "free-japanese-fonts";
+    src = ./packages/fonts/free-japanese-fonts.tar.gz;
   };
 in
 {
   options.font-config = {
     enable = lib.mkEnableOption "enable fonts module";
+    extra-jp-fonts = lib.mkEnableOption "install extra Japanese fonts";
   };
   config = lib.mkIf config.font-config.enable {
     fonts = {
@@ -35,22 +36,47 @@ in
         ];
       };
       fontDir.enable = true;
-      packages = with pkgs; [
-        adwaita-fonts
-        corefonts
-        fira
-        nerd-fonts.jetbrains-mono
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-cjk-serif
-        noto-fonts-color-emoji
-        line-seed-jp
-        vista-fonts
-      ];
+      packages =
+        with pkgs;
+        (
+          [
+            adwaita-fonts
+            corefonts
+            fira
+            nerd-fonts.jetbrains-mono
+            noto-fonts
+            noto-fonts-cjk-sans
+            noto-fonts-cjk-serif
+            noto-fonts-color-emoji
+            vista-fonts
+          ]
+          ++ (
+            if config.font-config.extra-jp-fonts then
+              [
+                free-japanese-fonts
+                kochi-substitute
+                ipaexfont
+                jigmo
+                ricty
+                takao
+                (zpix-pixel-font.overrideAttrs {
+                  installPhase = ''
+                    runHook preInstall
+                    install -Dm444 ''${srcs[1]} $out/share/fonts/truetype/zpix.ttf
+                    runHook postInstall
+                  '';
+                })
+              ]
+            else
+              [ ]
+          )
+        );
     };
     unfree-apps.pkg-names = [
       "corefonts"
+      "ricty"
       "vista-fonts"
+      "zpix-pixel-font"
     ];
   };
 }

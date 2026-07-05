@@ -10,7 +10,10 @@
   console-config.enable = true;
   docker.enable = true;
   flatpak.enable = true;
-  font-config.enable = true;
+  font-config = {
+    enable = true;
+    extra-jp-fonts = true;
+  };
   home-manager-config = {
     enable = true;
     home-file = ./home.nix;
