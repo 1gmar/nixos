@@ -1,5 +1,4 @@
 {
-  gnutar,
   installFonts,
   stdenvNoCC,
 }:
@@ -14,13 +13,8 @@ stdenvNoCC.mkDerivation {
   inherit src;
 
   nativeBuildInputs = [
-    gnutar
     installFonts
   ];
 
-  unpackPhase = ''
-    runHook preUnpack
-    tar -xvzf $src
-    runHook postUnpack
-  '';
+  sourceRoot = ".";
 }
