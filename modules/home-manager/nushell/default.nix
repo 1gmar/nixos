@@ -1,4 +1,5 @@
 {
+  colors,
   config,
   lib,
   pkgs,
@@ -34,8 +35,10 @@
             ''
               use ${./nix.nu} *
               use ${./prompt.nu}
-              use ${./solarized-light.nu}
               source ${./keybindings.nu}
+              use ${./solarized-light.nu} color-config
+              $env.config.color_config = color-config ${lib.hm.nushell.toNushell { } colors}
+              hide color-config
             '';
         plugins = [ pkgs.nushellPlugins.gstat ];
         settings = {

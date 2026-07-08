@@ -1,23 +1,18 @@
-def color-config [] {
-  let background = '#fdf6e3'
-  let backgroundHigh = '#eee8d5'
-  let blue = '#268bd2'
-  let cyan = '#2aa198'
-  let green = '#859900'
-  let magenta = '#d33682'
-  let orange = '#cb4b16'
-  let red = '#dc322f'
-  let violet = '#6c71c4'
-  let yellow = '#b58900'
-  let text = '#657b83'
-  let textEmph = '#586e75'
-  let black = '#002b36'
-  let base = '#839496'
+export def color-config [colors: record] {
+  let background = $colors.background;
+  let blue = $colors.blue;
+  let cyan = $colors.cyan;
+  let green = $colors.green;
+  let red = $colors.red;
+  let violet = $colors.violet;
+  let yellow = $colors.yellow;
+  let highlight = $colors.highlight;
+  let black = $colors.brightBlack;
 
   return {
     binary: $violet
     block: $blue
-    cell-path: $textEmph
+    cell-path: $highlight
     closure: $cyan
     custom: $black
     duration: $yellow
@@ -53,7 +48,7 @@ def color-config [] {
 
     filesize: {|e|
       if $e == 0b {
-        $textEmph
+        $highlight
       } else if $e < 1mb {
         $cyan
       } else { {fg: $blue} }
@@ -73,7 +68,7 @@ def color-config [] {
     shape_filepath: $cyan
     shape_flag: {fg: $blue attr: b}
     shape_float: {fg: $red attr: b}
-    shape_garbage: {fg: $background bg: $magenta attr: b}
+    shape_garbage: {fg: $background bg: $colors.magenta attr: b}
     shape_glob_interpolation: {fg: $cyan attr: b}
     shape_globpattern: {fg: $cyan attr: b}
     shape_int: {fg: $violet attr: b}
@@ -98,20 +93,16 @@ def color-config [] {
     shape_vardecl: {fg: $blue attr: u}
     shape_variable: $violet
 
-    foreground: $textEmph
+    foreground: $colors.primaryContent
     background: $background
-    cursor: $textEmph
+    cursor: $highlight
 
     empty: $blue
     header: {fg: $green attr: b}
-    hints: $base
+    hints: $colors.brightBlue
     leading_trailing_space_bg: {attr: n}
     row_index: {fg: $green attr: b}
-    search_result: {fg: $red bg: $backgroundHigh attr: bu}
-    separator: $textEmph
+    search_result: {fg: $red bg: $colors.backHighlight attr: bu}
+    separator: $highlight
   }
-}
-
-export-env {
-  $env.config.color_config = (color-config)
 }
