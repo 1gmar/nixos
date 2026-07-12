@@ -4,11 +4,7 @@
     enable = lib.mkEnableOption "enable picom module";
   };
   config = lib.mkIf config.picom.enable {
-    services.picom = {
-      backend = "glx";
-      enable = true;
-      extraArgs = [ "--xrender-sync-fence" ];
-      vSync = true;
-    };
+    services.picom.enable = true;
+    xdg.configFile."picom/picom.conf".source = ./picom.conf;
   };
 }
