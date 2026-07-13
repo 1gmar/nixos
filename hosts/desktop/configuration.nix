@@ -32,6 +32,7 @@
   nix-config.enable = true;
   nvidia.enable = true;
   pairdrop.enable = true;
+  programs.ssh.startAgent = true;
   screen-locker.enable = true;
   sops.enable = true;
   system-diff.enable = true;

@@ -23,9 +23,15 @@
         PasswordGenerator.SpecialChars = true;
 
         Security = {
-          ClearClipboard = false;
+          ClearClipboard = true;
           ClearClipboardTimeout = 60;
-          LockDatabaseIdle = false;
+          LockDatabaseIdle = true;
+          LockDatabaseIdleSeconds = 1800;
+        };
+
+        SSHAgent = {
+          Enabled = true;
+          UseOpenSSH = true;
         };
       };
     };

@@ -54,7 +54,7 @@
   polybar.enable = true;
   rofi.enable = true;
   screen-locker.enable = sysConfig.screen-locker.enable;
-  ssh.enable = true;
+  ssh.enable = false;
   thunderbird.enable = true;
   translate-selected.enable = true;
   vim.enable = true;
