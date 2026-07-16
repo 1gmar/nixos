@@ -36,11 +36,23 @@
     in
     {
       devShells.${system}.desktop = pkgs.mkShellNoCC {
-        packages = [
-          (self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package.extend {
-            git.enable = true;
-          })
-        ];
+        packages =
+          let
+            dvim =
+              self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package-dvim.extend
+                {
+                  git.enable = true;
+                };
+          in
+          [
+            (self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package.extend {
+              git.enable = true;
+            })
+            (pkgs.runCommandLocal "dvim" { } ''
+              mkdir -p $out/bin
+              ln -s ${dvim}/bin/nvim $out/bin/dvim
+            '')
+          ];
         shellHook = ''
           if [[ ! -f .envrc ]]; then
             echo "use flake .#desktop" > .envrc

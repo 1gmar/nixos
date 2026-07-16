@@ -57,7 +57,7 @@
   ssh.enable = false;
   thunderbird.enable = true;
   translate-selected.enable = true;
-  vim.enable = true;
+  vim.enable = false;
   wthrr.enable = true;
   xdg.enable = true;
 }

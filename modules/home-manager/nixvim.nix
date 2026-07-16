@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   system,
   ...
 }:
@@ -23,6 +24,10 @@ let
       plugins.treesitter.grammarPackages = config.nixvim.treesitterGrammars;
     }
   );
+  dark-version = myPackage.extend {
+    opts.background = "dark";
+    plugins.lualine.settings.options.theme = "solarized_dark";
+  };
 in
 {
   options.nixvim = with lib.types; {
@@ -35,12 +40,22 @@ in
       type = package;
       default = myPackage;
     };
+    package-dvim = lib.mkOption {
+      type = package;
+      default = dark-version;
+    };
     treesitterGrammars = lib.mkOption {
       type = listOf package;
       default = [ ];
     };
   };
   config = lib.mkIf config.nixvim.enable {
-    home.packages = [ config.nixvim.package ];
+    home.packages = [
+      config.nixvim.package
+      (pkgs.runCommandLocal "dvim" { } ''
+        mkdir -p $out/bin
+        ln -s ${config.nixvim.package-dvim}/bin/nvim $out/bin/dvim
+      '')
+    ];
   };
 }
