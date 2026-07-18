@@ -28,6 +28,12 @@
     let
       colors = inputs.color-themes.solarized.light;
       colors-dark = inputs.color-themes.solarized.dark;
+      ln-tty-vim =
+        pkg:
+        pkgs.runCommandLocal "tty-vim" { } ''
+          mkdir -p $out/bin
+          ln -s ${pkg}/bin/nvim $out/bin/tvim
+        '';
       pkgs = import nixpkgs { inherit system; };
       shell-theme = ./modules/home-manager/nushell/solarized-light.nu;
       system = "x86_64-linux";
@@ -38,8 +44,8 @@
       devShells.${system}.desktop = pkgs.mkShellNoCC {
         packages =
           let
-            dvim =
-              self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package-dvim.extend
+            tvim =
+              self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package-tvim.extend
                 {
                   git.enable = true;
                 };
@@ -48,10 +54,7 @@
             (self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package.extend {
               git.enable = true;
             })
-            (pkgs.runCommandLocal "dvim" { } ''
-              mkdir -p $out/bin
-              ln -s ${dvim}/bin/nvim $out/bin/dvim
-            '')
+            (ln-tty-vim tvim)
           ];
         shellHook = ''
           if [[ ! -f .envrc ]]; then
@@ -67,6 +70,7 @@
               colors
               colors-dark
               inputs
+              ln-tty-vim
               shell-theme
               system
               userName

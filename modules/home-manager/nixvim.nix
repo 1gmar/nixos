@@ -2,32 +2,28 @@
   config,
   inputs,
   lib,
-  pkgs,
+  ln-tty-vim,
   system,
   ...
 }:
 let
-  myPackage = inputs.nixvim-1gmar.packages.${system}.default.extend (
-    lib.recursiveUpdate config.nixvim.extensions {
-      lsp.servers.nixd.config.settings.nixd =
-        let
-          nixosOptions = "${thisFlake}.nixosConfigurations.desktop.options";
-          thisFlake = "(builtins.getFlake \"${config.home.homeDirectory}/nixos\")";
-        in
-        {
-          nixpkgs.expr = "import ${thisFlake}.inputs.nixpkgs { }";
-          options = {
-            home-manager.expr = "${nixosOptions}.home-manager.users.type.getSubOptions []";
-            nixos.expr = "${nixosOptions}";
-          };
+  extension = lib.recursiveUpdate config.nixvim.extensions {
+    lsp.servers.nixd.config.settings.nixd =
+      let
+        nixosOptions = "${thisFlake}.nixosConfigurations.desktop.options";
+        thisFlake = "(builtins.getFlake \"${config.home.homeDirectory}/nixos\")";
+      in
+      {
+        nixpkgs.expr = "import ${thisFlake}.inputs.nixpkgs { }";
+        options = {
+          home-manager.expr = "${nixosOptions}.home-manager.users.type.getSubOptions []";
+          nixos.expr = "${nixosOptions}";
         };
-      plugins.treesitter.grammarPackages = config.nixvim.treesitterGrammars;
-    }
-  );
-  dark-version = myPackage.extend {
-    opts.background = "dark";
-    plugins.lualine.settings.options.theme = "solarized_dark";
+      };
+    plugins.treesitter.grammarPackages = config.nixvim.treesitterGrammars;
   };
+  nvim = inputs.nixvim-1gmar.packages.${system}.default.extend extension;
+  tty-vim = inputs.nixvim-1gmar.packages.${system}.tty-vim.extend extension;
 in
 {
   options.nixvim = with lib.types; {
@@ -38,11 +34,11 @@ in
     };
     package = lib.mkOption {
       type = package;
-      default = myPackage;
+      default = nvim;
     };
-    package-dvim = lib.mkOption {
+    package-tvim = lib.mkOption {
       type = package;
-      default = dark-version;
+      default = tty-vim;
     };
     treesitterGrammars = lib.mkOption {
       type = listOf package;
@@ -52,10 +48,7 @@ in
   config = lib.mkIf config.nixvim.enable {
     home.packages = [
       config.nixvim.package
-      (pkgs.runCommandLocal "dvim" { } ''
-        mkdir -p $out/bin
-        ln -s ${config.nixvim.package-dvim}/bin/nvim $out/bin/dvim
-      '')
+      (ln-tty-vim config.nixvim.package-tvim)
     ];
   };
 }
