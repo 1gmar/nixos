@@ -2,7 +2,6 @@
   colors,
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -10,7 +9,7 @@ let
   foldMapDict =
     acc: x:
     let
-      s = builtins.toString x;
+      s = toString x;
     in
     lib.mergeAttrs acc {
       "${mod}+${s}" = "workspace number ${s}";
@@ -139,11 +138,6 @@ in
         };
         modifier = mod;
         startup = [
-          {
-            always = false;
-            command = "${pkgs.telegram-desktop}/bin/Telegram";
-            notification = false;
-          }
           {
             always = false;
             command = "${config.home.profileDirectory}/bin/i3-msg 'workspace ${workspace.browser}'";

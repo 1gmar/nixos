@@ -8,6 +8,10 @@
 {
   options.console-config = {
     enable = lib.mkEnableOption "enable console configuration";
+    font = lib.mkOption {
+      type = with lib.types; nullOr (either str path);
+    };
+    use-xkb-config = lib.mkEnableOption "use xkb configuration";
   };
   config = lib.mkIf config.console-config.enable {
     console = {
@@ -31,9 +35,10 @@
           highlight
           brightWhite
         ];
-      font = "ter-u18b";
+      font = config.console-config.font;
       packages = [ pkgs.terminus_font ];
-      keyMap = "us";
+      keyMap = lib.mkIf (!config.console-config.use-xkb-config) "us";
+      useXkbConfig = config.console-config.use-xkb-config;
     };
   };
 }

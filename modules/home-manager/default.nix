@@ -31,6 +31,7 @@
     ./rofi.nix
     ./screen-locker.nix
     ./ssh.nix
+    ./telegram.nix
     ./thunderbird.nix
     ./translate-selected.nix
     ./vim.nix

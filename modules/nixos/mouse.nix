@@ -1,9 +1,9 @@
 { config, lib, ... }:
 {
-  options.mouse = {
+  options.mouse-config = {
     enable = lib.mkEnableOption "enable mouse customisations";
   };
-  config = lib.mkIf config.mouse.enable {
+  config = lib.mkIf config.mouse-config.enable {
     services.libinput.mouse = {
       accelProfile = "flat";
       naturalScrolling = true;

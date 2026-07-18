@@ -1,12 +1,17 @@
 {
   config,
   lib,
+  pkgs,
   wallpaperPath,
   ...
 }:
 {
   options.xserver = {
     enable = lib.mkEnableOption "enable xserver module";
+    xkb-options = lib.mkOption {
+      type = lib.types.commas;
+      default = "";
+    };
   };
   config = lib.mkIf config.xserver.enable {
     services = {
@@ -25,9 +30,13 @@
           enable = true;
         };
         enable = true;
+        excludePackages = [ pkgs.xterm ];
         exportConfiguration = true;
         windowManager.i3.enable = true;
-        xkb.layout = "us";
+        xkb = {
+          layout = "us";
+          options = config.xserver.xkb-options;
+        };
       };
     };
   };

@@ -11,6 +11,9 @@ in
 {
   options.polybar.cpu = {
     enable = lib.mkEnableOption "enable polybar cpu module";
+    fan-cmd = lib.mkOption {
+      type = lib.types.str;
+    };
   };
   config = lib.mkIf config.polybar.cpu.enable {
     polybar.centerModules = lib.mkOrder 1040 [
@@ -49,36 +52,26 @@ in
                 };
               };
               label = {
-                text = "%percentage:3%%";
-                warn = "%percentage:3%%";
+                text = "%percentage:2%%";
+                warn = "%percentage:2%%";
               };
               warn.percentage = "90";
             };
           }
           {
             name = "module/cpu-fan";
-            value = {
-              exec =
-                if config.nushell.enable then
-                  "${config.home.profileDirectory}/bin/nu -c "
-                  + "'${pkgs.lm_sensors}/bin/sensors | find fan2 | split row -r `\\s+` | get 1'"
-                else
-                  "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 "
-                  + "| ${pkgs.gawk}/bin/awk '{print $2}'";
-            };
+            value.exec = config.polybar.cpu.fan-cmd;
           }
           {
             name = "module/cpu-temp";
-            value = {
-              exec =
-                if config.nushell.enable then
-                  "${config.home.profileDirectory}/bin/nu -c "
-                  + "'${pkgs.lm_sensors}/bin/sensors | find `Package id 0:` | split row -r `\\s+` "
-                  + "| get 3 | str replace -a -r `(\\+|\\.\\d)` ``'"
-                else
-                  "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep \"Package id 0:\" "
-                  + "| ${pkgs.gawk}/bin/awk '{gsub(/(\\+|\\.[0-9])/, \"\", $4); print $4}'";
-            };
+            value.exec =
+              if config.nushell.enable then
+                "${config.home.profileDirectory}/bin/nu -c "
+                + "'${pkgs.lm_sensors}/bin/sensors | find `Package id 0:` | split row -r `\\s+` "
+                + "| get 3 | str replace -a -r `(\\+|\\.\\d)` ``'"
+              else
+                "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep \"Package id 0:\" "
+                + "| ${pkgs.gawk}/bin/awk '{gsub(/(\\+|\\.[0-9])/, \"\", $4); print $4}'";
           }
         ];
       in

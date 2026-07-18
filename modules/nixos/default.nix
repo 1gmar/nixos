@@ -7,6 +7,7 @@
 
     ./audio.nix
     ./boot.nix
+    ./clight.nix
     ./console.nix
     ./docker.nix
     ./flatpak.nix
@@ -21,7 +22,9 @@
     ./nvidia.nix
     ./pairdrop.nix
     ./screen-locker.nix
+    ./screen-scaling.nix
     ./thunar.nix
+    ./touchpad.nix
     ./unfree-apps.nix
     ./xserver.nix
   ];

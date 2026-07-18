@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  sysConfig,
+  ...
+}:
 let
   activity-watch = "{ef87d84c-2127-493f-b952-5b4e744245bc}";
   better-ttv = "firefox@betterttv.net";
@@ -22,7 +27,7 @@ in
     enable = lib.mkEnableOption "enable firefox module";
   };
   config = lib.mkIf config.firefox.enable {
-    home.sessionVariables = {
+    home.sessionVariables = lib.mkIf sysConfig.nvidia.enable {
       LIBVA_DRIVER_NAME = "nvidia";
       MOZ_DISABLE_RDD_SANDBOX = "1";
       NVD_BACKEND = "direct";
@@ -328,6 +333,9 @@ in
           "gfx.x11-egl.force-enabled" = true;
           "media.ffmpeg.vaapi.enabled" = true;
           "media.hardware-video-decoding.force-enabled" = true;
+          "media.peerconnection.ice.default_address_only" = true;
+          "media.peerconnection.ice.obfuscate_host_addresses" = true;
+          "media.peerconnection.ice.proxy_only_if_behind_proxy" = true;
           "middlemouse.paste" = false;
           "pdfjs.enableAltText" = false;
           "places.semanticHistory.featureGate" = false;

@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, lib, ... }:
 {
   options = {
     gammastep.enable = lib.mkEnableOption "enable gammastep module";

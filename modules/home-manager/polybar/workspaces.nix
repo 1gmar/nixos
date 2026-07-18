@@ -7,6 +7,10 @@
 {
   options.polybar.workspaces = {
     enable = lib.mkEnableOption "enable polybar workspaces module";
+    title-maxlen = lib.mkOption {
+      type = lib.types.int;
+      default = 100;
+    };
   };
   config = lib.mkIf config.polybar.workspaces.enable {
     polybar.leftModules = lib.mkOrder 1050 [
@@ -20,8 +24,8 @@
         label = {
           font = 3;
           foreground = highlight;
-          maxlen = "100";
-          text = "%{F${cyan}}%class% %{F${yellow}}∋%{F-} %title%";
+          maxlen = config.polybar.workspaces.title-maxlen;
+          text = "%title%";
         };
       };
       "module/workspaces" = {

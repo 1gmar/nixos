@@ -2,8 +2,12 @@
   config,
   lib,
   pkgs,
+  sysConfig,
   ...
 }:
+let
+  sysCfg = sysConfig.screen-scaling;
+in
 {
   options.rofi = {
     enable = lib.mkEnableOption "enable rofi module";
@@ -11,6 +15,7 @@
   config = lib.mkIf config.rofi.enable {
     programs.rofi = {
       enable = true;
+      extraConfig.dpi = lib.mkIf sysCfg.enable sysCfg.dpi;
       font = "Fira Sans 14";
       modes = [
         "calc"

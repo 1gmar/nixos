@@ -39,32 +39,32 @@
       system = "x86_64-linux";
       userName = "igmar";
       wallpaperPath = ./anime-sky.png;
-    in
-    {
-      devShells.${system}.desktop = pkgs.mkShellNoCC {
-        packages =
-          let
-            tvim =
-              self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package-tvim.extend
-                {
-                  git.enable = true;
-                };
-          in
-          [
-            (self.nixosConfigurations.desktop.config.home-manager.users.${userName}.nixvim.package.extend {
-              git.enable = true;
-            })
-            (ln-tty-vim tvim)
-          ];
-        shellHook = ''
-          if [[ ! -f .envrc ]]; then
-            echo "use flake .#desktop" > .envrc
-          fi
-        '';
-      };
-      formatter.${system} = pkgs.nixfmt;
-      nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
+      mkShellFor =
+        host:
+        pkgs.mkShellNoCC {
+          packages =
+            let
+              tvim =
+                self.nixosConfigurations.${host}.config.home-manager.users.${userName}.nixvim.package-tvim.extend
+                  {
+                    git.enable = true;
+                  };
+            in
+            [
+              (self.nixosConfigurations.${host}.config.home-manager.users.${userName}.nixvim.package.extend {
+                git.enable = true;
+              })
+              (ln-tty-vim tvim)
+            ];
+          shellHook = ''
+            if [[ ! -f .envrc ]]; then
+              echo "use flake .#${host}" > .envrc
+            fi
+          '';
+        };
+      mkNixosConfigFor =
+        host:
+        nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit
               colors
@@ -79,11 +79,21 @@
           };
           modules = [
             inputs.disko.nixosModules.default
-            ./hosts/desktop/disk-config.nix
-            ./hosts/desktop/configuration.nix
+            ./hosts/${host}/disk-config.nix
+            ./hosts/${host}/configuration.nix
             ./modules/nixos
           ];
         };
+    in
+    {
+      devShells.${system} = {
+        desktop = mkShellFor "desktop";
+        macbook = mkShellFor "macbook";
+      };
+      formatter.${system} = pkgs.nixfmt;
+      nixosConfigurations = {
+        desktop = mkNixosConfigFor "desktop";
+        macbook = mkNixosConfigFor "macbook";
       };
       homeManagerModules.default = ./modules/home-manager;
     };
