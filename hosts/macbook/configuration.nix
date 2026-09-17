@@ -4,9 +4,12 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    ./modules
   ];
 
   audio.enable = true;
+  battery-charge-threshold.enable = true;
   boot-config = {
     enable = true;
     kernelModules = [ "coretemp" ];
