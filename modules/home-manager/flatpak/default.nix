@@ -21,6 +21,7 @@
 
     services.flatpak = {
       enable = true;
+      onCalendar = "monthly";
       remotes = {
         "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
       };

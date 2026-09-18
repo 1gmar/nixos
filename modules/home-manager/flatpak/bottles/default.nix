@@ -15,9 +15,11 @@ in
     services.flatpak = {
       overrides.${app-id}.Context.filesystems = [
         "/nix/store/:ro"
+        "xdg-data/applications:create"
+        "xdg-desktop:create"
       ];
       packages = [
-        "flathub:app/${app-id}//stable:bf6246635cdc3ef2986c7cb6a5afc13cb31e30f0784e39ca69da06563855991d"
+        "flathub:app/${app-id}//stable:b63354d6e95377f11796244da517df58866c708aeab2b13cf81082ba5a14c1dd"
       ];
     };
   };
