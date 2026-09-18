@@ -1,5 +1,5 @@
-def main []: string -> list<nothing> {
-  lines | each { decorate-line | print }
+def main []: string -> nothing {
+  lines | each { decorate-line | print } | ignore
 }
 
 def decorate-line []: string -> string {
