@@ -4,6 +4,7 @@
   inputs,
   ln-tty-vim,
   lib,
+  pkgs,
   system,
   userName,
   wallpaperPath,
@@ -31,6 +32,7 @@
           userName
           wallpaperPath
           ;
+        install-fonts = pkgs.callPackage ./fonts/packages/install-font.nix { };
         sysConfig = config;
       };
       sharedModules = [

@@ -1,5 +1,6 @@
 {
   config,
+  install-fonts,
   lib,
   ...
 }:
@@ -11,9 +12,14 @@ in
     enable = lib.mkEnableOption "enable denaro module";
   };
   config = lib.mkIf config.denaro.enable {
-    home.file = {
-      ".local/share/fonts/denaro".source = ./fonts;
-      ".var/app/${app-id}/config/fontconfig/fonts.conf".source = ./fonts.conf;
+    home = {
+      packages = [
+        (install-fonts {
+          pname = "denaro-fonts";
+          src = ./fonts.tar.gz;
+        })
+      ];
+      file.".var/app/${app-id}/config/fontconfig/fonts.conf".source = ./fonts.conf;
     };
     services.flatpak = {
       overrides.${app-id}.Context.filesystems = [
