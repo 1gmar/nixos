@@ -9,7 +9,7 @@
   options.screen-locker = {
     enable = lib.mkEnableOption "enable screen-locker module";
     resolution = lib.mkOption {
-      type = lib.types.strMatching "^[0-9]{3,4}x[0-9]{3,4}$";
+      type = with lib.types; nullOr (strMatching "^[0-9]{3,4}x[0-9]{3,4}$");
       default = null;
     };
   };
