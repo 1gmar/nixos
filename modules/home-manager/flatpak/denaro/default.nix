@@ -8,10 +8,10 @@ let
   app-id = "org.nickvision.money";
 in
 {
-  options.denaro = {
+  options.flatpak.denaro = {
     enable = lib.mkEnableOption "enable denaro module";
   };
-  config = lib.mkIf config.denaro.enable {
+  config = lib.mkIf config.flatpak.denaro.enable {
     home = {
       packages = [
         (install-fonts {
@@ -26,7 +26,7 @@ in
         "/nix/store/:ro"
       ];
       packages = [
-        "flathub:app/${app-id}//stable:4bf6d496e6e3d49d8a57a7e783e51fe8ac1b94148ff94eebda1eb7a917383422"
+        "flathub:app/${app-id}//stable:1c3b6465b5fe36c65d7c774f06c2963107aa241f5aa8c499e83d04162dd4798d"
       ];
     };
   };

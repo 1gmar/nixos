@@ -7,10 +7,10 @@ let
   app-id = "com.usebottles.bottles";
 in
 {
-  options.bottles = {
+  options.flatpak.bottles = {
     enable = lib.mkEnableOption "enable bottles module";
   };
-  config = lib.mkIf config.bottles.enable {
+  config = lib.mkIf config.flatpak.bottles.enable {
     home.file.".var/app/${app-id}/config/fontconfig/fonts.conf".source = ./fonts.conf;
     services.flatpak = {
       overrides.${app-id}.Context.filesystems = [

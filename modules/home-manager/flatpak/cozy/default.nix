@@ -7,10 +7,10 @@ let
   app-id = "com.github.geigi.cozy";
 in
 {
-  options.cozy = {
+  options.flatpak.cozy = {
     enable = lib.mkEnableOption "enable cozy module";
   };
-  config = lib.mkIf config.cozy.enable {
+  config = lib.mkIf config.flatpak.cozy.enable {
     home.file.".var/app/${app-id}/config/fontconfig/fonts.conf".source = ./fonts.conf;
     services.flatpak = {
       overrides.${app-id}.Context.filesystems = [

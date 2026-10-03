@@ -15,9 +15,11 @@
     enable = lib.mkEnableOption "enable flatpak module";
   };
   config = lib.mkIf config.flatpak.enable {
-    bottles.enable = true;
-    cozy.enable = true;
-    denaro.enable = true;
+    flatpak = {
+      bottles.enable = true;
+      cozy.enable = true;
+      denaro.enable = true;
+    };
 
     services.flatpak = {
       enable = true;
