@@ -15,7 +15,7 @@
   };
   console-config = {
     enable = true;
-    font = "ter-u18b";
+    font = "ter-v18b";
   };
   docker.enable = true;
   flatpak.enable = true;

@@ -17,7 +17,7 @@
   clight.enable = true;
   console-config = {
     enable = true;
-    font = "ter-u32b";
+    font = "ter-v32b";
     use-xkb-config = true;
   };
   font-config = {
