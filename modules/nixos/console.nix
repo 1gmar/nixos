@@ -1,8 +1,8 @@
 {
-  colors-dark,
   config,
   lib,
   pkgs,
+  theme,
   ...
 }:
 {
@@ -16,7 +16,7 @@
   config = lib.mkIf config.console-config.enable {
     console = {
       colors =
-        with colors-dark;
+        with theme.dark.gui;
         map (x: builtins.substring 1 (-1) x) [
           backHighlight
           red

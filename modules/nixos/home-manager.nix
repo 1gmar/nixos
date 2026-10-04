@@ -2,7 +2,6 @@
   colors,
   config,
   inputs,
-  ln-tty-vim,
   lib,
   pkgs,
   system,
@@ -27,7 +26,6 @@
         inherit
           colors
           inputs
-          ln-tty-vim
           system
           userName
           wallpaperPath

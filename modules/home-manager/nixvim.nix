@@ -2,7 +2,6 @@
   config,
   inputs,
   lib,
-  ln-tty-vim,
   system,
   ...
 }:
@@ -22,8 +21,7 @@ let
       };
     plugins.treesitter.grammarPackages = config.nixvim.treesitterGrammars;
   };
-  nvim = inputs.nixvim-1gmar.packages.${system}.default.extend extension;
-  tty-vim = inputs.nixvim-1gmar.packages.${system}.tty-vim.extend extension;
+  nvim = inputs.nixvim-1gmar.lib.${system}.mkNixvimWith extension;
 in
 {
   options.nixvim = with lib.types; {
@@ -32,13 +30,9 @@ in
       type = attrsOf anything;
       default = { };
     };
-    package = lib.mkOption {
-      type = package;
-      default = nvim;
-    };
-    package-tvim = lib.mkOption {
-      type = package;
-      default = tty-vim;
+    finalExtensions = lib.mkOption {
+      type = attrsOf anything;
+      default = extension;
     };
     treesitterGrammars = lib.mkOption {
       type = listOf package;
@@ -46,9 +40,6 @@ in
     };
   };
   config = lib.mkIf config.nixvim.enable {
-    home.packages = [
-      config.nixvim.package
-      (ln-tty-vim config.nixvim.package-tvim)
-    ];
+    home.packages = builtins.attrValues nvim;
   };
 }

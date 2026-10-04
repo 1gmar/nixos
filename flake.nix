@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-26.05";
+    color-themes.url = "github:1gmar/color-themes";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,8 +16,8 @@
     nixvim-1gmar = {
       url = "github:1gmar/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.color-themes.follows = "color-themes";
     };
-    color-themes.url = "github:1gmar/color-themes";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,16 +25,14 @@
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      nixvim-1gmar,
+      ...
+    }@inputs:
     let
-      colors = inputs.color-themes.solarized.light;
-      colors-dark = inputs.color-themes.solarized.dark;
-      ln-tty-vim =
-        pkg:
-        pkgs.runCommandLocal "tty-vim" { } ''
-          mkdir -p $out/bin
-          ln -s ${pkg}/bin/nvim $out/bin/tvim
-        '';
+      theme = inputs.color-themes.solarized;
       pkgs = import nixpkgs { inherit system; };
       shell-theme = ./modules/home-manager/nushell/solarized-light.nu;
       system = "x86_64-linux";
@@ -42,20 +41,14 @@
       mkShellFor =
         host:
         pkgs.mkShellNoCC {
-          packages =
-            let
-              tvim =
-                self.nixosConfigurations.${host}.config.home-manager.users.${userName}.nixvim.package-tvim.extend
-                  {
-                    git.enable = true;
-                  };
-            in
-            [
-              (self.nixosConfigurations.${host}.config.home-manager.users.${userName}.nixvim.package.extend {
+          packages = builtins.attrValues (
+            nixvim-1gmar.lib.${system}.mkNixvimWith (
+              self.nixosConfigurations.${host}.config.home-manager.users.${userName}.nixvim.finalExtensions
+              // {
                 git.enable = true;
-              })
-              (ln-tty-vim tvim)
-            ];
+              }
+            )
+          );
           shellHook = ''
             if [[ ! -f .envrc ]]; then
               echo "use flake .#${host}" > .envrc
@@ -67,15 +60,14 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit
-              colors
-              colors-dark
               inputs
-              ln-tty-vim
               shell-theme
               system
+              theme
               userName
               wallpaperPath
               ;
+            colors = theme.light.gui;
           };
           modules = [
             inputs.disko.nixosModules.default
