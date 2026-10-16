@@ -5,6 +5,7 @@
   ...
 }:
 let
+  color-theme = "elemental-soft-colorway@mozilla.org";
   activity-watch = "{ef87d84c-2127-493f-b952-5b4e744245bc}";
   better-ttv = "firefox@betterttv.net";
   ddg-privacy = "jid1-ZAdIEUB7XOzOJw@jetpack";
@@ -62,7 +63,11 @@ in
           BaselineExceptions = false;
           Category = "strict";
           ConvenienceExceptions = false;
+          Cryptomining = true;
+          EmailTracking = true;
+          Fingerprinting = true;
           Locked = true;
+          SuspectedFingerprinting = true;
           Value = true;
         };
         EncryptedMediaExtensions = {
@@ -81,9 +86,13 @@ in
             installation_mode = "allowed";
             private_browsing = false;
           };
+          ${color-theme} = {
+            installation_mode = "normal_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${color-theme}/latest.xpi";
+          };
           ${activity-watch} = lib.mkIf config.activity-watch.enable {
             default_area = "navbar";
-            installation_mode = "force_installed";
+            installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/${activity-watch}/latest.xpi";
           };
           ${better-ttv} = {
@@ -106,7 +115,7 @@ in
           };
           ${keepassxc} = lib.mkIf config.keepassxc.enable {
             default_area = "navbar";
-            installation_mode = "force_installed";
+            installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/${keepassxc}/latest.xpi";
             private_browsing = true;
           };
@@ -116,7 +125,7 @@ in
           };
           ${proton-vpn} = {
             default_area = "navbar";
-            installation_mode = "force_installed";
+            installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/${proton-vpn}/latest.xpi";
             private_browsing = true;
           };
@@ -141,7 +150,7 @@ in
             private_browsing = true;
           };
           ${ublock} = {
-            installation_mode = "force_installed";
+            installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/${ublock}/latest.xpi";
             private_browsing = true;
           };
@@ -152,7 +161,7 @@ in
           };
           ${vimium} = {
             default_area = "navbar";
-            installation_mode = "force_installed";
+            installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/${vimium}/latest.xpi";
             private_browsing = true;
           };
@@ -185,7 +194,7 @@ in
         HardwareAcceleration = true;
         Homepage = {
           Locked = true;
-          StartPage = "homepage";
+          StartPage = "previous-session";
           URL = "about:home";
         };
         HttpsOnlyMode = "enabled";
@@ -252,6 +261,7 @@ in
           "browser.ai.control.default" = "blocked";
           "browser.ai.control.pdfjsAltText" = "blocked";
           "browser.ai.control.translations" = "blocked";
+          "browser.ctrlTab.sortByRecentlyUsed" = true;
           "browser.fullscreen.autohide" = false;
           "browser.ml.chat.menu" = false;
           "browser.ml.chat.page.footerBadge" = false;
@@ -295,15 +305,15 @@ in
               url = "https://oficiulonline.premierenergy.md/office/";
             }
             {
-              label = "Energocom";
-              url = "https://my.energocom.md/home";
+              label = "NixOS";
+              url = "https://nixos.org/learn";
             }
             {
               label = "curs.md - curs valutar";
               url = "https://www.curs.md/ro";
             }
             {
-              label = "ibkr";
+              label = "IBKR";
               url = "https://www.interactivebrokers.co.uk/en/home.php";
             }
             {
@@ -318,6 +328,10 @@ in
               label = "The Story Graph";
               url = "https://app.thestorygraph.com/";
             }
+            {
+              label = "Duck AI";
+              url = "https://duck.ai/";
+            }
           ];
           "browser.preferences.defaultPerformanceSettings.enabled" = false;
           "browser.sessionstore.restore_on_demand" = true;
@@ -325,9 +339,10 @@ in
           "browser.sessionstore.restore_tabs_lazily" = true;
           "browser.tabs.groups.smart.enabled" = false;
           "browser.translations.automaticallyPopup" = false;
+          "browser.uidensity" = 1;
           "browser.urlbar.quicksuggest.mlEnabled" = false;
           "browser.warnOnQuitShortcut" = false;
-          "extensions.activeThemeId" = "firefox-compact-light@mozilla.org";
+          "extensions.activeThemeID" = "elemental-soft-colorway@mozilla.org";
           "extensions.ml.enabled" = false;
           "font.default.x-western" = "sans-serif";
           "gfx.x11-egl.force-enabled" = true;
@@ -339,7 +354,6 @@ in
           "middlemouse.paste" = false;
           "pdfjs.enableAltText" = false;
           "places.semanticHistory.featureGate" = false;
-          "privacy.resistFingerprinting" = false;
           "reader.color_scheme" = "sepia";
           "reader.content_width" = 5;
           "reader.font_size" = 8;
