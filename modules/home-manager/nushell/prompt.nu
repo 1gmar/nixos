@@ -3,10 +3,49 @@ export-env {
   $env.TRANSIENT_PROMPT_COMMAND = ""
   $env.PROMPT_COMMAND_RIGHT = { get-right-prompt-text }
   $env.TRANSIENT_PROMPT_COMMAND_RIGHT = { get-execution-segment }
-  $env.PROMPT_INDICATOR = { $"(get-indicator-color)❯ " }
-  $env.PROMPT_INDICATOR_VI_INSERT = { $"(get-indicator-color)❯ " }
-  $env.PROMPT_INDICATOR_VI_NORMAL = { $"(get-indicator-color)❮ " }
+  $env.PROMPT_INDICATOR = { $"(get-indicator-color)(icon prompt_arrow_right) " }
+  $env.PROMPT_INDICATOR_VI_INSERT = { $"(get-indicator-color)(icon prompt_arrow_right) " }
+  $env.PROMPT_INDICATOR_VI_NORMAL = { $"(get-indicator-color)(icon prompt_arrow_left) " }
   $env.PROMPT_MULTILINE_INDICATOR = "> "
+}
+
+const icon_table = [
+  [icon val];
+  [prompt_arrow_right ['❯' '›']]
+  [prompt_arrow_left ['❮' '‹']]
+  [branch ['' 'Ч']]
+  [git_tag [' ' '@ ']]
+  [git_stash ['󰴮 ' '* ']]
+  [github [' ' '']]
+  [gitlab [' ' '']]
+  [codeberg [' ' '']]
+  [bitbucket [' ' '']]
+  [repo_default ['󰳏 ' '']]
+  [cherrypick [' ' '‰']]
+  [merge [' ' 'λ']]
+  [rebase [' ' '↓↑']]
+  [revert ['󰕍 ' '«']]
+  [conflicts ['󰮘 ' '× ']]
+  [staged_changes ['󰈖 ' '+ ']]
+  [unstaged_changes ['󰩋 ' '! ']]
+  [untracked ['󰡯 ' '? ']]
+  [unlocked ['' '#']]
+  [locked ['' '■']]
+  [root_home ['󰣬' '#']]
+  [home ['' '■']]
+  [root_home_path ['󰴉' '#']]
+  [home_path ['' '■']]
+  [nixos ['' '']]
+  [windows ['󰨡' '']]
+  [darwin ['' '']]
+  [linux ['' '']]
+  [time ['󱑓 ' '']]
+  [duration ['' '']]
+]
+
+def icon [key: string]: nothing -> string {
+  let idx = $env.TERM == 'linux' | into int
+  $icon_table | where icon == $key | first | get val | get $idx
 }
 
 def get-prompt-text []: nothing -> string {
@@ -56,19 +95,19 @@ def get-dirpath [path_color: string]: string -> string {
   [
     ($git_dirpath | get-default-dirpath $path_color $basename_color)
     $"(ansi chartreuse3b) (get-git-remote-icon)"
-    $"(char nf_branch)($gs.branch)"
-    (if $gs.tag != 'no_tag' { $"  ($gs.tag)" })
+    $"(icon branch)($gs.branch)"
+    (if $gs.tag != 'no_tag' { $" (icon git_tag)($gs.tag)" })
     (if not ($gs.remote | str ends-with $gs.branch) { $":($gs.remote)" })
     (if $gs.behind > 0 or $gs.ahead > 0 { ' ' })
     (if $gs.behind > 0 { $"(char branch_behind)($gs.behind)" })
     (if $gs.ahead > 0 { $"(char branch_ahead)($gs.ahead)" })
     (if $gs_summary.dirty_state { ' ' })
-    (if $gs.stashes > 0 { $"($gs.stashes)󰴮 " })
+    (if $gs.stashes > 0 { $"($gs.stashes)(icon git_stash) " })
     ($gs.state | decorate-git-state)
-    (if $gs.conflicts > 0 { $"(ansi red)($gs.conflicts)󰮘 " })
-    (if $gs_summary.staged_changes > 0 { $"(ansi green)($gs_summary.staged_changes)󰈖 " })
-    (if $gs_summary.unstaged_changes > 0 { $"(ansi yellow)($gs_summary.unstaged_changes)󰩋 " })
-    (if $gs.wt_untracked > 0 { $"(ansi blue)($gs.wt_untracked)󰡯 " })
+    (if $gs.conflicts > 0 { $"(ansi red)($gs.conflicts)(icon conflicts)" })
+    (if $gs_summary.staged_changes > 0 { $"(ansi green)($gs_summary.staged_changes)(icon staged_changes)" })
+    (if $gs_summary.unstaged_changes > 0 { $"(ansi yellow)($gs_summary.unstaged_changes)(icon unstaged_changes)" })
+    (if $gs.wt_untracked > 0 { $"(ansi blue)($gs.wt_untracked)(icon untracked)" })
   ]
   | str join
 }
@@ -105,22 +144,16 @@ def get-git-remote-icon []: nothing -> string {
   git config get remote.origin.url
   | parse -r '^(?:git@|https?://)(?<remote>\w+)\..+$'
   | get remote.0
-  | match $in {
-    'github' => ' '
-    'gitlab' => ' '
-    'codeberg' => ' '
-    'bitbucket' => ' '
-    _ => '󰳏 '
-  }
+  | if $in in ['github' 'gitlab' 'codeberg' 'bitbucket'] { icon $in } else { icon repo_default }
 }
 
 def decorate-git-state []: string -> string {
   match $in {
     'clean' => ''
-    'cherrypick' => $" (ansi cyan)"
-    'merge' => $" (ansi red)"
-    'rebase' => $" (ansi blue)"
-    'revert' => $" (ansi yellow)󰕍"
+    'cherrypick' => $" (ansi cyan)(icon cherrypick)"
+    'merge' => $" (ansi red)(icon merge)"
+    'rebase' => $" (ansi blue)(icon rebase)"
+    'revert' => $" (ansi yellow)(icon revert)"
     _ => $" (ansi default)($in)"
   }
 }
@@ -134,11 +167,11 @@ def get-default-dirpath [path_color: string basename_color: string]: string -> s
 
 def get-dir-metadata []: nothing -> record<path: string, icon: string> {
   match (do -i { $env.PWD | path relative-to $nu.home-dir }) {
-    null => {path: $env.PWD icon: (if (is-admin) { '' } else { '' })}
-    '' => {path: '~' icon: (if (is-admin) { '󰣬' } else { '' })}
+    null => {path: $env.PWD icon: (if (is-admin) { icon unlocked } else { icon locked })}
+    '' => {path: '~' icon: (if (is-admin) { icon root_home } else { icon home })}
     $relative_pwd => {
       path: ([~ $relative_pwd] | path join)
-      icon: (if (is-admin) { '󰴉' } else { '' })
+      icon: (if (is-admin) { icon root_home_path } else { icon home_path })
     }
   }
 }
@@ -151,15 +184,15 @@ def get-dirname [path_color: string]: string -> string {
 
 def get-os-segment []: nothing -> string {
   match (sys host | get name) {
-    'NixOS' => $"(ansi '#7ebae4')"
-    'Windows' => '󰨡'
-    'Darwin' => ''
-    _ => ''
+    'NixOS' => $"(ansi '#7ebae4')(icon nixos)"
+    'Windows' => (icon windows)
+    'Darwin' => (icon darwin)
+    _ => (icon linux)
   }
 }
 
 def get-time-segment []: nothing -> string {
-  $"(ansi reset)(ansi magenta)(date now | format date '󱑓 %H:%M:%S')"
+  $"(ansi reset)(ansi magenta)(icon time)(date now | format date '%H:%M:%S')"
 }
 
 def get-execution-segment []: nothing -> duration {
@@ -173,6 +206,6 @@ def get-execution-segment []: nothing -> duration {
     }
 
   if $exec_duration >= 3sec {
-    $"(ansi darkseagreen4a) ($exec_duration)"
+    $"(ansi darkseagreen4a)(icon duration) ($exec_duration)"
   }
 }

@@ -1,10 +1,12 @@
 {
-  colors,
   config,
   lib,
   pkgs,
   ...
 }:
+let
+  vividExe = lib.getExe pkgs.vivid;
+in
 {
   options.nushell = {
     enable = lib.mkEnableOption "enable nushell module";
@@ -27,7 +29,11 @@
           LS_COLORS =
             lib.hm.nushell.mkNushellInline # nu
               ''
-                ${lib.getExe pkgs.vivid} generate solarized-light
+                if $env.TERM == 'linux' {
+                    ${vividExe} -m 8-bit generate solarized-light
+                  } else {
+                    ${vividExe} generate solarized-light
+                  } 
               '';
         };
         extraConfig =
@@ -35,10 +41,8 @@
             ''
               use ${./nix.nu} *
               use ${./prompt.nu}
+              use ${./solarized-light.nu}
               source ${./keybindings.nu}
-              use ${./solarized-light.nu} color-config
-              $env.config.color_config = color-config ${lib.hm.nushell.toNushell { } colors}
-              hide color-config
             '';
         plugins = [ pkgs.nushellPlugins.gstat ];
         settings = {

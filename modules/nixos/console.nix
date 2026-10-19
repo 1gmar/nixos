@@ -14,26 +14,27 @@
     use-xkb-config = lib.mkEnableOption "use xkb configuration";
   };
   config = lib.mkIf config.console-config.enable {
+    boot.kernelParams = [ "vt.cur_default=0xE00011" ];
     console = {
       colors =
-        with theme.dark.gui;
+        with theme.light.gui;
         map (x: builtins.substring 1 (-1) x) [
-          backHighlight
+          background
           red
           green
           yellow
           blue
           magenta
           cyan
-          white
-          background
+          black
+          backHighlight
           orange
-          secondaryContent
-          brightYellow
-          primaryContent
-          violet
           highlight
-          brightWhite
+          primaryContent
+          brightBlue
+          violet
+          secondaryContent
+          brightBlack
         ];
       font = config.console-config.font;
       packages = [ pkgs.terminus_font ];

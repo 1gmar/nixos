@@ -1,108 +1,102 @@
-export def color-config [colors: record] {
-  let background = $colors.background;
-  let blue = $colors.blue;
-  let cyan = $colors.cyan;
-  let green = $colors.green;
-  let red = $colors.red;
-  let violet = $colors.violet;
-  let yellow = $colors.yellow;
-  let highlight = $colors.highlight;
-  let black = $colors.brightBlack;
+export-env {
+  $env.config.color_config = gen-config ($env.TERM == 'linux')
+}
 
-  return {
-    binary: $violet
-    block: $blue
-    cell-path: $highlight
-    closure: $cyan
-    custom: $black
-    duration: $yellow
-    float: $red
-    glob: $black
-    int: $violet
-    list: $cyan
-    nothing: $red
-    range: $yellow
-    record: $cyan
-    string: $green
+def gen-config [is_tty: bool]: nothing -> record {
+  {
+    binary: 'light_magenta'
+    block: 'blue'
+    cell-path: 'light_green'
+    closure: 'cyan'
+    custom: (if $is_tty { 'light_gray' } else { 'dark_gray' })
+    duration: 'yellow'
+    float: 'red'
+    glob: (if $is_tty { 'light_gray' } else { 'dark_gray' })
+    int: 'light_magenta'
+    list: 'cyan'
+    nothing: 'red'
+    range: 'yellow'
+    record: 'cyan'
+    string: 'green'
 
-    bool: { if $in { $green } else { $red } }
+    bool: { if $in { 'green' } else { 'red' } }
 
     datetime: {
       (date now) - $in
       | if $in < 1hr {
-        {fg: $red attr: b}
+        {fg: 'red' attr: b}
       } else if $in < 6hr {
-        $red
+        'red'
       } else if $in < 1day {
-        $yellow
+        'yellow'
       } else if $in < 3day {
-        $green
+        'green'
       } else if $in < 1wk {
-        {fg: $green attr: b}
+        {fg: 'green' attr: b}
       } else if $in < 6wk {
-        $cyan
+        'cyan'
       } else if $in < 52wk {
-        $blue
-      } else { $violet }
+        'blue'
+      } else { 'light_magenta' }
     }
 
     filesize: {|e|
       if $e == 0b {
-        $highlight
+        'light_green'
       } else if $e < 1mb {
-        $cyan
-      } else { {fg: $blue} }
+        'cyan'
+      } else { 'blue' }
     }
 
-    shape_and: {fg: $violet attr: b}
-    shape_binary: {fg: $violet attr: b}
-    shape_block: {fg: $blue attr: b}
-    shape_bool: $cyan
-    shape_closure: {fg: $cyan attr: b}
-    shape_custom: $green
-    shape_datetime: {fg: $cyan attr: b}
-    shape_directory: $cyan
-    shape_external: $cyan
-    shape_external_resolved: $cyan
-    shape_externalarg: {fg: $green attr: b}
-    shape_filepath: $cyan
-    shape_flag: {fg: $blue attr: b}
-    shape_float: {fg: $red attr: b}
-    shape_garbage: {fg: $background bg: $colors.magenta attr: b}
-    shape_glob_interpolation: {fg: $cyan attr: b}
-    shape_globpattern: {fg: $cyan attr: b}
-    shape_int: {fg: $violet attr: b}
-    shape_internalcall: {fg: $cyan attr: b}
-    shape_keyword: {fg: $violet attr: b}
-    shape_list: {fg: $cyan attr: b}
-    shape_literal: $blue
-    shape_match_pattern: $green
+    shape_and: (if $is_tty { 'light_magenta' } else { {fg: 'light_magenta' attr: b} })
+    shape_binary: (if $is_tty { 'light_magenta' } else { {fg: 'light_magenta' attr: b} })
+    shape_block: (if $is_tty { 'blue' } else { {fg: 'blue' attr: b} })
+    shape_bool: 'cyan'
+    shape_closure: (if $is_tty { 'cyan' } else { {fg: 'cyan' attr: b} })
+    shape_custom: 'green'
+    shape_datetime: (if $is_tty { 'cyan' } else { {fg: 'cyan' attr: b} })
+    shape_directory: 'cyan'
+    shape_external: 'cyan'
+    shape_external_resolved: 'cyan'
+    shape_externalarg: (if $is_tty { 'green' } else { {fg: 'green' attr: b} })
+    shape_filepath: 'cyan'
+    shape_flag: (if $is_tty { 'blue' } else { {fg: 'blue' attr: b} })
+    shape_float: (if $is_tty { 'red' } else { {fg: 'red' attr: b} })
+    shape_garbage: (if $is_tty { {fg: 'black' bg: 'magenta'} } else { {fg: 'light_gray' bg: 'magenta' attr: b} })
+    shape_glob_interpolation: (if $is_tty { 'cyan' } else { {fg: 'cyan' attr: b} })
+    shape_globpattern: (if $is_tty { 'cyan' } else { {fg: 'cyan' attr: b} })
+    shape_int: (if $is_tty { 'light_magenta' } else { {fg: 'light_magenta' attr: b} })
+    shape_internalcall: (if $is_tty { 'cyan' } else { {fg: 'cyan' attr: b} })
+    shape_keyword: (if $is_tty { 'light_magenta' } else { {fg: 'light_magenta' attr: b} })
+    shape_list: (if $is_tty { 'cyan' } else { {fg: 'cyan' attr: b} })
+    shape_literal: 'blue'
+    shape_match_pattern: 'green'
     shape_matching_brackets: {attr: u}
-    shape_nothing: $red
-    shape_operator: $yellow
-    shape_or: {fg: $violet attr: b}
-    shape_pipe: {fg: $violet attr: b}
-    shape_range: {fg: $yellow attr: b}
-    shape_raw_string: {fg: $black attr: b}
-    shape_record: {fg: $cyan attr: b}
-    shape_redirection: {fg: $violet attr: b}
-    shape_signature: {fg: $green attr: b}
-    shape_string: $green
-    shape_string_interpolation: {fg: $cyan attr: b}
-    shape_table: {fg: $blue attr: b}
-    shape_vardecl: {fg: $blue attr: u}
-    shape_variable: $violet
+    shape_nothing: 'red'
+    shape_operator: 'yellow'
+    shape_or: (if $is_tty { 'light_magenta' } else { {fg: 'light_magenta' attr: b} })
+    shape_pipe: (if $is_tty { 'light_magenta' } else { {fg: 'light_magenta' attr: b} })
+    shape_range: (if $is_tty { 'yellow' } else { {fg: 'yellow' attr: b} })
+    shape_raw_string: (if $is_tty { 'light_gray' } else { {fg: 'dark_gray' attr: b} })
+    shape_record: (if $is_tty { 'cyan' } else { {fg: 'cyan' attr: b} })
+    shape_redirection: (if $is_tty { 'light_magenta' } else { {fg: 'light_magenta' attr: b} })
+    shape_signature: (if $is_tty { 'green' } else { {fg: 'green' attr: b} })
+    shape_string: 'green'
+    shape_string_interpolation: (if $is_tty { 'cyan' } else { {fg: 'cyan' attr: b} })
+    shape_table: (if $is_tty { 'blue' } else { {fg: 'blue' attr: b} })
+    shape_vardecl: (if $is_tty { 'blue' } else { {fg: 'blue' attr: u} })
+    shape_variable: 'light_magenta'
 
-    foreground: $colors.primaryContent
-    background: $background
-    cursor: $highlight
+    foreground: 'light_yellow'
+    background: (if $is_tty { 'black' } else { 'light_gray' })
+    cursor: 'light_green'
 
-    empty: $blue
-    header: {fg: $green attr: b}
-    hints: $colors.brightBlue
+    empty: 'blue'
+    header: (if $is_tty { 'green' } else { {fg: 'green' attr: b} })
+    hints: 'light_blue'
     leading_trailing_space_bg: {attr: n}
-    row_index: {fg: $green attr: b}
-    search_result: {fg: $red bg: $colors.backHighlight attr: bu}
-    separator: $highlight
+    row_index: (if $is_tty { 'green' } else { {fg: 'green' attr: b} })
+    search_result: (if $is_tty { 'red' } else { {fg: 'red' bg: 'white' attr: bu} })
+    separator: 'light_green'
   }
 }
