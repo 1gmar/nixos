@@ -1,7 +1,7 @@
 {
-  config,
   lib,
   pkgs,
+  runNuC,
   sysConfig,
   userName,
   ...
@@ -54,18 +54,27 @@
     height = "2.25%";
     icon-voffset = 7;
     text-voffset = 5;
-    cpu.fan-cmd =
-      "${config.home.profileDirectory}/bin/nu -c "
-      + "'${pkgs.lm_sensors}/bin/sensors | find `Left side` | split row -r `\\s+` | get 3'";
+    cpu.fan-cmd = runNuC [
+      "${pkgs.lm_sensors}/bin/sensors"
+      "| find `Left side`"
+      "| split row -r `\\s+`"
+      "| get 3"
+    ];
     gpu = {
       radeongpu.enable = true;
-      fan-cmd.exec =
-        "${config.home.profileDirectory}/bin/nu -c "
-        + "'${pkgs.lm_sensors}/bin/sensors | find `Right side` | split row -r `\\s+` | get 3'";
-      temp-cmd.exec =
-        "${config.home.profileDirectory}/bin/nu -c "
-        + "'${pkgs.lm_sensors}/bin/sensors | find `temp1` | split row -r `\\s+` "
-        + "| get 1 | str replace -a -r `(\\+|\\.\\d°C)` ``'";
+      fan-cmd.exec = runNuC [
+        "${pkgs.lm_sensors}/bin/sensors"
+        "| find `Right side`"
+        "| split row -r `\\s+`"
+        "| get 3"
+      ];
+      temp-cmd.exec = runNuC [
+        "${pkgs.lm_sensors}/bin/sensors"
+        "| find `temp1`"
+        "| split row -r `\\s+`"
+        "| get 1"
+        "| str replace -a -r `(\\+|\\.\\d°C)` ``"
+      ];
     };
     network.interface = "wlp4s0";
     weather.enable = false;

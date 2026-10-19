@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  runNuC,
   ...
 }:
 {
@@ -15,15 +16,11 @@
       "module/input-method" = {
         type = "custom/script";
         click.right = "${pkgs.ibus-with-plugins}/bin/ibus-setup";
-        exec =
-          if config.nushell.enable then
-            "${config.home.profileDirectory}/bin/nu -c "
-            + "'${pkgs.ibus-with-plugins}/bin/ibus engine | if $in =~ `^mozc` { \"ja\" } "
-            + "else { $in | split row `:` | get 1 }'"
-          else
-            "${pkgs.ibus-with-plugins}/bin/ibus engine "
-            + "| ${pkgs.gawk}/bin/awk '{if ($1 ~ /^mozc/) print \"ja\"; "
-            + "else split($1, L, \":\"); print L[2]}'";
+        exec = runNuC [
+          "${pkgs.ibus-with-plugins}/bin/ibus engine"
+          "| if $in =~ `^mozc` { \"ja\" }"
+          "else { $in | split row `:` | get 1 }"
+        ];
         format = {
           foreground = colors.cyan;
           prefix = {

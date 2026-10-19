@@ -2,7 +2,7 @@
   colors,
   config,
   lib,
-  pkgs,
+  runNuC,
   ...
 }:
 {
@@ -14,16 +14,15 @@
     services.polybar.settings = {
       "module/weather" = {
         type = "custom/script";
-        exec =
-          if config.nushell.enable then
-            "${config.home.profileDirectory}/bin/nu -c "
-            + "'${config.home.profileDirectory}/bin/wthrr "
-            + "| lines | get 3 | split row `,` | each { split row -r `\\s+` } "
-            + "| get 0.1 1.1 | str join `  `'"
-          else
-            "(set -o pipefail && ${pkgs.wthrr}/bin/wthrr "
-            + "| ${pkgs.gawk}/bin/awk 'NR==4 {split($0, L, \",\"); "
-            + "split(L[2], S, \" \"); print $2, S[1]}')";
+        exec = runNuC [
+          "${config.home.profileDirectory}/bin/wthrr"
+          "| lines"
+          "| get 3"
+          "| split row `,`"
+          "| each { split row -r `\\s+` }"
+          "| get 0.1 1.1"
+          "| str join `  `"
+        ];
         format = {
           fail = "<label-fail>";
           text = "<label>";

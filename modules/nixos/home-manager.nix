@@ -5,6 +5,7 @@
   lib,
   pkgs,
   system,
+  theme,
   userName,
   wallpaperPath,
   ...
@@ -27,10 +28,17 @@
           colors
           inputs
           system
+          theme
           userName
           wallpaperPath
           ;
         install-fonts = pkgs.callPackage ./fonts/packages/install-font.nix { };
+        runNuC =
+          cmdList:
+          let
+            cmdStr = lib.concatStringsSep " " cmdList;
+          in
+          "${pkgs.nushell}/bin/nu -n --no-std-lib -c '${cmdStr}'";
         sysConfig = config;
       };
       sharedModules = [

@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  runNuC,
   sysConfig,
   userName,
   ...
@@ -53,43 +54,44 @@
   pointer-cursor.enable = true;
   polybar = {
     enable = true;
-    cpu.fan-cmd =
-      if config.nushell.enable then
-        "${config.home.profileDirectory}/bin/nu -c "
-        + "'${pkgs.lm_sensors}/bin/sensors | find fan2 | split row -r `\\s+` | get 1'"
-      else
-        "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep fan2 "
-        + "| ${pkgs.gawk}/bin/awk '{print $2}'";
+    cpu.fan-cmd = runNuC [
+      "${pkgs.lm_sensors}/bin/sensors"
+      "| find fan2"
+      "| split row -r `\\s+`"
+      "| get 1"
+    ];
     gpu = {
-      fan-cmd.exec =
-        if config.nushell.enable then
-          "${config.home.profileDirectory}/bin/nu -c "
-          + "'/run/current-system/sw/bin/nvidia-settings -q GPUCurrentFanSpeedRPM "
-          + "| lines | get 1 | split row -r `\\s+` | get 4 | str substring 0..-2'"
-        else
-          "(set -o pipefail && ${pkgs.lm_sensors}/bin/sensors "
-          + "| ${pkgs.gnugrep}/bin/grep fan1 | ${pkgs.gawk}/bin/awk '{print $2}')";
-      gpu-cmd.exec =
-        if config.nushell.enable then
-          "${config.home.profileDirectory}/bin/nu -c "
-          + "'/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu,utilization.encoder,utilization.decoder "
-          + "--format=csv,noheader,nounits | split row `,` | each { str trim | fill -a right -c ` ` -w 3 } "
-          + "| zip [`` `E` `D`] | each { reverse | str join } | update 0 { $in + `%` } | str join ` `'"
-        else
-          "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.gpu "
-          + "--format=csv,noheader,nounits";
+      fan-cmd.exec = runNuC [
+        "/run/current-system/sw/bin/nvidia-settings -q GPUCurrentFanSpeedRPM"
+        "| lines"
+        "| get 1"
+        "| split row -r `\\s+`"
+        "| get 4"
+        "| str substring 0..-2"
+      ];
+      gpu-cmd.exec = runNuC [
+        "/run/current-system/sw/bin/nvidia-smi"
+        "--query-gpu=utilization.gpu,utilization.encoder,utilization.decoder"
+        "--format=csv,noheader,nounits"
+        "| split row `,`"
+        "| each { str trim | fill -a right -c ` ` -w 3 }"
+        "| zip [`` `E` `D`]"
+        "| each { reverse | str join }"
+        "| update 0 { $in + `%` }"
+        "| str join ` `"
+      ];
       mem-cmd = {
-        exec =
-          if config.nushell.enable then
-            "${config.home.profileDirectory}/bin/nu -c "
-            + "'/run/current-system/sw/bin/nvidia-smi --query-gpu=memory.total,memory.used "
-            + "--format=csv,noheader | split row `,` | into filesize | $in.1 / $in.0 * 100 | math round'"
-          else
-            "/run/current-system/sw/bin/nvidia-smi --query-gpu=utilization.memory "
-            + "--format=csv,noheader,nounits";
+        exec = runNuC [
+          "/run/current-system/sw/bin/nvidia-smi"
+          "--query-gpu=memory.total,memory.used"
+          "--format=csv,noheader"
+          "| split row `,`"
+          "| into filesize"
+          "| $in.1 / $in.0 * 100"
+          "| math round"
+        ];
         interval.text = 1;
       };
-
       temp-cmd.exec =
         "/run/current-system/sw/bin/nvidia-smi --query-gpu=temperature.gpu "
         + "--format=csv,noheader,nounits";

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  runNuC,
   ...
 }:
 let
@@ -14,10 +15,16 @@ in
   config = lib.mkIf config.polybar.gpu.radeongpu.enable {
     polybar.gpu = {
       gpu-cmd = {
-        exec =
-          "${pkgs.nushell}/bin/nu -n -c "
-          + "'open ${log-file} | lines | last | split row `,` | get 1 "
-          + "| split row -r `\\s+` | last | str replace -r `\\.\\d+` ``'";
+        exec = runNuC [
+          "open ${log-file}"
+          "| lines"
+          "| last"
+          "| split row `,`"
+          "| get 1"
+          "| split row -r `\\s+`"
+          "| last"
+          "| str replace -r `\\.\\d+` ``"
+        ];
         interval = {
           fail = 5;
           text = 1;
@@ -25,10 +32,16 @@ in
         label.text = "%output:3%";
       };
       mem-cmd = {
-        exec =
-          "${pkgs.nushell}/bin/nu -n -c "
-          + "'open ${log-file} | lines | last | split row `,` | get 12 "
-          + "| split row -r `\\s+` | get 2 | str replace -r `\\.\\d+%` ``'";
+        exec = runNuC [
+          "open ${log-file}"
+          "| lines"
+          "| last"
+          "| split row `,`"
+          "| get 12"
+          "| split row -r `\\s+`"
+          "| get 2"
+          "| str replace -r `\\.\\d+%` ``"
+        ];
         interval = {
           fail = 5;
           text = 1;
@@ -50,9 +63,13 @@ in
         };
         radeontop-log-cleanup = {
           Service = {
-            ExecStart =
-              "${pkgs.nushell}/bin/nu -n -c "
-              + "'open ${log-file} | lines | last | $in + (char nl) | save -f ${log-file}'";
+            ExecStart = runNuC [
+              "open ${log-file}"
+              "| lines"
+              "| last"
+              "| $in + (char nl)"
+              "| save -f ${log-file}"
+            ];
             Type = "oneshot";
           };
           Unit.Description = "Cleanup the radeontop log";

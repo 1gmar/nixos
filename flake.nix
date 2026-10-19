@@ -34,7 +34,6 @@
     let
       theme = inputs.color-themes.solarized;
       pkgs = import nixpkgs { inherit system; };
-      shell-theme = ./modules/home-manager/nushell/solarized-light.nu;
       system = "x86_64-linux";
       userName = "igmar";
       wallpaperPath = ./anime-sky.png;
@@ -61,7 +60,6 @@
           specialArgs = {
             inherit
               inputs
-              shell-theme
               system
               theme
               userName

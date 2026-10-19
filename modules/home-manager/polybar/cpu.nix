@@ -2,6 +2,7 @@
   colors,
   config,
   lib,
+  runNuC,
   pkgs,
   ...
 }:
@@ -64,14 +65,13 @@ in
           }
           {
             name = "module/cpu-temp";
-            value.exec =
-              if config.nushell.enable then
-                "${config.home.profileDirectory}/bin/nu -c "
-                + "'${pkgs.lm_sensors}/bin/sensors | find `Package id 0:` | split row -r `\\s+` "
-                + "| get 3 | str replace -a -r `(\\+|\\.\\d)` ``'"
-              else
-                "${pkgs.lm_sensors}/bin/sensors | ${pkgs.gnugrep}/bin/grep \"Package id 0:\" "
-                + "| ${pkgs.gawk}/bin/awk '{gsub(/(\\+|\\.[0-9])/, \"\", $4); print $4}'";
+            value.exec = runNuC [
+              "${pkgs.lm_sensors}/bin/sensors"
+              "| find `Package id 0:`"
+              "| split row -r `\\s+`"
+              "| get 3"
+              "| str replace -a -r `(\\+|\\.\\d)` ``"
+            ];
           }
         ];
       in
