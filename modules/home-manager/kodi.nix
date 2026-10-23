@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  workspace = "5: kodi";
+in
 {
   options.kodi = {
     enable = lib.mkEnableOption "enable kodi module";
@@ -17,21 +20,26 @@
     ];
     programs.kodi = {
       enable = true;
-      package = pkgs.kodi.withPackages (exts: [ exts.jellycon ]);
+      package = pkgs.kodi.withPackages (exts: [ exts.jellyfin ]);
       settings = {
         fullscreen = "false";
         seeksteps = "5, 10, 30, 60";
       };
     };
-    xdg.desktopEntries."Kodi" = {
+    services.polybar.settings."module/workspaces".icon.text =
+      lib.mkIf config.polybar.workspaces.enable
+        [
+          "${workspace};󰈰"
+        ];
+    xdg.desktopEntries."kodi" = {
       actions = {
         "Fullscreen" = {
           name = "Open in fullscreen";
-          exec = "${config.profileDirectory}/bin/kodi -fs";
+          exec = "${config.home.profileDirectory}/bin/kodi -fs";
         };
         "Standalone" = {
           name = "Open in standalone mode";
-          exec = "${config.profileDirectory}/bin/kodi --standalone";
+          exec = "${config.home.profileDirectory}/bin/kodi --standalone";
         };
       };
       categories = [
@@ -41,15 +49,16 @@
         "TV"
       ];
       comment = "Manage and view your media";
-      exec = "${config.profileDirectory}/bin/kodi --gl-interface=glx";
+      exec = "${config.home.profileDirectory}/bin/kodi --gl-interface=glx";
       genericName = "Media Center";
       icon = "kodi";
+      name = "Kodi";
       terminal = false;
       type = "Application";
     };
     xsession.windowManager.i3.config = lib.mkIf config.i3wm.enable {
-      assigns."5" = [ { class = "Kodi"; } ];
-      keybindings."Mod4+bracketright" = "workspace 5";
+      assigns.${workspace} = [ { class = "Kodi"; } ];
+      keybindings."Mod4+bracketright" = "workspace ${workspace}";
     };
   };
 }
