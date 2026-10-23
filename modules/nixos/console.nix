@@ -14,7 +14,16 @@
     use-xkb-config = lib.mkEnableOption "use xkb configuration";
   };
   config = lib.mkIf config.console-config.enable {
-    boot.kernelParams = [ "vt.cur_default=0xE00011" ];
+    boot = {
+      consoleLogLevel = 3;
+      initrd.verbose = false;
+      kernelParams = [
+        "quiet"
+        "systemd.show_status=false"
+        "rd.udev.log_level=3"
+        "rd.systemd.show_status=auto"
+      ];
+    };
     console = {
       colors =
         with theme.light.gui;

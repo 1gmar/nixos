@@ -15,7 +15,8 @@
   };
   console-config = {
     enable = true;
-    font = "ter-v18b";
+    font = "ter-v24b";
+    use-xkb-config = true;
   };
   docker.enable = true;
   flatpak.enable = true;
@@ -47,7 +48,10 @@
   system-diff.enable = true;
   thunar.enable = true;
   unfree-apps.enable = true;
-  xserver.enable = true;
+  xserver = {
+    enable = true;
+    xkb-options = "altwin:meta_alt";
+  };
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.11"; # Did you read the comment?
