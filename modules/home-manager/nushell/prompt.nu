@@ -122,12 +122,12 @@ def get-dirpath [path_color: string]: string -> string {
     (if $gs.behind > 0 or $gs.ahead > 0 { ' ' })
     (if $gs.behind > 0 { $"(char branch_behind)($gs.behind)" })
     (if $gs.ahead > 0 { $"(char branch_ahead)($gs.ahead)" })
-    (if $gs_summary.dirty_state { ' ' })
+    ' '
     (if $gs.stashes > 0 { $"($gs.stashes)(icon git_stash)" })
   ] | str join | color (get-color chartreuse3b)
   [
     ($git_dirpath | get-default-dirpath $path_color $basename_color)
-    " "
+    ' '
     $git_branch_section
     ($gs.state | decorate-git-state)
     (if $gs.conflicts > 0 { $"($gs.conflicts)(icon conflicts)" | color red })
@@ -139,29 +139,21 @@ def get-dirpath [path_color: string]: string -> string {
 }
 
 def summarize-gs [gs] {
-  let staged_changes = [
-    $gs.idx_added_staged
-    $gs.idx_renamed
-    $gs.idx_modified_staged
-    $gs.idx_deleted_staged
-  ] | math sum
-  let unstaged_changes = [
-    $gs.wt_modified
-    $gs.wt_deleted
-    $gs.wt_renamed
-  ] | math sum
   {
-    staged_changes : $staged_changes
-    unstaged_changes : $unstaged_changes
-    dirty_state : (
+    staged_changes : (
       [
-        $staged_changes
-        $unstaged_changes
-        $gs.stashes
-        $gs.conflicts
-        $gs.wt_untracked
-      ]
-      | any { $in > 0 }
+        $gs.idx_added_staged
+        $gs.idx_renamed
+        $gs.idx_modified_staged
+        $gs.idx_deleted_staged
+      ] | math sum
+    )
+    unstaged_changes : (
+      [
+        $gs.wt_modified
+        $gs.wt_deleted
+        $gs.wt_renamed
+      ] | math sum
     )
   }
 }

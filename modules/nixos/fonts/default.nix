@@ -50,26 +50,21 @@ in
             noto-fonts-color-emoji
             vista-fonts
           ]
-          ++ (
-            if config.font-config.extra-jp-fonts then
-              [
-                free-japanese-fonts
-                kochi-substitute
-                ipaexfont
-                jigmo
-                ricty
-                takao
-                (zpix-pixel-font.overrideAttrs {
-                  installPhase = ''
-                    runHook preInstall
-                    install -Dm444 ''${srcs[1]} $out/share/fonts/truetype/zpix.ttf
-                    runHook postInstall
-                  '';
-                })
-              ]
-            else
-              [ ]
-          )
+          ++ (lib.optionals config.font-config.extra-jp-fonts [
+            free-japanese-fonts
+            kochi-substitute
+            ipaexfont
+            jigmo
+            ricty
+            takao
+            (zpix-pixel-font.overrideAttrs {
+              installPhase = ''
+                runHook preInstall
+                install -Dm444 ''${srcs[1]} $out/share/fonts/truetype/zpix.ttf
+                runHook postInstall
+              '';
+            })
+          ])
         );
     };
     unfree-apps.pkg-names = [

@@ -9,7 +9,7 @@
     enable = lib.mkEnableOption "enable polybar workspaces module";
     title-maxlen = lib.mkOption {
       type = lib.types.int;
-      default = 95;
+      default = 90;
     };
   };
   config = lib.mkIf config.polybar.workspaces.enable {
