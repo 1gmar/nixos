@@ -9,7 +9,7 @@
     enable = lib.mkEnableOption "enable git module";
   };
   config = lib.mkIf config.git.enable {
-    nixvim.extensions.mini-git.enableExtDiff = true;
+    nixvim.extensions.git.mini-git.enableExtDiff = true;
     programs = {
       difftastic = {
         enable = true;

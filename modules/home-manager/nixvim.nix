@@ -21,7 +21,7 @@ let
       };
     plugins.treesitter.grammarPackages = config.nixvim.treesitterGrammars;
   };
-  nvim = inputs.nixvim-1gmar.lib.${system}.mkNixvimWith extension;
+  nvim = inputs.nixvim-1gmar.packages.${system}.default.extend extension;
 in
 {
   options.nixvim = with lib.types; {
@@ -30,9 +30,9 @@ in
       type = attrsOf anything;
       default = { };
     };
-    finalExtensions = lib.mkOption {
-      type = attrsOf anything;
-      default = extension;
+    package = lib.mkOption {
+      type = package;
+      default = nvim;
     };
     treesitterGrammars = lib.mkOption {
       type = listOf package;
@@ -40,6 +40,6 @@ in
     };
   };
   config = lib.mkIf config.nixvim.enable {
-    home.packages = builtins.attrValues nvim;
+    home.packages = [ config.nixvim.package ];
   };
 }

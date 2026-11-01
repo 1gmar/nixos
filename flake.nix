@@ -28,7 +28,6 @@
     {
       self,
       nixpkgs,
-      nixvim-1gmar,
       ...
     }@inputs:
     let
@@ -40,14 +39,11 @@
       mkShellFor =
         host:
         pkgs.mkShellNoCC {
-          packages = builtins.attrValues (
-            nixvim-1gmar.lib.${system}.mkNixvimWith (
-              self.nixosConfigurations.${host}.config.home-manager.users.${userName}.nixvim.finalExtensions
-              // {
-                git.enable = true;
-              }
-            )
-          );
+          packages = [
+            (self.nixosConfigurations.${host}.config.home-manager.users.${userName}.nixvim.package.extend {
+              git.enable = true;
+            })
+          ];
           shellHook = ''
             if [[ ! -f .envrc ]]; then
               echo "use flake .#${host}" > .envrc

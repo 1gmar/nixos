@@ -20,7 +20,7 @@ in
       ];
       shell.enableNushellIntegration = true;
     };
-    nixvim.extensions.nushell.enable = true;
+    nixvim.extensions.languages.nushell.enable = true;
     programs = {
       kitty.settings.shell = "${config.home.profileDirectory}/bin/nu";
       nushell = {
