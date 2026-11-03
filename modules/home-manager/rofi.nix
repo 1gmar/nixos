@@ -38,7 +38,8 @@ in
         "Mod1+Tab" = "exec ${rofi} -show window";
         "${mod}+d" = "exec ${rofi} -show drun";
         "${mod}+Shift+d" =
-          "exec ${rofi} -font \"Fira Mono 14\" -show calc -no-show-match -no-sort -no-history";
+          "exec \"${rofi} -font 'Fira Mono 14' -show calc -no-show-match -no-sort -no-history "
+          + "-theme-str 'window {width: 25em;} listview {lines: 1;}'\"";
         "${mod}+Shift+p" =
           "exec \"${rofi} -show power-menu -theme-str 'window {width: 8em;} listview {lines: 6;}'\"";
       }

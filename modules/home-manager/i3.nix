@@ -41,10 +41,10 @@ in
           inherit background;
           focused = {
             inherit background;
-            border = blue;
+            border = cyan;
             text = primaryContent;
             indicator = green;
-            childBorder = blue;
+            childBorder = cyan;
           };
           focusedInactive = {
             background = backHighlight;
@@ -62,10 +62,10 @@ in
           };
           unfocused = {
             background = backHighlight;
-            border = brightBlue;
+            border = backHighlight;
             text = secondaryContent;
             indicator = green;
-            childBorder = brightBlue;
+            childBorder = backHighlight;
           };
           urgent = {
             background = backHighlight;
@@ -75,34 +75,40 @@ in
             childBorder = magenta;
           };
         };
-        floating.criteria = [
-          {
-            class = "firefox";
-            window_role = "About";
-          }
-          {
-            class = "firefox";
-            window_role = "Organizer";
-          }
-          {
-            class = "librewolf";
-            window_role = "About";
-          }
-          {
-            class = "librewolf";
-            window_role = "Organizer";
-          }
-          { class = "Qalculate-gtk"; }
-          { class = "pavucontrol"; }
-          { class = ".protonvpn-app-wrapped"; }
-        ];
+        defaultWorkspace = "workspace ${workspace.browser}";
+        floating = {
+          border = 5;
+          criteria = [
+            {
+              class = "firefox";
+              window_role = "About";
+            }
+            {
+              class = "firefox";
+              window_role = "Organizer";
+            }
+            {
+              class = "librewolf";
+              window_role = "About";
+            }
+            {
+              class = "librewolf";
+              window_role = "Organizer";
+            }
+            { class = "Qalculate-gtk"; }
+            { class = "pavucontrol"; }
+            { class = ".protonvpn-app-wrapped"; }
+          ];
+          titlebar = false;
+        };
         fonts = lib.mkForce {
           names = [ "Fira Sans" ];
-          size = 0.0;
+          size = 8.0;
           style = "Bold";
         };
         gaps = {
-          inner = 2;
+          smartGaps = "on";
+          inner = 5;
           outer = 0;
         };
         keybindings = lib.mergeAttrs defaultWorkspaceMappings {
@@ -137,16 +143,10 @@ in
           "Return" = "mode default";
         };
         modifier = mod;
-        startup = [
-          {
-            always = false;
-            command = "${config.home.profileDirectory}/bin/i3-msg 'workspace ${workspace.browser}'";
-            notification = false;
-          }
-        ];
         window = {
-          border = 0;
-          hideEdgeBorders = "both";
+          border = 5;
+          hideEdgeBorders = "smart";
+          titlebar = false;
         };
       };
     };

@@ -34,7 +34,6 @@
     ./telegram.nix
     ./thunderbird.nix
     ./translate-selected.nix
-    ./vim.nix
     ./wthrr.nix
   ];
 }

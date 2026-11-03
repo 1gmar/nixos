@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   runNuC,
   sysConfig,
@@ -104,7 +103,6 @@
   telegram.enable = true;
   thunderbird.enable = true;
   translate-selected.enable = true;
-  vim.enable = false;
   wthrr.enable = true;
   xdg.enable = true;
 }

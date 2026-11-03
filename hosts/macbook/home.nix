@@ -85,7 +85,6 @@
   ssh.enable = false;
   thunderbird.enable = true;
   translate-selected.enable = false;
-  vim.enable = false;
   wthrr.enable = true;
   xresources.properties = lib.mkIf (sysConfig.screen-scaling.enable && sysConfig.xserver.enable) {
     "Xft.dpi" = sysConfig.screen-scaling.dpi;
