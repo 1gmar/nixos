@@ -40,7 +40,7 @@
   foliate.enable = true;
   gammastep.enable = true;
   git.enable = true;
-  i3wm.enable = true;
+  i3wm.enable = false;
   ibus.enable = sysConfig.ibus.enable;
   jellyfin-desktop.enable = true;
   keepassxc.enable = true;

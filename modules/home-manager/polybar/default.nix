@@ -99,7 +99,10 @@ in
         };
       };
     };
-    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+    i3.extraConfig = ''
+      exec_always --no-startup-id systemctl --user restart polybar.service
+    '';
+    xsession.windowManager.i3.config.startup = [
       {
         always = true;
         command = "systemctl --user restart polybar.service";

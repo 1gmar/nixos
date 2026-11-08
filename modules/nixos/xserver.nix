@@ -32,7 +32,6 @@
         enable = true;
         excludePackages = [ pkgs.xterm ];
         exportConfiguration = true;
-        windowManager.i3.enable = true;
         xkb = {
           layout = "us";
           options = config.xserver.xkb-options;

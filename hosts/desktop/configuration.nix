@@ -28,6 +28,7 @@
     enable = true;
     home-file = ./home.nix;
   };
+  i3.enable = true;
   ibus.enable = true;
   locale.enable = true;
   main-user = {

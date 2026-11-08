@@ -373,7 +373,13 @@ in
         '';
       };
     };
-    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+    i3.extraConfig = ''
+      assign [class="firefox"] ${sysConfig.i3.workspaces.browser}
+      for_window [class="firefox" window_role="About"] floating enable
+      for_window [class="firefox" window_role="Organizer"] floating enable
+      exec --no-startup-id ${config.home.profileDirectory}/bin/firefox
+    '';
+    xsession.windowManager.i3.config.startup = [
       {
         always = false;
         command = "${config.home.profileDirectory}/bin/firefox";

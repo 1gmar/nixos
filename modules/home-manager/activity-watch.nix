@@ -18,7 +18,10 @@
             poll_time = 5;
           };
         };
-    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+    i3.extraConfig = ''
+      exec --no-startup-id ${config.home.profileDirectory}/bin/aw-qt
+    '';
+    xsession.windowManager.i3.config.startup = [
       {
         always = false;
         command = "${config.home.profileDirectory}/bin/aw-qt";

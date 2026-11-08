@@ -20,6 +20,7 @@
     ./gammastep.nix
     ./git.nix
     ./i3.nix
+    ./i3wm.nix
     ./ibus.nix
     ./jellyfin-desktop.nix
     ./keepassxc.nix

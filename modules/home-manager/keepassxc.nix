@@ -35,7 +35,10 @@
         };
       };
     };
-    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+    i3.extraConfig = ''
+      exec --no-startup-id ${config.home.profileDirectory}/bin/keepassxc
+    '';
+    xsession.windowManager.i3.config.startup = [
       {
         always = false;
         command = "${config.home.profileDirectory}/bin/keepassxc";

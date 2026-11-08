@@ -6,6 +6,8 @@
   ...
 }:
 let
+  mod = "Mod4";
+  rofi = "${config.home.profileDirectory}/bin/rofi";
   sysCfg = sysConfig.screen-scaling;
 in
 {
@@ -29,20 +31,20 @@ in
       plugins = with pkgs; [ rofi-calc ];
       terminal = lib.mkIf config.kitty.enable "${pkgs.kitty}/bin/kitty";
     };
-    xsession.windowManager.i3.config.keybindings = lib.mkIf config.i3wm.enable (
-      let
-        mod = "Mod4";
-        rofi = "${config.home.profileDirectory}/bin/rofi";
-      in
-      {
-        "Mod1+Tab" = "exec ${rofi} -show window";
-        "${mod}+d" = "exec ${rofi} -show drun";
-        "${mod}+Shift+d" =
-          "exec \"${rofi} -font 'Fira Mono 14' -show calc -no-show-match -no-sort -no-history "
-          + "-theme-str 'window {width: 25em;} listview {lines: 1;}'\"";
-        "${mod}+Shift+p" =
-          "exec \"${rofi} -show power-menu -theme-str 'window {width: 8em;} listview {lines: 6;}'\"";
-      }
-    );
+    i3.extraConfig = ''
+      bindsym Mod1+Tab exec --no-startup-id ${rofi} -show window
+      bindsym ${mod}+d exec --no-startup-id ${rofi} -show drun
+      bindsym ${mod}+Shift+d exec --no-startup-id "${rofi} -font 'Fira Mono 14' -show calc -no-show-match -no-sort -no-history -theme-str 'window {width: 25em;} listview {lines: 1;}'"
+      bindsym ${mod}+Shift+p exec --no-startup-id "${rofi} -show power-menu -theme-str 'window {width: 8em;} listview {lines: 6;}'"
+    '';
+    xsession.windowManager.i3.config.keybindings = {
+      "Mod1+Tab" = "exec ${rofi} -show window";
+      "${mod}+d" = "exec ${rofi} -show drun";
+      "${mod}+Shift+d" =
+        "exec \"${rofi} -font 'Fira Mono 14' -show calc -no-show-match -no-sort -no-history "
+        + "-theme-str 'window {width: 25em;} listview {lines: 1;}'\"";
+      "${mod}+Shift+p" =
+        "exec \"${rofi} -show power-menu -theme-str 'window {width: 8em;} listview {lines: 6;}'\"";
+    };
   };
 }

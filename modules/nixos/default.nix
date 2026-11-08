@@ -12,6 +12,7 @@
     ./docker.nix
     ./flatpak.nix
     ./home-manager.nix
+    ./i3.nix
     ./ibus.nix
     ./locale.nix
     ./main-user.nix

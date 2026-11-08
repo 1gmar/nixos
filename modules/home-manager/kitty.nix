@@ -138,7 +138,10 @@ in
       color7  ${backHighlight}
       color15 ${background}
     '';
-    xsession.windowManager.i3.config.keybindings = lib.mkIf config.i3wm.enable {
+    i3.extraConfig = ''
+      bindsym Mod4+Return exec --no-startup-id ${config.home.profileDirectory}/bin/kitty
+    '';
+    xsession.windowManager.i3.config.keybindings = {
       "Mod4+Return" = "exec ${pkgs.kitty}/bin/kitty";
     };
   };

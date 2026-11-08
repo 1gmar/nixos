@@ -25,7 +25,11 @@
           [
             "${workspace};󰼁"
           ];
-      xsession.windowManager.i3.config = lib.mkIf config.i3wm.enable {
+      i3.extraConfig = ''
+        bindsym Mod4+bracketright workspace ${workspace}
+        assign [class="jellyfin-desktop"] ${workspace}
+      '';
+      xsession.windowManager.i3.config = {
         assigns.${workspace} = [ { class = "jellyfin-desktop"; } ];
         keybindings."Mod4+bracketright" = "workspace ${workspace}";
       };

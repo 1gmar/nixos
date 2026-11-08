@@ -21,7 +21,10 @@
         };
       };
     };
-    xsession.windowManager.i3.config.keybindings = lib.mkIf config.i3wm.enable {
+    i3.extraConfig = ''
+      bindsym Print exec --no-startup-id ${config.home.profileDirectory}/bin/flameshot gui
+    '';
+    xsession.windowManager.i3.config.keybindings = {
       "Print" = "exec flameshot gui";
     };
   };

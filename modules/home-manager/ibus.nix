@@ -37,7 +37,10 @@
         unicode-hotkey = [ "<Super>u" ];
       };
     };
-    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+    i3.extraConfig = ''
+      exec --no-startup-id ${pkgs.ibus}/bin/ibus start
+    '';
+    xsession.windowManager.i3.config.startup = [
       {
         always = false;
         command = "${pkgs.ibus}/bin/ibus start";

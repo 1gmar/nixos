@@ -10,7 +10,10 @@
   };
   config = lib.mkIf config.feh.enable {
     programs.feh.enable = true;
-    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+    i3.extraConfig = ''
+      exec_always --no-startup-id ${config.home.profileDirectory}/bin/feh --bg-fill ${wallpaperPath}
+    '';
+    xsession.windowManager.i3.config.startup = [
       {
         always = true;
         command = "${config.home.profileDirectory}/bin/feh --bg-fill ${wallpaperPath}";

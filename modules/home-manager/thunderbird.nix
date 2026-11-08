@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  sysConfig,
   ...
 }:
 {
@@ -15,7 +16,11 @@
         isDefault = true;
       };
     };
-    xsession.windowManager.i3.config.startup = lib.mkIf config.i3wm.enable [
+    i3.extraConfig = ''
+      assign [class="thunderbird"] ${sysConfig.i3.workspaces.email}
+      exec --no-startup-id ${config.home.profileDirectory}/bin/thunderbird
+    '';
+    xsession.windowManager.i3.config.startup = [
       {
         always = false;
         command = "${pkgs.thunderbird}/bin/thunderbird";

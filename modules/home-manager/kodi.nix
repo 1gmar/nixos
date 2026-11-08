@@ -56,7 +56,11 @@ in
       terminal = false;
       type = "Application";
     };
-    xsession.windowManager.i3.config = lib.mkIf config.i3wm.enable {
+    i3.extraConfig = ''
+      bindsym Mod4+bracketright workspace ${workspace}
+      assign [class="Kodi"] ${workspace}
+    '';
+    xsession.windowManager.i3.config = {
       assigns.${workspace} = [ { class = "Kodi"; } ];
       keybindings."Mod4+bracketright" = "workspace ${workspace}";
     };
