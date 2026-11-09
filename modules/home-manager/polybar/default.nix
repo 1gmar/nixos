@@ -70,9 +70,13 @@ in
           inherit background;
           foreground = primaryContent;
           border = {
-            left.size = "0";
-            right.size = "0";
-            top.size = "0";
+            left.size = 0;
+            right.size = 0;
+            top.size = 0;
+            bottom = {
+              size = 1;
+              color = brightBlue;
+            };
           };
           dpi = lib.mkIf sysCfg.enable {
             x = sysCfg.dpi;
@@ -86,15 +90,15 @@ in
             "JetBrainsMono Nerd Font:size=18:style=Bold;${toString config.polybar.icon-voffset}"
           ];
           height = config.polybar.height;
-          line.size = "2";
-          module.margin = "0";
+          line.size = 2;
+          module.margin = 0;
           modules = {
             center = lib.concatStringsSep " " config.polybar.centerModules;
             left = lib.concatStringsSep " " config.polybar.leftModules;
             right = lib.concatStringsSep " " config.polybar.rightModules;
           };
-          padding = "1";
-          radius = "1";
+          padding = 1;
+          radius = 0;
           separator = " ";
         };
       };

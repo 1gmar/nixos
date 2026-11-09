@@ -18,6 +18,7 @@ let
     ];
   defaultWorkspaceMappings = lib.concatMap keyMap (lib.range 1 9);
   cfg = config.i3;
+  hmCfg = config.home-manager.users.${userName};
   i3Config = with colors; ''
     font pango:Fira Sans Bold 8.000000
     floating_modifier ${mod}
@@ -102,14 +103,14 @@ in
   config = lib.mkIf cfg.enable {
     assertions = [
       {
-        assertion = !config.home-manager.users.${userName}.xsession.windowManager.i3.enable;
+        assertion = !hmCfg.xsession.windowManager.i3.enable;
         description = "Configuration file conflict.";
       }
     ];
     home-manager.users.${userName}.xdg.configFile."i3/config".text = lib.mkMerge [
       i3Config
       cfg.extraConfig
-      config.home-manager.users.${userName}.i3.extraConfig
+      hmCfg.i3.extraConfig
     ];
     services.xserver.windowManager.i3 = {
       enable = true;

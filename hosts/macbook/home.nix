@@ -34,7 +34,7 @@
   flatpak.enable = sysConfig.flatpak.enable;
   foliate.enable = false;
   git.enable = true;
-  i3wm.enable = true;
+  i3wm.enable = false;
   ibus.enable = sysConfig.ibus.enable;
   jellyfin-desktop.enable = false;
   keepassxc.enable = true;
