@@ -179,11 +179,11 @@ def decorate-git-state []: string -> string {
 def get-default-dirpath [path_color: string basename_color: oneof<record, string>]: string -> string {
   let dirpath = $in
   let basename = $dirpath | path basename | color $basename_color
-  let dirname = $dirpath | get-dirname $path_color
+  let dirname = $dirpath | path dirname
   if ($dirname | is-empty) {
     $basename
   } else {
-    $"($dirname)((char separator) | color $path_color)($basename)"
+    $"($dirname | color $path_color)(if $dirname != '/' { char separator | color $path_color })($basename)"
   }
 }
 
@@ -196,12 +196,6 @@ def get-dir-metadata []: nothing -> record<path: string, icon: string> {
       icon: (if (is-admin) { icon root_home_path } else { icon home_path })
     }
   }
-}
-
-def get-dirname [path_color: string]: string -> string {
-  $in
-  | path dirname
-  | if ($in | is-empty) { '' } else { $in | color $path_color }
 }
 
 def get-os-segment []: nothing -> string {

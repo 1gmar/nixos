@@ -46,14 +46,20 @@
         label = {
           active = {
             background = backHighlight;
-            foreground = primaryContent;
+            foreground = highlight;
             padding = 1;
             text = "%icon%";
             underline = blue;
           };
-          occupied = {
+          empty = {
             inherit background;
             foreground = secondaryContent;
+            padding = 1;
+            text = "%icon%";
+          };
+          occupied = {
+            inherit background;
+            foreground = primaryContent;
             padding = 1;
             text = "%icon%";
           };
